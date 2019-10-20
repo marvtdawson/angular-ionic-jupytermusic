@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {SiteDataService} from '../../../providers/site-data/site-data.service';
-import {AdminService} from '../../../providers/admin-service/admin-service';
+import { SiteDataService } from '../../../providers/site-data/site-data.service';
+// import {AdminService} from '../../../providers/admin-service/admin-service';
 import {Observable} from 'rxjs';
 import * as firebase from 'firebase';
 
@@ -17,7 +17,8 @@ export class HeaderComponent implements OnInit {
   user$: Observable<firebase.User>;
 
   constructor(private siteData: SiteDataService,
-              private adminService: AdminService) {}
+              // private adminService: AdminService
+            ) {}
 
   ngOnInit() {}
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {SiteDataService} from '../../../providers/site-data/site-data.service';
+import { SiteDataService } from '../../../providers/site-data/site-data.service';
 import {Router} from '@angular/router';
-import {AuthService} from '../../../providers/auth/auth.service';
+// import {AuthService} from '../../../providers/auth/auth.service';
 
 @Component({
   selector: 'app-footer',
@@ -13,7 +13,7 @@ export class FooterComponent implements OnInit {
   siteName = this.siteData.siteName;
   message: string;
   constructor(private siteData: SiteDataService,
-              public authService: AuthService,
+              // public authService: AuthService,
               private router: Router) { }
 
   setMessage() {
