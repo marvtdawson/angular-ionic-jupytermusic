@@ -1,0 +1,7 @@
+{
+  "name": "jupyter",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
