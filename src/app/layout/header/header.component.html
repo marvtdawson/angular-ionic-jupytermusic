@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar>
+
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+
+        <ion-title class="title__link">
+            <a [routerLink]="['/home']">
+                <ion-item lines="none">
+                    {{ appName }}
+                </ion-item>
+                <div class="tag-line">
+                    {{ tagLine }}
+                </div>
+            </a>
+        </ion-title>
+
+        <ion-grid>
+            <ion-row class="nav">
+                <ion-col>
+                    <a [routerLink]="['/about']">ABOUT</a>
+                </ion-col>
+                |
+                <ion-col>
+                    <a [routerLink]="['/solutions']">SOLUTIONS</a>
+                </ion-col>
+                |
+                <ng-template #anonymousUser>
+                    <ion-col>
+                        <a class="nav-link" routerLink="/login"><i class="far fa-user-circle"></i></a>
+                    </ion-col>
+                </ng-template>
+                <ion-col *ngIf="adminService.user$ | async as user; else anonymousUser">{{ user.displayName }} |
+                    <a [routerLink]="['/log-out']">LOG OUT</a>
+                </ion-col>
+
+            </ion-row>
+        </ion-grid>
+
+    </ion-toolbar>
+</ion-header>

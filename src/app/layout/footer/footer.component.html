@@ -1,0 +1,69 @@
+<!-- START FOOTER CONTAINER -->
+<ion-footer>
+    <ion-grid>
+        <ion-row class="footer__social-icons-wrapper">
+            <ion-col class="footer__social-icons-wrapper__box">
+                <a href="https://www.facebook.com/whoslaundry09" target="_blank">
+                    <ion-icon class="footer__social-icons-wrapper__box__icon" name="logo-facebook"></ion-icon>
+                </a>
+            </ion-col>
+            <ion-col class="footer__social-icons-wrapper__box">
+                <a href="https://www.instagram.com/whoslaundry09/" target="_blank">
+                    <ion-icon class="footer__social-icons-wrapper__box__icon" name="logo-instagram"></ion-icon>
+                </a>
+            </ion-col>
+            <ion-col class="footer__social-icons-wrapper__box">
+                <a href="https://www.linkedin.com/in/marvin-t-dawson-0b89a67/" target="_blank">
+                    <ion-icon class="footer__social-icons-wrapper__box__icon" name="logo-linkedin"></ion-icon>
+                </a>
+            </ion-col>
+
+            <ion-col class="footer__social-icons-wrapper__box">
+                <a href="https://twitter.com/whoslaundry09" target="_blank">
+                    <ion-icon class="footer__social-icons-wrapper__box__icon" name="logo-twitter"></ion-icon>
+                </a>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="footer__wrapper">
+            <ion-col>
+                <div class="footer__wrapper__nav-subdiv">
+                    <h2>Manage Anywhere</h2>
+                    <p class="footer__wrapper__nav-subdiv__contact-text">Stay Connected To Your Business</p>
+                    <button class="footer__wrapper__nav-subdiv__btn" (click)="goToServicesPage()">
+                        Learn More
+                    </button>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div class="footer__wrapper__nav-subdiv">
+                    <h2>Quick Request</h2>
+                    <p class="footer__wrapper__nav-subdiv__contact-text">My Apartment Requires Service</p>
+                    <button class="footer__wrapper__nav-subdiv__btn"
+                            (click)="isUserLogin()">Request Service
+                    </button>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div class="footer__wrapper__nav-subdiv">
+                    <h2>Got Questions?</h2>
+                    <p class="footer__wrapper__nav-subdiv__contact-text">Let us know how we can better serve you.</p>
+                    <button class="footer__wrapper__nav-subdiv__btn" (click)="getContactForm()">Contact
+                    </button>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <div class="footer__site-info">
+                <ion-col>
+                    <div class="footer__site-info__content">
+                        The {{ siteName }} is powered by Angular 7 / 8, TypeScript 2 & the Ionic 4 Framework. Hosting is provided by
+                        Google Firebase & Google Cloud Platform (GCP).
+                    </div>
+                </ion-col>
+            </div>
+        </ion-row>
+    </ion-grid>
+
+
+</ion-footer>
