@@ -10,7 +10,7 @@ import { ListPage } from '../pages/list/list';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav, null) nav: Nav;
 
   rootPage: any = HomePage;
 

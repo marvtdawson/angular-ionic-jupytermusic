@@ -16,9 +16,9 @@ export class FooterComponent implements OnInit {
               // public authService: AuthService,
               private router: Router) { }
 
-  setMessage() {
+  /*setMessage() {
     this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
-  }
+  }*/
   goToServicesPage() {
     this.router.navigate(['/services'])
         .then()
@@ -30,7 +30,7 @@ export class FooterComponent implements OnInit {
   /**
    * Check if user is logged in
    */
-  isUserLogin() {
+  /*isUserLogin() {
     this.message = 'Trying to log in ...';
 
     this.authService.login().subscribe(() => {
@@ -45,18 +45,18 @@ export class FooterComponent implements OnInit {
       }
     });
 
-  }
+  }*/
 
-  goToRequestServicePage() {
+  /*goToRequestServicePage() {
     this.router.navigate(['/admin/customer/request-service'])
         .then()
         .catch();
-  }
+  }*/
 
-  getContactForm() {
+  /*getContactForm() {
     this.router.navigate(['/contact'])
         .then()
         .catch();
-  }
+  }*/
 
 }
