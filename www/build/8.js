@@ -1,20 +1,21 @@
 webpackJsonp([8],{
 
-/***/ 514:
+/***/ 492:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_select", function() { return Select; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_select_option", function() { return SelectOption; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_select_popover", function() { return SelectPopover; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_modal", function() { return Modal; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__overlays_10640d86_js__ = __webpack_require__(270);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__ = __webpack_require__(534);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__watch_options_2af96011_js__ = __webpack_require__(542);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(434);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__ = __webpack_require__(432);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__ = __webpack_require__(433);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__constants_3c3e1099_js__ = __webpack_require__(437);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__ = __webpack_require__(436);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__theme_18cbe2cc_js__ = __webpack_require__(534);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__framework_delegate_c2e2e1f4_js__ = __webpack_require__(536);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__index_35276576_js__ = __webpack_require__(537);
 
 
 
@@ -22,516 +23,291 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var Select = /** @class */ (function () {
+
+
+
+/**
+ * iOS Modal Enter Animation
+ */
+var iosEnterAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.01, 0.4);
+    wrapperAnimation
+        .addElement(baseEl.querySelector('.modal-wrapper'))
+        .beforeStyles({ 'opacity': 1 })
+        .fromTo('transform', 'translateY(100%)', 'translateY(0%)');
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(0.36,0.66,0.04,1)')
+        .duration(400)
+        .beforeAddClass('show-modal')
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+};
+/**
+ * Animations for modals
+ */
+// export function modalSlideIn(rootEl: HTMLElement) {
+// }
+// export class ModalSlideOut {
+//   constructor(el: HTMLElement) {
+//     let backdrop = new Animation(this.plt, el.querySelector('ion-backdrop'));
+//     let wrapperEle = <HTMLElement>el.querySelector('.modal-wrapper');
+//     let wrapperEleRect = wrapperEle.getBoundingClientRect();
+//     let wrapper = new Animation(this.plt, wrapperEle);
+//     // height of the screen - top of the container tells us how much to scoot it down
+//     // so it's off-screen
+//     wrapper.fromTo('translateY', '0px', `${this.plt.height() - wrapperEleRect.top}px`);
+//     backdrop.fromTo('opacity', 0.4, 0.0);
+//     this
+//       .element(this.leavingView.pageRef())
+//       .easing('ease-out')
+//       .duration(250)
+//       .add(backdrop)
+//       .add(wrapper);
+//   }
+// }
+// export class ModalMDSlideIn {
+//   constructor(el: HTMLElement) {
+//     const backdrop = new Animation(this.plt, el.querySelector('ion-backdrop'));
+//     const wrapper = new Animation(this.plt, el.querySelector('.modal-wrapper'));
+//     backdrop.fromTo('opacity', 0.01, 0.4);
+//     wrapper.fromTo('translateY', '40px', '0px');
+//     wrapper.fromTo('opacity', 0.01, 1);
+//     const DURATION = 280;
+//     const EASING = 'cubic-bezier(0.36,0.66,0.04,1)';
+//     this.element(this.enteringView.pageRef()).easing(EASING).duration(DURATION)
+//       .add(backdrop)
+//       .add(wrapper);
+//   }
+// }
+// export class ModalMDSlideOut {
+//   constructor(el: HTMLElement) {
+//     const backdrop = new Animation(this.plt, el.querySelector('ion-backdrop'));
+//     const wrapper = new Animation(this.plt, el.querySelector('.modal-wrapper'));
+//     backdrop.fromTo('opacity', 0.4, 0.0);
+//     wrapper.fromTo('translateY', '0px', '40px');
+//     wrapper.fromTo('opacity', 0.99, 0);
+//     this
+//       .element(this.leavingView.pageRef())
+//       .duration(200)
+//       .easing('cubic-bezier(0.47,0,0.745,0.715)')
+//       .add(wrapper)
+//       .add(backdrop);
+//   }
+// }
+/**
+ * iOS Modal Leave Animation
+ */
+var iosLeaveAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperEl = baseEl.querySelector('.modal-wrapper');
+    var wrapperElRect = wrapperEl.getBoundingClientRect();
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.4, 0.0);
+    wrapperAnimation
+        .addElement(wrapperEl)
+        .beforeStyles({ 'opacity': 1 })
+        .fromTo('transform', 'translateY(0%)', "translateY(" + (baseEl.ownerDocument.defaultView.innerHeight - wrapperElRect.top) + "px)");
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('ease-out')
+        .duration(250)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+};
+/**
+ * Md Modal Enter Animation
+ */
+var mdEnterAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.01, 0.32);
+    wrapperAnimation
+        .addElement(baseEl.querySelector('.modal-wrapper'))
+        .keyframes([
+        { offset: 0, opacity: 0.01, transform: 'translateY(40px)' },
+        { offset: 1, opacity: 1, transform: 'translateY(0px)' }
+    ]);
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(0.36,0.66,0.04,1)')
+        .duration(280)
+        .beforeAddClass('show-modal')
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+};
+/**
+ * Md Modal Leave Animation
+ */
+var mdLeaveAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperEl = baseEl.querySelector('.modal-wrapper');
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.32, 0.0);
+    wrapperAnimation
+        .addElement(wrapperEl)
+        .keyframes([
+        { offset: 0, opacity: 0.99, transform: 'translateY(0px)' },
+        { offset: 1, opacity: 0, transform: 'translateY(40px)' }
+    ]);
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(0.47,0,0.745,0.715)')
+        .duration(200)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+};
+var Modal = /** @class */ (function () {
     function class_1(hostRef) {
         var _this = this;
         Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.inputId = "ion-sel-" + selectIds++;
-        this.didInit = false;
-        this.isExpanded = false;
+        this.presented = false;
+        this.mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
         /**
-         * If `true`, the user cannot interact with the select.
+         * If `true`, the keyboard will be automatically dismissed when the overlay is presented.
          */
-        this.disabled = false;
+        this.keyboardClose = true;
         /**
-         * The text to display on the cancel button.
+         * If `true`, the modal will be dismissed when the backdrop is clicked.
          */
-        this.cancelText = 'Cancel';
+        this.backdropDismiss = true;
         /**
-         * The text to display on the ok button.
+         * If `true`, a backdrop will be displayed behind the modal.
          */
-        this.okText = 'OK';
+        this.showBackdrop = true;
         /**
-         * The name of the control, which is submitted with the form data.
+         * If `true`, the modal will animate.
          */
-        this.name = this.inputId;
-        /**
-         * If `true`, the select can accept multiple values.
-         */
-        this.multiple = false;
-        /**
-         * The interface the select should use: `action-sheet`, `popover` or `alert`.
-         */
-        this.interface = 'alert';
-        /**
-         * Any additional options that the `alert`, `action-sheet` or `popover` interface
-         * can take. See the [AlertController API docs](../../alert/AlertController/#create), the
-         * [ActionSheetController API docs](../../action-sheet/ActionSheetController/#create) and the
-         * [PopoverController API docs](../../popover/PopoverController/#create) for the
-         * create options for each interface.
-         */
-        this.interfaceOptions = {};
-        this.onClick = function (ev) {
-            _this.setFocus();
-            _this.open(ev);
+        this.animated = true;
+        this.onBackdropTap = function () {
+            _this.dismiss(undefined, __WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["a" /* B */]);
         };
-        this.onFocus = function () {
-            _this.ionFocus.emit();
+        this.onDismiss = function (ev) {
+            ev.stopPropagation();
+            ev.preventDefault();
+            _this.dismiss();
         };
-        this.onBlur = function () {
-            _this.ionBlur.emit();
+        this.onLifecycle = function (modalEvent) {
+            var el = _this.usersElement;
+            var name = LIFECYCLE_MAP[modalEvent.type];
+            if (el && name) {
+                var ev = new CustomEvent(name, {
+                    bubbles: false,
+                    cancelable: false,
+                    detail: modalEvent.detail
+                });
+                el.dispatchEvent(ev);
+            }
         };
-        this.ionChange = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionChange", 7);
-        this.ionCancel = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionCancel", 7);
-        this.ionFocus = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionFocus", 7);
-        this.ionBlur = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionBlur", 7);
-        this.ionStyle = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionStyle", 7);
+        Object(__WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["e" /* d */])(this.el);
+        this.didPresent = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionModalDidPresent", 7);
+        this.willPresent = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionModalWillPresent", 7);
+        this.willDismiss = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionModalWillDismiss", 7);
+        this.didDismiss = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionModalDidDismiss", 7);
     }
-    class_1.prototype.disabledChanged = function () {
-        this.emitStyle();
-    };
-    class_1.prototype.valueChanged = function () {
-        this.updateOptions();
-        this.emitStyle();
-        if (this.didInit) {
-            this.ionChange.emit({
-                value: this.value,
-            });
-        }
-    };
-    class_1.prototype.connectedCallback = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var checked, checked;
-            var _this = this;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                if (this.value === undefined) {
-                    if (this.multiple) {
-                        checked = this.childOpts.filter(function (o) { return o.selected; });
-                        this.value = checked.map(function (o) { return getOptionValue(o); });
-                    }
-                    else {
-                        checked = this.childOpts.find(function (o) { return o.selected; });
-                        if (checked) {
-                            this.value = getOptionValue(checked);
-                        }
-                    }
-                }
-                this.updateOptions();
-                this.updateOverlayOptions();
-                this.emitStyle();
-                this.mutationO = Object(__WEBPACK_IMPORTED_MODULE_6__watch_options_2af96011_js__["b" /* w */])(this.el, 'ion-select-option', function () { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(_this, void 0, void 0, function () {
-                    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                        this.updateOptions();
-                        this.updateOverlayOptions();
-                        return [2 /*return*/];
-                    });
-                }); });
-                return [2 /*return*/];
-            });
-        });
-    };
-    class_1.prototype.disconnectedCallback = function () {
-        if (this.mutationO) {
-            this.mutationO.disconnect();
-            this.mutationO = undefined;
-        }
-    };
-    class_1.prototype.componentDidLoad = function () {
-        this.didInit = true;
-    };
     /**
-     * Open the select overlay. The overlay is either an alert, action sheet, or popover,
-     * depending on the `interface` property on the `ion-select`.
-     *
-     * @param event The user interface event that called the open.
+     * Present the modal overlay after it has been created.
      */
-    class_1.prototype.open = function (event) {
+    class_1.prototype.present = function () {
         return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var overlay, _a;
-            var _this = this;
+            var container, componentProps, _a;
             return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        if (this.disabled || this.isExpanded) {
-                            return [2 /*return*/, undefined];
+                        if (this.presented) {
+                            return [2 /*return*/];
                         }
+                        container = this.el.querySelector(".modal-wrapper");
+                        if (!container) {
+                            throw new Error('container is undefined');
+                        }
+                        componentProps = Object.assign(Object.assign({}, this.componentProps), { modal: this.el });
                         _a = this;
-                        return [4 /*yield*/, this.createOverlay(event)];
+                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_8__framework_delegate_c2e2e1f4_js__["a"])(this.delegate, container, this.component, ['ion-page'], componentProps)];
                     case 1:
-                        overlay = _a.overlay = _b.sent();
-                        this.isExpanded = true;
-                        overlay.onDidDismiss().then(function () {
-                            _this.overlay = undefined;
-                            _this.isExpanded = false;
-                            _this.setFocus();
-                        });
-                        return [4 /*yield*/, overlay.present()];
+                        _a.usersElement = _b.sent();
+                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_9__index_35276576_js__["a" /* d */])(this.usersElement)];
                     case 2:
                         _b.sent();
-                        return [2 /*return*/, overlay];
+                        return [2 /*return*/, Object(__WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["f" /* e */])(this, 'modalEnter', iosEnterAnimation, mdEnterAnimation)];
                 }
-            });
-        });
-    };
-    class_1.prototype.createOverlay = function (ev) {
-        var selectInterface = this.interface;
-        if ((selectInterface === 'action-sheet' || selectInterface === 'popover') && this.multiple) {
-            console.warn("Select interface cannot be \"" + selectInterface + "\" with a multi-value select. Using the \"alert\" interface instead.");
-            selectInterface = 'alert';
-        }
-        if (selectInterface === 'popover' && !ev) {
-            console.warn('Select interface cannot be a "popover" without passing an event. Using the "alert" interface instead.');
-            selectInterface = 'alert';
-        }
-        if (selectInterface === 'popover') {
-            return this.openPopover(ev);
-        }
-        if (selectInterface === 'action-sheet') {
-            return this.openActionSheet();
-        }
-        return this.openAlert();
-    };
-    class_1.prototype.updateOverlayOptions = function () {
-        var overlay = this.overlay;
-        if (!overlay) {
-            return;
-        }
-        var childOpts = this.childOpts;
-        switch (this.interface) {
-            case 'action-sheet':
-                overlay.buttons = this.createActionSheetButtons(childOpts);
-                break;
-            case 'popover':
-                var popover = overlay.querySelector('ion-select-popover');
-                if (popover) {
-                    popover.options = this.createPopoverOptions(childOpts);
-                }
-                break;
-            case 'alert':
-                var inputType = (this.multiple ? 'checkbox' : 'radio');
-                overlay.inputs = this.createAlertInputs(childOpts, inputType);
-                break;
-        }
-    };
-    class_1.prototype.createActionSheetButtons = function (data) {
-        var _this = this;
-        var actionSheetButtons = data.map(function (option) {
-            return {
-                role: (option.selected ? 'selected' : ''),
-                text: option.textContent,
-                handler: function () {
-                    _this.value = getOptionValue(option);
-                }
-            };
-        });
-        // Add "cancel" button
-        actionSheetButtons.push({
-            text: this.cancelText,
-            role: 'cancel',
-            handler: function () {
-                _this.ionCancel.emit();
-            }
-        });
-        return actionSheetButtons;
-    };
-    class_1.prototype.createAlertInputs = function (data, inputType) {
-        return data.map(function (o) {
-            return {
-                type: inputType,
-                label: o.textContent,
-                value: getOptionValue(o),
-                checked: o.selected,
-                disabled: o.disabled
-            };
-        });
-    };
-    class_1.prototype.createPopoverOptions = function (data) {
-        var _this = this;
-        return data.map(function (o) {
-            var value = getOptionValue(o);
-            return {
-                text: o.textContent,
-                value: value,
-                checked: o.selected,
-                disabled: o.disabled,
-                handler: function () {
-                    _this.value = value;
-                    _this.close();
-                }
-            };
-        });
-    };
-    class_1.prototype.openPopover = function (ev) {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var interfaceOptions, mode, popoverOpts;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                interfaceOptions = this.interfaceOptions;
-                mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-                popoverOpts = Object.assign(Object.assign({ mode: mode }, interfaceOptions), { component: 'ion-select-popover', cssClass: ['select-popover', interfaceOptions.cssClass], event: ev, componentProps: {
-                        header: interfaceOptions.header,
-                        subHeader: interfaceOptions.subHeader,
-                        message: interfaceOptions.message,
-                        value: this.value,
-                        options: this.createPopoverOptions(this.childOpts)
-                    } });
-                return [2 /*return*/, __WEBPACK_IMPORTED_MODULE_4__overlays_10640d86_js__["d" /* c */].create(popoverOpts)];
-            });
-        });
-    };
-    class_1.prototype.openActionSheet = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var mode, interfaceOptions, actionSheetOpts;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-                interfaceOptions = this.interfaceOptions;
-                actionSheetOpts = Object.assign(Object.assign({ mode: mode }, interfaceOptions), { buttons: this.createActionSheetButtons(this.childOpts), cssClass: ['select-action-sheet', interfaceOptions.cssClass] });
-                return [2 /*return*/, __WEBPACK_IMPORTED_MODULE_4__overlays_10640d86_js__["c" /* b */].create(actionSheetOpts)];
-            });
-        });
-    };
-    class_1.prototype.openAlert = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var label, labelText, interfaceOptions, inputType, mode, alertOpts;
-            var _this = this;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                label = this.getLabel();
-                labelText = (label) ? label.textContent : null;
-                interfaceOptions = this.interfaceOptions;
-                inputType = (this.multiple ? 'checkbox' : 'radio');
-                mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-                alertOpts = Object.assign(Object.assign({ mode: mode }, interfaceOptions), { header: interfaceOptions.header ? interfaceOptions.header : labelText, inputs: this.createAlertInputs(this.childOpts, inputType), buttons: [
-                        {
-                            text: this.cancelText,
-                            role: 'cancel',
-                            handler: function () {
-                                _this.ionCancel.emit();
-                            }
-                        },
-                        {
-                            text: this.okText,
-                            handler: function (selectedValues) {
-                                _this.value = selectedValues;
-                            }
-                        }
-                    ], cssClass: ['select-alert', interfaceOptions.cssClass,
-                        (this.multiple ? 'multiple-select-alert' : 'single-select-alert')] });
-                return [2 /*return*/, __WEBPACK_IMPORTED_MODULE_4__overlays_10640d86_js__["b" /* a */].create(alertOpts)];
             });
         });
     };
     /**
-     * Close the select interface.
+     * Dismiss the modal overlay after it has been presented.
+     *
+     * @param data Any data to emit in the dismiss events.
+     * @param role The role of the element that is dismissing the modal. For example, 'cancel' or 'backdrop'.
      */
-    class_1.prototype.close = function () {
-        // TODO check !this.overlay || !this.isFocus()
-        if (!this.overlay) {
-            return Promise.resolve(false);
-        }
-        return this.overlay.dismiss();
-    };
-    class_1.prototype.updateOptions = function () {
-        // iterate all options, updating the selected prop
-        var canSelect = true;
-        var _a = this, value = _a.value, childOpts = _a.childOpts, compareWith = _a.compareWith, multiple = _a.multiple;
-        for (var _i = 0, childOpts_1 = childOpts; _i < childOpts_1.length; _i++) {
-            var selectOption = childOpts_1[_i];
-            var optValue = getOptionValue(selectOption);
-            var selected = canSelect && isOptionSelected(value, optValue, compareWith);
-            selectOption.selected = selected;
-            // if current option is selected and select is single-option, we can't select
-            // any option more
-            if (selected && !multiple) {
-                canSelect = false;
-            }
-        }
-    };
-    class_1.prototype.getLabel = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__["f"])(this.el);
-    };
-    class_1.prototype.hasValue = function () {
-        return this.getText() !== '';
-    };
-    Object.defineProperty(class_1.prototype, "childOpts", {
-        get: function () {
-            return Array.from(this.el.querySelectorAll('ion-select-option'));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    class_1.prototype.getText = function () {
-        var selectedText = this.selectedText;
-        if (selectedText != null && selectedText !== '') {
-            return selectedText;
-        }
-        return generateText(this.childOpts, this.value, this.compareWith);
-    };
-    class_1.prototype.setFocus = function () {
-        if (this.buttonEl) {
-            this.buttonEl.focus();
-        }
-    };
-    class_1.prototype.emitStyle = function () {
-        this.ionStyle.emit({
-            'interactive': true,
-            'select': true,
-            'has-placeholder': this.placeholder != null,
-            'has-value': this.hasValue(),
-            'interactive-disabled': this.disabled,
-            'select-disabled': this.disabled
+    class_1.prototype.dismiss = function (data, role) {
+        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            var dismissed;
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["g" /* f */])(this, data, role, 'modalLeave', iosLeaveAnimation, mdLeaveAnimation)];
+                    case 1:
+                        dismissed = _a.sent();
+                        if (!dismissed) return [3 /*break*/, 3];
+                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_8__framework_delegate_c2e2e1f4_js__["b" /* d */])(this.delegate, this.usersElement)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3: return [2 /*return*/, dismissed];
+                }
+            });
         });
     };
+    /**
+     * Returns a promise that resolves when the modal did dismiss.
+     */
+    class_1.prototype.onDidDismiss = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["h" /* g */])(this.el, 'ionModalDidDismiss');
+    };
+    /**
+     * Returns a promise that resolves when the modal will dismiss.
+     */
+    class_1.prototype.onWillDismiss = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["h" /* g */])(this.el, 'ionModalWillDismiss');
+    };
     class_1.prototype.render = function () {
-        var _a;
-        var _this = this;
-        var _b = this, placeholder = _b.placeholder, name = _b.name, disabled = _b.disabled, isExpanded = _b.isExpanded, value = _b.value, el = _b.el;
+        var _a, _b;
         var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var labelId = this.inputId + '-lbl';
-        var label = Object(__WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__["f"])(el);
-        if (label) {
-            label.id = labelId;
-        }
-        var addPlaceholderClass = false;
-        var selectText = this.getText();
-        if (selectText === '' && placeholder != null) {
-            selectText = placeholder;
-            addPlaceholderClass = true;
-        }
-        Object(__WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__["a"])(true, el, name, parseValue(value), disabled);
-        var selectTextClasses = {
-            'select-text': true,
-            'select-placeholder': addPlaceholderClass
-        };
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { onClick: this.onClick, role: "combobox", "aria-haspopup": "dialog", "aria-disabled": disabled ? 'true' : null, "aria-expanded": "" + isExpanded, "aria-labelledby": labelId, class: (_a = {},
-                _a[mode] = true,
-                _a['in-item'] = Object(__WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__["c" /* h */])('ion-item', el),
-                _a['select-disabled'] = disabled,
-                _a) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: selectTextClasses }, selectText), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "select-icon", role: "presentation" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "select-icon-inner" })), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("button", { type: "button", onFocus: this.onFocus, onBlur: this.onBlur, disabled: disabled, ref: (function (btnEl) { return _this.buttonEl = btnEl; }) })));
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { "no-router": true, "aria-modal": "true", class: Object.assign((_a = {}, _a[mode] = true, _a), Object(__WEBPACK_IMPORTED_MODULE_7__theme_18cbe2cc_js__["b" /* g */])(this.cssClass)), style: {
+                zIndex: "" + (20000 + this.overlayIndex),
+            }, onIonBackdropTap: this.onBackdropTap, onIonDismiss: this.onDismiss, onIonModalDidPresent: this.onLifecycle, onIonModalWillPresent: this.onLifecycle, onIonModalWillDismiss: this.onLifecycle, onIonModalDidDismiss: this.onLifecycle }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-backdrop", { visible: this.showBackdrop, tappable: this.backdropDismiss }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { role: "dialog", class: (_b = {},
+                _b["modal-wrapper"] = true,
+                _b[mode] = true,
+                _b) })));
     };
     Object.defineProperty(class_1.prototype, "el", {
         get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(class_1, "watchers", {
-        get: function () {
-            return {
-                "disabled": ["disabledChanged"],
-                "placeholder": ["disabledChanged"],
-                "value": ["valueChanged"]
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(class_1, "style", {
-        get: function () { return ":host{padding-left:var(--padding-start);padding-right:var(--padding-end);padding-top:var(--padding-top);padding-bottom:var(--padding-bottom);display:-ms-flexbox;display:flex;position:relative;font-family:var(--ion-font-family,inherit);overflow:hidden;z-index:2}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--padding-start);padding-inline-start:var(--padding-start);-webkit-padding-end:var(--padding-end);padding-inline-end:var(--padding-end)}}:host(.in-item){position:static;max-width:45%}:host(.select-disabled){opacity:.4;pointer-events:none}:host(.ion-focused) button{border:2px solid #5e9ed6}.select-placeholder{color:currentColor;opacity:.33}button{left:0;top:0;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;position:absolute;width:100%;height:100%;border:0;background:transparent;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none}:host-context([dir=rtl]) button,[dir=rtl] button{left:unset;right:unset;right:0}button::-moz-focus-inner{border:0}.select-icon{position:relative}.select-text{-ms-flex:1;flex:1;min-width:16px;font-size:inherit;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.select-icon-inner{left:5px;top:50%;margin-top:-3px;position:absolute;width:0;height:0;border-top:5px solid;border-right:5px solid transparent;border-left:5px solid transparent;color:currentColor;opacity:.33;pointer-events:none}:host-context([dir=rtl]) .select-icon-inner,[dir=rtl] .select-icon-inner{left:unset;right:unset;right:5px}:host{--padding-top:10px;--padding-end:0;--padding-bottom:11px;--padding-start:16px}.select-icon{width:19px;height:19px}"; },
+        get: function () { return ".sc-ion-modal-ios-h{--width:100%;--min-width:auto;--max-width:auto;--height:100%;--min-height:auto;--max-height:auto;--overflow:hidden;--border-radius:0;--border-width:0;--border-style:none;--border-color:transparent;--background:var(--ion-background-color,#fff);--box-shadow:none;left:0;right:0;top:0;bottom:0;display:-ms-flexbox;display:flex;position:absolute;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;contain:strict}.overlay-hidden.sc-ion-modal-ios-h{display:none}.modal-wrapper.sc-ion-modal-ios{border-radius:var(--border-radius);width:var(--width);min-width:var(--min-width);max-width:var(--max-width);height:var(--height);min-height:var(--min-height);max-height:var(--max-height);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);background:var(--background);-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);overflow:var(--overflow);z-index:10}\@media only screen and (min-width:768px) and (min-height:600px){.sc-ion-modal-ios-h{--width:600px;--height:500px;--ion-safe-area-top:0px;--ion-safe-area-bottom:0px;--ion-safe-area-right:0px;--ion-safe-area-left:0px}}\@media only screen and (min-width:768px) and (min-height:768px){.sc-ion-modal-ios-h{--width:600px;--height:600px}}\@media only screen and (min-width:768px) and (min-height:600px){.sc-ion-modal-ios-h{--border-radius:10px}}.modal-wrapper.sc-ion-modal-ios{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}"; },
         enumerable: true,
         configurable: true
     });
     return class_1;
 }());
-var getOptionValue = function (el) {
-    var value = el.value;
-    return (value === undefined)
-        ? el.textContent || ''
-        : value;
+var LIFECYCLE_MAP = {
+    'ionModalDidPresent': 'ionViewDidEnter',
+    'ionModalWillPresent': 'ionViewWillEnter',
+    'ionModalWillDismiss': 'ionViewWillLeave',
+    'ionModalDidDismiss': 'ionViewDidLeave',
 };
-var parseValue = function (value) {
-    if (value == null) {
-        return undefined;
-    }
-    if (Array.isArray(value)) {
-        return value.join(',');
-    }
-    return value.toString();
-};
-var isOptionSelected = function (currentValue, compareValue, compareWith) {
-    if (currentValue === undefined) {
-        return false;
-    }
-    if (Array.isArray(currentValue)) {
-        return currentValue.some(function (val) { return compareOptions(val, compareValue, compareWith); });
-    }
-    else {
-        return compareOptions(currentValue, compareValue, compareWith);
-    }
-};
-var compareOptions = function (currentValue, compareValue, compareWith) {
-    if (typeof compareWith === 'function') {
-        return compareWith(currentValue, compareValue);
-    }
-    else if (typeof compareWith === 'string') {
-        return currentValue[compareWith] === compareValue[compareWith];
-    }
-    else {
-        return currentValue === compareValue;
-    }
-};
-var generateText = function (opts, value, compareWith) {
-    if (value === undefined) {
-        return '';
-    }
-    if (Array.isArray(value)) {
-        return value
-            .map(function (v) { return textForValue(opts, v, compareWith); })
-            .filter(function (opt) { return opt !== null; })
-            .join(', ');
-    }
-    else {
-        return textForValue(opts, value, compareWith) || '';
-    }
-};
-var textForValue = function (opts, value, compareWith) {
-    var selectOpt = opts.find(function (opt) {
-        return compareOptions(getOptionValue(opt), value, compareWith);
-    });
-    return selectOpt
-        ? selectOpt.textContent
-        : null;
-};
-var selectIds = 0;
-var SelectOption = /** @class */ (function () {
-    function SelectOption(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.inputId = "ion-selopt-" + selectOptionIds++;
-        /**
-         * If `true`, the user cannot interact with the select option.
-         */
-        this.disabled = false;
-        /**
-         * If `true`, the element is selected.
-         */
-        this.selected = false;
-    }
-    SelectOption.prototype.render = function () {
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { role: "option", id: this.inputId, class: Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this) }));
-    };
-    Object.defineProperty(SelectOption.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SelectOption, "style", {
-        get: function () { return ":host{display:none}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return SelectOption;
-}());
-var selectOptionIds = 0;
-var SelectPopover = /** @class */ (function () {
-    function SelectPopover(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        /** Array of options for the popover */
-        this.options = [];
-    }
-    SelectPopover.prototype.onSelect = function (ev) {
-        var option = this.options.find(function (o) { return o.value === ev.target.value; });
-        if (option) {
-            Object(__WEBPACK_IMPORTED_MODULE_4__overlays_10640d86_js__["p" /* s */])(option.handler);
-        }
-    };
-    SelectPopover.prototype.render = function () {
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-list", null, this.header !== undefined && Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-list-header", null, this.header), (this.subHeader !== undefined || this.message !== undefined) &&
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-item", null, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-label", { class: "ion-text-wrap" }, this.subHeader !== undefined && Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("h3", null, this.subHeader), this.message !== undefined && Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("p", null, this.message))), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-radio-group", null, this.options.map(function (option) { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-item", null, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-label", null, option.text), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-radio", { checked: option.checked, value: option.value, disabled: option.disabled })); })))));
-    };
-    Object.defineProperty(SelectPopover, "style", {
-        get: function () { return ".sc-ion-select-popover-h ion-list.sc-ion-select-popover{margin-left:0;margin-right:0;margin-top:-1px;margin-bottom:-1px}.sc-ion-select-popover-h ion-label.sc-ion-select-popover, .sc-ion-select-popover-h ion-list-header.sc-ion-select-popover{margin-left:0;margin-right:0;margin-top:0;margin-bottom:0}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return SelectPopover;
-}());
 
 
 
@@ -597,40 +373,343 @@ var openURL = function (url, ev, direction) { return Object(__WEBPACK_IMPORTED_M
 
 /***/ }),
 
-/***/ 542:
+/***/ 536:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return findCheckedOption; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return watchForOptions; });
-var watchForOptions = function (containerEl, tagName, onChange) {
-    var mutation = new MutationObserver(function (mutationList) {
-        onChange(getSelectedOption(mutationList, tagName));
-    });
-    mutation.observe(containerEl, {
-        childList: true,
-        subtree: true
-    });
-    return mutation;
-};
-var getSelectedOption = function (mutationList, tagName) {
-    var newOption;
-    mutationList.forEach(function (mut) {
-        // tslint:disable-next-line: prefer-for-of
-        for (var i = 0; i < mut.addedNodes.length; i++) {
-            newOption = findCheckedOption(mut.addedNodes[i], tagName) || newOption;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return attachComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return detachComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
+
+var attachComponent = function (delegate, container, component, cssClasses, componentProps) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
+    var el;
+    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                if (delegate) {
+                    return [2 /*return*/, delegate.attachViewToDom(container, component, componentProps, cssClasses)];
+                }
+                if (typeof component !== 'string' && !(component instanceof HTMLElement)) {
+                    throw new Error('framework delegate is missing');
+                }
+                el = (typeof component === 'string')
+                    ? container.ownerDocument && container.ownerDocument.createElement(component)
+                    : component;
+                if (cssClasses) {
+                    cssClasses.forEach(function (c) { return el.classList.add(c); });
+                }
+                if (componentProps) {
+                    Object.assign(el, componentProps);
+                }
+                container.appendChild(el);
+                if (!el.componentOnReady) return [3 /*break*/, 2];
+                return [4 /*yield*/, el.componentOnReady()];
+            case 1:
+                _a.sent();
+                _a.label = 2;
+            case 2: return [2 /*return*/, el];
         }
     });
-    return newOption;
-};
-var findCheckedOption = function (el, tagName) {
-    if (el.nodeType !== 1) {
-        return undefined;
+}); };
+var detachComponent = function (delegate, element) {
+    if (element) {
+        if (delegate) {
+            var container = element.parentElement;
+            return delegate.removeViewFromDom(container, element);
+        }
+        element.remove();
     }
-    var options = (el.tagName === tagName.toUpperCase())
-        ? [el]
-        : Array.from(el.querySelectorAll(tagName));
-    return options.find(function (o) { return o.checked === true; });
+    return Promise.resolve();
+};
+
+
+
+/***/ }),
+
+/***/ 537:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return deepReady; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return lifecycle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return setPageHidden; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return transition; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(434);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__ = __webpack_require__(437);
+
+
+
+var iosTransitionAnimation = function () { return __webpack_require__.e/* import() */(94).then(__webpack_require__.bind(null, 540)); };
+var mdTransitionAnimation = function () { return __webpack_require__.e/* import() */(93).then(__webpack_require__.bind(null, 541)); };
+var transition = function (opts) {
+    return new Promise(function (resolve, reject) {
+        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
+            beforeTransition(opts);
+            runTransition(opts).then(function (result) {
+                if (result.animation) {
+                    result.animation.destroy();
+                }
+                afterTransition(opts);
+                resolve(result);
+            }, function (error) {
+                afterTransition(opts);
+                reject(error);
+            });
+        });
+    });
+};
+var beforeTransition = function (opts) {
+    var enteringEl = opts.enteringEl;
+    var leavingEl = opts.leavingEl;
+    setZIndex(enteringEl, leavingEl, opts.direction);
+    if (opts.showGoBack) {
+        enteringEl.classList.add('can-go-back');
+    }
+    else {
+        enteringEl.classList.remove('can-go-back');
+    }
+    setPageHidden(enteringEl, false);
+    if (leavingEl) {
+        setPageHidden(leavingEl, false);
+    }
+};
+var runTransition = function (opts) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
+    var animationBuilder, ani;
+    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, getAnimationBuilder(opts)];
+            case 1:
+                animationBuilder = _a.sent();
+                ani = (animationBuilder)
+                    ? animation(animationBuilder, opts)
+                    : noAnimation(opts);
+                return [2 /*return*/, ani];
+        }
+    });
+}); };
+var afterTransition = function (opts) {
+    var enteringEl = opts.enteringEl;
+    var leavingEl = opts.leavingEl;
+    enteringEl.classList.remove('ion-page-invisible');
+    if (leavingEl !== undefined) {
+        leavingEl.classList.remove('ion-page-invisible');
+    }
+};
+var getAnimationBuilder = function (opts) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
+    var getAnimation, _a;
+    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                if (!opts.leavingEl || !opts.animated || opts.duration === 0) {
+                    return [2 /*return*/, undefined];
+                }
+                if (opts.animationBuilder) {
+                    return [2 /*return*/, opts.animationBuilder];
+                }
+                if (!(opts.mode === 'ios')) return [3 /*break*/, 2];
+                return [4 /*yield*/, iosTransitionAnimation()];
+            case 1:
+                _a = (_b.sent()).iosTransitionAnimation;
+                return [3 /*break*/, 4];
+            case 2: return [4 /*yield*/, mdTransitionAnimation()];
+            case 3:
+                _a = (_b.sent()).mdTransitionAnimation;
+                _b.label = 4;
+            case 4:
+                getAnimation = _a;
+                return [2 /*return*/, getAnimation];
+        }
+    });
+}); };
+var animation = function (animationBuilder, opts) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
+    var trans, mod, err_1, didComplete;
+    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, waitForReady(opts, true)];
+            case 1:
+                _a.sent();
+                _a.label = 2;
+            case 2:
+                _a.trys.push([2, 5, , 6]);
+                return [4 /*yield*/, __webpack_require__.e/* import() */(2/* duplicate */).then(__webpack_require__.bind(null, 450))];
+            case 3:
+                mod = _a.sent();
+                return [4 /*yield*/, mod.create(animationBuilder, opts.baseEl, opts)];
+            case 4:
+                trans = _a.sent();
+                return [3 /*break*/, 6];
+            case 5:
+                err_1 = _a.sent();
+                trans = animationBuilder(opts.baseEl, opts);
+                return [3 /*break*/, 6];
+            case 6:
+                fireWillEvents(opts.enteringEl, opts.leavingEl);
+                return [4 /*yield*/, playTransition(trans, opts)];
+            case 7:
+                didComplete = _a.sent();
+                if (opts.progressCallback) {
+                    opts.progressCallback(undefined);
+                }
+                if (didComplete) {
+                    fireDidEvents(opts.enteringEl, opts.leavingEl);
+                }
+                return [2 /*return*/, {
+                        hasCompleted: didComplete,
+                        animation: trans
+                    }];
+        }
+    });
+}); };
+var noAnimation = function (opts) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
+    var enteringEl, leavingEl;
+    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                enteringEl = opts.enteringEl;
+                leavingEl = opts.leavingEl;
+                return [4 /*yield*/, waitForReady(opts, false)];
+            case 1:
+                _a.sent();
+                fireWillEvents(enteringEl, leavingEl);
+                fireDidEvents(enteringEl, leavingEl);
+                return [2 /*return*/, {
+                        hasCompleted: true
+                    }];
+        }
+    });
+}); };
+var waitForReady = function (opts, defaultDeep) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
+    var deep, promises;
+    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                deep = opts.deepWait !== undefined ? opts.deepWait : defaultDeep;
+                promises = deep ? [
+                    deepReady(opts.enteringEl),
+                    deepReady(opts.leavingEl),
+                ] : [
+                    shallowReady(opts.enteringEl),
+                    shallowReady(opts.leavingEl),
+                ];
+                return [4 /*yield*/, Promise.all(promises)];
+            case 1:
+                _a.sent();
+                return [4 /*yield*/, notifyViewReady(opts.viewIsReady, opts.enteringEl)];
+            case 2:
+                _a.sent();
+                return [2 /*return*/];
+        }
+    });
+}); };
+var notifyViewReady = function (viewIsReady, enteringEl) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
+    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                if (!viewIsReady) return [3 /*break*/, 2];
+                return [4 /*yield*/, viewIsReady(enteringEl)];
+            case 1:
+                _a.sent();
+                _a.label = 2;
+            case 2: return [2 /*return*/];
+        }
+    });
+}); };
+var playTransition = function (trans, opts) {
+    var progressCallback = opts.progressCallback;
+    // TODO: Remove AnimationBuilder
+    var promise = new Promise(function (resolve) {
+        trans.onFinish(function (currentStep) {
+            if (typeof currentStep === 'number') {
+                resolve(currentStep === 1);
+            }
+            else if (trans.hasCompleted !== undefined) {
+                resolve(trans.hasCompleted);
+            }
+        });
+    });
+    // cool, let's do this, start the transition
+    if (progressCallback) {
+        // this is a swipe to go back, just get the transition progress ready
+        // kick off the swipe animation start
+        trans.progressStart(true);
+        progressCallback(trans);
+    }
+    else {
+        // only the top level transition should actually start "play"
+        // kick it off and let it play through
+        // ******** DOM WRITE ****************
+        trans.play();
+    }
+    // create a callback for when the animation is done
+    return promise;
+};
+var fireWillEvents = function (enteringEl, leavingEl) {
+    lifecycle(leavingEl, __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__["c" /* b */]);
+    lifecycle(enteringEl, __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__["a" /* L */]);
+};
+var fireDidEvents = function (enteringEl, leavingEl) {
+    lifecycle(enteringEl, __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__["b" /* a */]);
+    lifecycle(leavingEl, __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__["d" /* c */]);
+};
+var lifecycle = function (el, eventName) {
+    if (el) {
+        var ev = new CustomEvent(eventName, {
+            bubbles: false,
+            cancelable: false,
+        });
+        el.dispatchEvent(ev);
+    }
+};
+var shallowReady = function (el) {
+    if (el && el.componentOnReady) {
+        return el.componentOnReady();
+    }
+    return Promise.resolve();
+};
+var deepReady = function (el) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
+    var element, stencilEl;
+    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                element = el;
+                if (!element) return [3 /*break*/, 4];
+                if (!(element.componentOnReady != null)) return [3 /*break*/, 2];
+                return [4 /*yield*/, element.componentOnReady()];
+            case 1:
+                stencilEl = _a.sent();
+                if (stencilEl != null) {
+                    return [2 /*return*/];
+                }
+                _a.label = 2;
+            case 2: return [4 /*yield*/, Promise.all(Array.from(element.children).map(deepReady))];
+            case 3:
+                _a.sent();
+                _a.label = 4;
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+var setPageHidden = function (el, hidden) {
+    if (hidden) {
+        el.setAttribute('aria-hidden', 'true');
+        el.classList.add('ion-page-hidden');
+    }
+    else {
+        el.hidden = false;
+        el.removeAttribute('aria-hidden');
+        el.classList.remove('ion-page-hidden');
+    }
+};
+var setZIndex = function (enteringEl, leavingEl, direction) {
+    if (enteringEl !== undefined) {
+        enteringEl.style.zIndex = (direction === 'back')
+            ? '99'
+            : '101';
+    }
+    if (leavingEl !== undefined) {
+        leavingEl.style.zIndex = '100';
+    }
 };
 
 

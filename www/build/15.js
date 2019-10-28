@@ -1,394 +1,332 @@
 webpackJsonp([15],{
 
-/***/ 509:
+/***/ 526:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_searchbar", function() { return Searchbar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_toast", function() { return Toast; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__theme_18cbe2cc_js__ = __webpack_require__(534);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__index_3476b023_js__ = __webpack_require__(535);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(434);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__ = __webpack_require__(432);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__ = __webpack_require__(433);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__ = __webpack_require__(436);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__theme_18cbe2cc_js__ = __webpack_require__(534);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__index_3476b023_js__ = __webpack_require__(535);
 
 
 
 
 
 
-var Searchbar = /** @class */ (function () {
-    function class_1(hostRef) {
-        var _this = this;
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.isCancelVisible = false;
-        this.shouldAlignLeft = true;
-        this.focused = false;
-        this.noAnimate = true;
-        /**
-         * If `true`, enable searchbar animation.
-         */
-        this.animated = false;
-        /**
-         * Set the input's autocomplete property.
-         */
-        this.autocomplete = 'off';
-        /**
-         * Set the input's autocorrect property.
-         */
-        this.autocorrect = 'off';
-        /**
-         * Set the cancel button icon. Only applies to `md` mode.
-         */
-        this.cancelButtonIcon = 'md-arrow-back';
-        /**
-         * Set the the cancel button text. Only applies to `ios` mode.
-         */
-        this.cancelButtonText = 'Cancel';
-        /**
-         * Set the amount of time, in milliseconds, to wait to trigger the `ionChange` event after each keystroke.
-         */
-        this.debounce = 250;
-        /**
-         * If `true`, the user cannot interact with the input.
-         */
-        this.disabled = false;
-        /**
-         * A hint to the browser for which keyboard to display.
-         * Possible values: `"none"`, `"text"`, `"tel"`, `"url"`,
-         * `"email"`, `"numeric"`, `"decimal"`, and `"search"`.
-         */
-        this.inputmode = 'search';
-        /**
-         * Set the input's placeholder.
-         * `placeholder` can accept either plaintext or HTML as a string.
-         * To display characters normally reserved for HTML, they
-         * must be escaped. For example `<Ionic>` would become
-         * `&lt;Ionic&gt;`
-         *
-         * For more information: [Security Documentation](https://ionicframework.com/docs/faq/security)
-         */
-        this.placeholder = 'Search';
-        /**
-         * The icon to use as the search icon.
-         */
-        this.searchIcon = 'search';
-        /**
-         * Sets the behavior for the cancel button. Defaults to `"never"`.
-         * Setting to `"focus"` shows the cancel button on focus.
-         * Setting to `"never"` hides the cancel button.
-         * Setting to `"always"` shows the cancel button regardless
-         * of focus state.
-         */
-        this.showCancelButton = 'never';
-        /**
-         * If `true`, enable spellcheck on the input.
-         */
-        this.spellcheck = false;
-        /**
-         * Set the type of the input.
-         */
-        this.type = 'search';
-        /**
-         * the value of the searchbar.
-         */
-        this.value = '';
-        /**
-         * Clears the input field and triggers the control change.
-         */
-        this.onClearInput = function (ev) {
-            _this.ionClear.emit();
-            if (ev) {
-                ev.preventDefault();
-                ev.stopPropagation();
-            }
-            // setTimeout() fixes https://github.com/ionic-team/ionic/issues/7527
-            // wait for 4 frames
-            setTimeout(function () {
-                var value = _this.getValue();
-                if (value !== '') {
-                    _this.value = '';
-                    _this.ionInput.emit();
-                }
-            }, 16 * 4);
-        };
-        /**
-         * Clears the input field and tells the input to blur since
-         * the clearInput function doesn't want the input to blur
-         * then calls the custom cancel function if the user passed one in.
-         */
-        this.onCancelSearchbar = function (ev) {
-            if (ev) {
-                ev.preventDefault();
-                ev.stopPropagation();
-            }
-            _this.ionCancel.emit();
-            _this.onClearInput();
-            if (_this.nativeInput) {
-                _this.nativeInput.blur();
-            }
-        };
-        /**
-         * Update the Searchbar input value when the input changes
-         */
-        this.onInput = function (ev) {
-            var input = ev.target;
-            if (input) {
-                _this.value = input.value;
-            }
-            _this.ionInput.emit(ev);
-        };
-        /**
-         * Sets the Searchbar to not focused and checks if it should align left
-         * based on whether there is a value in the searchbar or not.
-         */
-        this.onBlur = function () {
-            _this.focused = false;
-            _this.ionBlur.emit();
-            _this.positionElements();
-        };
-        /**
-         * Sets the Searchbar to focused and active on input focus.
-         */
-        this.onFocus = function () {
-            _this.focused = true;
-            _this.ionFocus.emit();
-            _this.positionElements();
-        };
-        this.ionInput = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionInput", 7);
-        this.ionChange = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionChange", 7);
-        this.ionCancel = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionCancel", 7);
-        this.ionClear = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionClear", 7);
-        this.ionBlur = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionBlur", 7);
-        this.ionFocus = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionFocus", 7);
-        this.ionStyle = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionStyle", 7);
+
+
+/**
+ * iOS Toast Enter Animation
+ */
+var iosEnterAnimation = function (baseEl, position) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var hostEl = baseEl.host || baseEl;
+    var wrapperEl = baseEl.querySelector('.toast-wrapper');
+    var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
+    var top = "calc(10px + var(--ion-safe-area-top, 0px))";
+    wrapperAnimation.addElement(wrapperEl);
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('transform', 'translateY(-100%)', "translateY(" + top + ")");
+            break;
+        case 'middle':
+            var topPosition = Math.floor(hostEl.clientHeight / 2 - wrapperEl.clientHeight / 2);
+            wrapperEl.style.top = topPosition + "px";
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+        default:
+            wrapperAnimation.fromTo('transform', 'translateY(100%)', "translateY(" + bottom + ")");
+            break;
     }
-    class_1.prototype.debounceChanged = function () {
-        this.ionChange = Object(__WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__["d"])(this.ionChange, this.debounce);
-    };
-    class_1.prototype.valueChanged = function () {
-        var inputEl = this.nativeInput;
-        var value = this.getValue();
-        if (inputEl && inputEl.value !== value) {
-            inputEl.value = value;
-        }
-        this.ionChange.emit({ value: value });
-    };
-    class_1.prototype.showCancelButtonChanged = function () {
-        var _this = this;
-        requestAnimationFrame(function () {
-            _this.positionElements();
-            _this.el.forceUpdate();
-        });
-    };
-    class_1.prototype.connectedCallback = function () {
-        this.emitStyle();
-    };
-    class_1.prototype.componentDidLoad = function () {
-        var _this = this;
-        if (this.showCancelButton === 'false' || this.showCancelButton === false) {
-            console.warn('The boolean values of showCancelButton are deprecated. Please use "never" instead of "false".');
-        }
-        if (this.showCancelButton === '' || this.showCancelButton === 'true' || this.showCancelButton === true) {
-            console.warn('The boolean values of showCancelButton are deprecated. Please use "focus" instead of "true".');
-        }
-        this.positionElements();
-        this.debounceChanged();
-        setTimeout(function () {
-            _this.noAnimate = false;
-        }, 300);
-    };
-    class_1.prototype.emitStyle = function () {
-        this.ionStyle.emit({
-            'searchbar': true
-        });
-    };
+    return baseAnimation
+        .addElement(hostEl)
+        .easing('cubic-bezier(.155,1.105,.295,1.12)')
+        .duration(400)
+        .addAnimation(wrapperAnimation);
+};
+/**
+ * iOS Toast Leave Animation
+ */
+var iosLeaveAnimation = function (baseEl, position) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var hostEl = baseEl.host || baseEl;
+    var wrapperEl = baseEl.querySelector('.toast-wrapper');
+    var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
+    var top = "calc(10px + var(--ion-safe-area-top, 0px))";
+    wrapperAnimation.addElement(wrapperEl);
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('transform', "translateY(" + top + ")", 'translateY(-100%)');
+            break;
+        case 'middle':
+            wrapperAnimation.fromTo('opacity', 0.99, 0);
+            break;
+        default:
+            wrapperAnimation.fromTo('transform', "translateY(" + bottom + ")", 'translateY(100%)');
+            break;
+    }
+    return baseAnimation
+        .addElement(hostEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(300)
+        .addAnimation(wrapperAnimation);
+};
+/**
+ * MD Toast Enter Animation
+ */
+var mdEnterAnimation = function (baseEl, position) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var hostEl = baseEl.host || baseEl;
+    var wrapperEl = baseEl.querySelector('.toast-wrapper');
+    var bottom = "calc(8px + var(--ion-safe-area-bottom, 0px))";
+    var top = "calc(8px + var(--ion-safe-area-top, 0px))";
+    wrapperAnimation.addElement(wrapperEl);
+    switch (position) {
+        case 'top':
+            wrapperEl.style.top = top;
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+        case 'middle':
+            var topPosition = Math.floor(hostEl.clientHeight / 2 - wrapperEl.clientHeight / 2);
+            wrapperEl.style.top = topPosition + "px";
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+        default:
+            wrapperEl.style.bottom = bottom;
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+    }
+    return baseAnimation
+        .addElement(hostEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(400)
+        .addAnimation(wrapperAnimation);
+};
+/**
+ * md Toast Leave Animation
+ */
+var mdLeaveAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var hostEl = baseEl.host || baseEl;
+    var wrapperEl = baseEl.querySelector('.toast-wrapper');
+    wrapperAnimation
+        .addElement(wrapperEl)
+        .fromTo('opacity', 0.99, 0);
+    return baseAnimation
+        .addElement(hostEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(300)
+        .addAnimation(wrapperAnimation);
+};
+var Toast = /** @class */ (function () {
+    function class_1(hostRef) {
+        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
+        this.presented = false;
+        this.mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
+        /**
+         * How many milliseconds to wait before hiding the toast. By default, it will show
+         * until `dismiss()` is called.
+         */
+        this.duration = 0;
+        /**
+         * If `true`, the keyboard will be automatically dismissed when the overlay is presented.
+         */
+        this.keyboardClose = false;
+        /**
+         * The position of the toast on the screen.
+         */
+        this.position = 'bottom';
+        /**
+         * @deprecated Use `buttons` instead. If `true`, the close button will be displayed.
+         */
+        this.showCloseButton = false;
+        /**
+         * If `true`, the toast will be translucent.
+         * Only applies when the mode is `"ios"` and the device supports
+         * [`backdrop-filter`](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility).
+         */
+        this.translucent = false;
+        /**
+         * If `true`, the toast will animate.
+         */
+        this.animated = true;
+        Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["e" /* d */])(this.el);
+        this.didPresent = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionToastDidPresent", 7);
+        this.willPresent = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionToastWillPresent", 7);
+        this.willDismiss = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionToastWillDismiss", 7);
+        this.didDismiss = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionToastDidDismiss", 7);
+    }
     /**
-     * Sets focus on the specified `ion-searchbar`. Use this method instead of the global
-     * `input.focus()`.
+     * Present the toast overlay after it has been created.
      */
-    class_1.prototype.setFocus = function () {
+    class_1.prototype.present = function () {
         return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            var _this = this;
             return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                if (this.nativeInput) {
-                    this.nativeInput.focus();
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["f" /* e */])(this, 'toastEnter', iosEnterAnimation, mdEnterAnimation, this.position)];
+                    case 1:
+                        _a.sent();
+                        if (this.duration > 0) {
+                            this.durationTimeout = setTimeout(function () { return _this.dismiss(undefined, 'timeout'); }, this.duration);
+                        }
+                        return [2 /*return*/];
                 }
-                return [2 /*return*/];
             });
         });
     };
     /**
-     * Returns the native `<input>` element used under the hood.
+     * Dismiss the toast overlay after it has been presented.
+     *
+     * @param data Any data to emit in the dismiss events.
+     * @param role The role of the element that is dismissing the toast.
+     * This can be useful in a button handler for determining which button was
+     * clicked to dismiss the toast.
+     * Some examples include: ``"cancel"`, `"destructive"`, "selected"`, and `"backdrop"`.
      */
-    class_1.prototype.getInputElement = function () {
-        return Promise.resolve(this.nativeInput);
+    class_1.prototype.dismiss = function (data, role) {
+        if (this.durationTimeout) {
+            clearTimeout(this.durationTimeout);
+        }
+        return Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["g" /* f */])(this, data, role, 'toastLeave', iosLeaveAnimation, mdLeaveAnimation, this.position);
     };
     /**
-     * Positions the input search icon, placeholder, and the cancel button
-     * based on the input value and if it is focused. (ios only)
+     * Returns a promise that resolves when the toast did dismiss.
      */
-    class_1.prototype.positionElements = function () {
-        var value = this.getValue();
-        var prevAlignLeft = this.shouldAlignLeft;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var shouldAlignLeft = (!this.animated || value.trim() !== '' || !!this.focused);
-        this.shouldAlignLeft = shouldAlignLeft;
-        if (mode !== 'ios') {
-            return;
-        }
-        if (prevAlignLeft !== shouldAlignLeft) {
-            this.positionPlaceholder();
-        }
-        if (this.animated) {
-            this.positionCancelButton();
-        }
+    class_1.prototype.onDidDismiss = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["h" /* g */])(this.el, 'ionToastDidDismiss');
     };
     /**
-     * Positions the input placeholder
+     * Returns a promise that resolves when the toast will dismiss.
      */
-    class_1.prototype.positionPlaceholder = function () {
-        var inputEl = this.nativeInput;
-        if (!inputEl) {
-            return;
-        }
-        var isRTL = document.dir === 'rtl';
-        var iconEl = (this.el.shadowRoot || this.el).querySelector('.searchbar-search-icon');
-        if (this.shouldAlignLeft) {
-            inputEl.removeAttribute('style');
-            iconEl.removeAttribute('style');
-        }
-        else {
-            // Create a dummy span to get the placeholder width
-            var doc = document;
-            var tempSpan = doc.createElement('span');
-            tempSpan.innerHTML = Object(__WEBPACK_IMPORTED_MODULE_5__index_3476b023_js__["a" /* s */])(this.placeholder) || '';
-            doc.body.appendChild(tempSpan);
-            // Get the width of the span then remove it
-            var textWidth = tempSpan.offsetWidth;
-            tempSpan.remove();
-            // Calculate the input padding
-            var inputLeft = 'calc(50% - ' + (textWidth / 2) + 'px)';
-            // Calculate the icon margin
-            var iconLeft = 'calc(50% - ' + ((textWidth / 2) + 30) + 'px)';
-            // Set the input padding start and icon margin start
-            if (isRTL) {
-                inputEl.style.paddingRight = inputLeft;
-                iconEl.style.marginRight = iconLeft;
-            }
-            else {
-                inputEl.style.paddingLeft = inputLeft;
-                iconEl.style.marginLeft = iconLeft;
-            }
-        }
+    class_1.prototype.onWillDismiss = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["h" /* g */])(this.el, 'ionToastWillDismiss');
     };
-    /**
-     * Show the iOS Cancel button on focus, hide it offscreen otherwise
-     */
-    class_1.prototype.positionCancelButton = function () {
-        var isRTL = document.dir === 'rtl';
-        var cancelButton = (this.el.shadowRoot || this.el).querySelector('.searchbar-cancel-button');
-        var shouldShowCancel = this.shouldShowCancelButton();
-        if (cancelButton && shouldShowCancel !== this.isCancelVisible) {
-            var cancelStyle = cancelButton.style;
-            this.isCancelVisible = shouldShowCancel;
-            if (shouldShowCancel) {
-                if (isRTL) {
-                    cancelStyle.marginLeft = '0';
+    class_1.prototype.getButtons = function () {
+        var _this = this;
+        var buttons = this.buttons
+            ? this.buttons.map(function (b) {
+                return (typeof b === 'string')
+                    ? { text: b }
+                    : b;
+            })
+            : [];
+        // tslint:disable-next-line: deprecation
+        if (this.showCloseButton) {
+            buttons.push({
+                // tslint:disable-next-line: deprecation
+                text: this.closeButtonText || 'Close',
+                handler: function () { return _this.dismiss(undefined, 'cancel'); }
+            });
+        }
+        return buttons;
+    };
+    class_1.prototype.buttonClick = function (button) {
+        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            var role, shouldDismiss;
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        role = button.role;
+                        if (Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["j" /* i */])(role)) {
+                            return [2 /*return*/, this.dismiss(undefined, role)];
+                        }
+                        return [4 /*yield*/, this.callButtonHandler(button)];
+                    case 1:
+                        shouldDismiss = _a.sent();
+                        if (shouldDismiss) {
+                            return [2 /*return*/, this.dismiss(undefined, button.role)];
+                        }
+                        return [2 /*return*/, Promise.resolve()];
                 }
-                else {
-                    cancelStyle.marginRight = '0';
+            });
+        });
+    };
+    class_1.prototype.callButtonHandler = function (button) {
+        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            var rtn, e_1;
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(button && button.handler)) return [3 /*break*/, 4];
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["p" /* s */])(button.handler)];
+                    case 2:
+                        rtn = _a.sent();
+                        if (rtn === false) {
+                            // if the return value of the handler is false then do not dismiss
+                            return [2 /*return*/, false];
+                        }
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_1 = _a.sent();
+                        console.error(e_1);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/, true];
                 }
-            }
-            else {
-                var offset = cancelButton.offsetWidth;
-                if (offset > 0) {
-                    if (isRTL) {
-                        cancelStyle.marginLeft = -offset + 'px';
-                    }
-                    else {
-                        cancelStyle.marginRight = -offset + 'px';
-                    }
-                }
-            }
-        }
+            });
+        });
     };
-    class_1.prototype.getValue = function () {
-        return this.value || '';
-    };
-    class_1.prototype.hasValue = function () {
-        return this.getValue() !== '';
-    };
-    /**
-     * Determines whether or not the cancel button should be visible onscreen.
-     * Cancel button should be shown if one of two conditions applies:
-     * 1. `showCancelButton` is set to `always`.
-     * 2. `showCancelButton` is set to `focus`, and the searchbar has been focused.
-     */
-    class_1.prototype.shouldShowCancelButton = function () {
-        if (isCancelButtonSetToNever(this.showCancelButton) ||
-            (isCancelButtonSetToFocus(this.showCancelButton) && !this.focused)) {
-            return false;
-        }
-        return true;
-    };
-    class_1.prototype.render = function () {
+    class_1.prototype.renderButtons = function (buttons, side) {
         var _a;
         var _this = this;
-        var animated = this.animated && __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('animated', true);
+        if (buttons.length === 0) {
+            return;
+        }
         var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var clearIcon = this.clearIcon || (mode === 'ios' ? 'ios-close-circle' : 'md-close');
-        var searchIcon = this.searchIcon;
-        var cancelButton = !isCancelButtonSetToNever(this.showCancelButton) && (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("button", { "aria-label": "cancel", type: "button", tabIndex: mode === 'ios' && !this.shouldShowCancelButton() ? -1 : undefined, onMouseDown: this.onCancelSearchbar, onTouchStart: this.onCancelSearchbar, class: "searchbar-cancel-button" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", null, mode === 'md'
-            ? Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-icon", { "aria-hidden": "true", mode: mode, icon: this.cancelButtonIcon, lazy: false })
-            : this.cancelButtonText)));
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { role: "search", "aria-disabled": this.disabled ? 'true' : null, class: Object.assign(Object.assign({}, Object(__WEBPACK_IMPORTED_MODULE_4__theme_18cbe2cc_js__["a" /* c */])(this.color)), (_a = {}, _a[mode] = true, _a['searchbar-animated'] = animated, _a['searchbar-disabled'] = this.disabled, _a['searchbar-no-animate'] = animated && this.noAnimate, _a['searchbar-has-value'] = this.hasValue(), _a['searchbar-left-aligned'] = this.shouldAlignLeft, _a['searchbar-has-focus'] = this.focused, _a['searchbar-should-show-cancel'] = this.shouldShowCancelButton(), _a)) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "searchbar-input-container" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("input", { "aria-label": "search text", disabled: this.disabled, ref: function (el) { return _this.nativeInput = el; }, class: "searchbar-input", inputMode: this.inputmode, onInput: this.onInput, onBlur: this.onBlur, onFocus: this.onFocus, placeholder: this.placeholder, type: this.type, value: this.getValue(), autoComplete: this.autocomplete, autoCorrect: this.autocorrect, spellCheck: this.spellcheck }), mode === 'md' && cancelButton, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-icon", { mode: mode, icon: searchIcon, lazy: false, class: "searchbar-search-icon" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("button", { "aria-label": "reset", type: "button", "no-blur": true, class: "searchbar-clear-button", onMouseDown: this.onClearInput, onTouchStart: this.onClearInput }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-icon", { "aria-hidden": "true", mode: mode, icon: clearIcon, lazy: false, class: "searchbar-clear-icon" }))), mode === 'ios' && cancelButton));
+        var buttonGroupsClasses = (_a = {
+                'toast-button-group': true
+            },
+            _a["toast-button-group-" + side] = true,
+            _a);
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: buttonGroupsClasses }, buttons.map(function (b) { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("button", { type: "button", class: buttonClass(b), tabIndex: 0, onClick: function () { return _this.buttonClick(b); } }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toast-button-inner" }, b.icon &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-icon", { icon: b.icon, slot: b.text === undefined ? 'icon-only' : undefined, class: "toast-icon" }), b.text), mode === 'md' && Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-ripple-effect", { type: b.icon !== undefined && b.text === undefined ? 'unbounded' : 'bounded' })); })));
+    };
+    class_1.prototype.render = function () {
+        var _a, _b;
+        var allButtons = this.getButtons();
+        var startButtons = allButtons.filter(function (b) { return b.side === 'start'; });
+        var endButtons = allButtons.filter(function (b) { return b.side !== 'start'; });
+        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
+        var wrapperClass = (_a = {
+                'toast-wrapper': true
+            },
+            _a["toast-" + this.position] = true,
+            _a);
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { style: {
+                zIndex: "" + (60000 + this.overlayIndex),
+            }, class: Object.assign(Object.assign(Object.assign((_b = {}, _b[mode] = true, _b), Object(__WEBPACK_IMPORTED_MODULE_6__theme_18cbe2cc_js__["a" /* c */])(this.color)), Object(__WEBPACK_IMPORTED_MODULE_6__theme_18cbe2cc_js__["b" /* g */])(this.cssClass)), { 'toast-translucent': this.translucent }) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: wrapperClass }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toast-container" }, this.renderButtons(startButtons, 'start'), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toast-content" }, this.header !== undefined &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toast-header" }, this.header), this.message !== undefined &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toast-message", innerHTML: Object(__WEBPACK_IMPORTED_MODULE_7__index_3476b023_js__["a" /* s */])(this.message) })), this.renderButtons(endButtons, 'end')))));
     };
     Object.defineProperty(class_1.prototype, "el", {
         get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(class_1, "watchers", {
-        get: function () {
-            return {
-                "debounce": ["debounceChanged"],
-                "value": ["valueChanged"],
-                "showCancelButton": ["showCancelButtonChanged"]
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(class_1, "style", {
-        get: function () { return ".sc-ion-searchbar-ios-h{--placeholder-color:initial;--placeholder-font-style:initial;--placeholder-font-weight:initial;--placeholder-opacity:.5;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-ms-flexbox;display:flex;position:relative;-ms-flex-align:center;align-items:center;width:100%;color:var(--color);font-family:var(--ion-font-family,inherit);-webkit-box-sizing:border-box;box-sizing:border-box}.ion-color.sc-ion-searchbar-ios-h{color:var(--ion-color-contrast)}.ion-color.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios{background:var(--ion-color-base)}.ion-color.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios, .ion-color.sc-ion-searchbar-ios-h .searchbar-clear-button.sc-ion-searchbar-ios, .ion-color.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{color:inherit}.searchbar-search-icon.sc-ion-searchbar-ios{color:var(--icon-color);pointer-events:none}.searchbar-input-container.sc-ion-searchbar-ios{display:block;position:relative;-ms-flex-negative:1;flex-shrink:1;width:100%}.searchbar-input.sc-ion-searchbar-ios{font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;-webkit-box-sizing:border-box;box-sizing:border-box;display:block;width:100%;border:0;outline:none;background:var(--background);font-family:inherit;-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-input.sc-ion-searchbar-ios::-webkit-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-ios::-moz-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-ios:-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-ios::-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-ios::placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-ios::-ms-clear, .searchbar-input.sc-ion-searchbar-ios::-webkit-search-cancel-button{display:none}.searchbar-cancel-button.sc-ion-searchbar-ios{margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;display:none;height:100%;border:0;outline:none;color:var(--cancel-button-color);cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-cancel-button.sc-ion-searchbar-ios > div.sc-ion-searchbar-ios{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}.searchbar-clear-button.sc-ion-searchbar-ios{margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0;display:none;min-height:0;outline:none;color:var(--clear-button-color);-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-has-value.searchbar-has-focus.sc-ion-searchbar-ios-h .searchbar-clear-button.sc-ion-searchbar-ios{display:block}.searchbar-disabled.sc-ion-searchbar-ios-h{cursor:default;opacity:.4;pointer-events:none}.sc-ion-searchbar-ios-h{--clear-button-color:var(--ion-color-step-600,#666);--cancel-button-color:var(--ion-color-primary,#3880ff);--color:var(--ion-text-color,#000);--icon-color:var(--ion-color-step-600,#666);--background:rgba(var(--ion-text-color-rgb,0,0,0),0.07);padding-left:12px;padding-right:12px;padding-top:12px;padding-bottom:12px;height:60px;contain:strict}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.sc-ion-searchbar-ios-h{padding-left:unset;padding-right:unset;-webkit-padding-start:12px;padding-inline-start:12px;-webkit-padding-end:12px;padding-inline-end:12px}}.searchbar-input-container.sc-ion-searchbar-ios{height:36px;contain:strict}.searchbar-search-icon.sc-ion-searchbar-ios{margin-left:calc(50% - 60px);left:5px;top:0;position:absolute;width:22px;height:100%;contain:strict}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-search-icon.sc-ion-searchbar-ios{margin-left:unset;-webkit-margin-start:calc(50% - 60px);margin-inline-start:calc(50% - 60px)}}[dir=rtl].sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios, [dir=rtl] .sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios, [dir=rtl].sc-ion-searchbar-ios .searchbar-search-icon.sc-ion-searchbar-ios{left:unset;right:unset;right:5px}.searchbar-input.sc-ion-searchbar-ios{padding-left:28px;padding-right:28px;padding-top:0;padding-bottom:0;border-radius:10px;height:100%;font-size:17px;font-weight:400;contain:strict}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-input.sc-ion-searchbar-ios{padding-left:unset;padding-right:unset;-webkit-padding-start:28px;padding-inline-start:28px;-webkit-padding-end:28px;padding-inline-end:28px}}.searchbar-clear-button.sc-ion-searchbar-ios{right:0;top:0;background-position:50%;position:absolute;width:30px;height:100%;border:0;background-color:transparent}[dir=rtl].sc-ion-searchbar-ios-h .searchbar-clear-button.sc-ion-searchbar-ios, [dir=rtl] .sc-ion-searchbar-ios-h .searchbar-clear-button.sc-ion-searchbar-ios, [dir=rtl].sc-ion-searchbar-ios .searchbar-clear-button.sc-ion-searchbar-ios{left:unset;right:unset;left:0}.searchbar-clear-icon.sc-ion-searchbar-ios{width:18px;height:100%}.searchbar-cancel-button.sc-ion-searchbar-ios{padding-left:8px;padding-right:0;padding-top:0;padding-bottom:0;-ms-flex-negative:0;flex-shrink:0;background-color:transparent;font-size:16px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-cancel-button.sc-ion-searchbar-ios{padding-left:unset;padding-right:unset;-webkit-padding-start:8px;padding-inline-start:8px;-webkit-padding-end:0;padding-inline-end:0}}.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{margin-left:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{margin-left:unset;-webkit-margin-start:0;margin-inline-start:0}}.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios{padding-left:30px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios{padding-left:unset;-webkit-padding-start:30px;padding-inline-start:30px}}.searchbar-animated.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios, .searchbar-has-focus.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios, .searchbar-should-show-cancel.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios{display:block}.searchbar-animated.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios, .searchbar-animated.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{-webkit-transition:all .3s ease;transition:all .3s ease}.searchbar-animated.searchbar-has-focus.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios, .searchbar-animated.searchbar-should-show-cancel.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios{opacity:1;pointer-events:auto}.searchbar-animated.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios{margin-right:-100%;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-transition:all .3s ease;transition:all .3s ease;opacity:0;pointer-events:none}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-animated.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios{margin-right:unset;-webkit-margin-end:-100%;margin-inline-end:-100%}}.searchbar-no-animate.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios, .searchbar-no-animate.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios, .searchbar-no-animate.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{-webkit-transition-duration:0ms;transition-duration:0ms}.ion-color.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios{color:var(--ion-color-base)}\@media (any-hover:hover){.ion-color.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios:hover{color:var(--ion-color-tint)}}ion-toolbar.sc-ion-searchbar-ios-h, ion-toolbar .sc-ion-searchbar-ios-h{padding-top:1px;padding-bottom:15px;height:52px}ion-toolbar.ion-color.sc-ion-searchbar-ios-h:not(.ion-color), ion-toolbar.ion-color .sc-ion-searchbar-ios-h:not(.ion-color){color:inherit}ion-toolbar.ion-color.sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-cancel-button.sc-ion-searchbar-ios, ion-toolbar.ion-color .sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-cancel-button.sc-ion-searchbar-ios{color:currentColor}ion-toolbar.ion-color.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios, ion-toolbar.ion-color .sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{color:currentColor;opacity:.5}ion-toolbar.ion-color.sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-input.sc-ion-searchbar-ios, ion-toolbar.ion-color .sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-input.sc-ion-searchbar-ios{background:rgba(var(--ion-color-contrast-rgb),.07);color:currentColor}ion-toolbar.ion-color.sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-clear-button.sc-ion-searchbar-ios, ion-toolbar.ion-color .sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-clear-button.sc-ion-searchbar-ios{color:currentColor;opacity:.5}"; },
+        get: function () { return ":host{--border-width:0;--border-style:none;--border-color:initial;--box-shadow:none;--min-width:auto;--width:auto;--min-height:auto;--height:auto;--max-height:auto;left:0;top:0;display:block;position:absolute;width:100%;height:100%;color:var(--color);font-family:var(--ion-font-family,inherit);contain:strict;z-index:1001;pointer-events:none}:host-context([dir=rtl]){left:unset;right:unset;right:0}:host(.overlay-hidden){display:none}:host(.ion-color){--button-color:inherit;color:var(--ion-color-contrast)}:host(.ion-color) .toast-wrapper{background:var(--ion-color-base)}.toast-wrapper{border-radius:var(--border-radius);left:var(--start);right:var(--end);width:var(--width);min-width:var(--min-width);max-width:var(--max-width);height:var(--height);min-height:var(--min-height);max-height:var(--max-height);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);background:var(--background);-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow)}:host-context([dir=rtl]) .toast-wrapper,[dir=rtl] .toast-wrapper{left:unset;right:unset;left:var(--end);right:var(--start)}.toast-container{-ms-flex-align:center;align-items:center;pointer-events:auto;contain:content}.toast-container,.toast-content{display:-ms-flexbox;display:flex}.toast-content{-ms-flex:1;flex:1;-ms-flex-direction:column;flex-direction:column;-ms-flex-pack:center;justify-content:center}.toast-message{-ms-flex:1;flex:1;white-space:pre-wrap}.toast-button-group{display:-ms-flexbox;display:flex}.toast-button{outline:none;color:var(--button-color);z-index:0}.toast-icon{font-size:1.4em}.toast-button-inner{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center}\@media (any-hover:hover){.toast-button:hover{cursor:pointer}}:host{--background:var(--ion-color-step-50,#f2f2f2);--border-radius:14px;--button-color:var(--ion-color-primary,#3880ff);--color:var(--ion-color-step-850,#262626);--max-width:700px;--start:10px;--end:10px;font-size:14px}.toast-wrapper{margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;display:block;position:absolute;z-index:10}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.toast-wrapper{margin-left:unset;margin-right:unset;-webkit-margin-start:auto;margin-inline-start:auto;-webkit-margin-end:auto;margin-inline-end:auto}}\@supports ((-webkit-backdrop-filter:blur(0)) or (backdrop-filter:blur(0))){:host(.toast-translucent) .toast-wrapper{background:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}}.toast-wrapper.toast-top{-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0);top:0}.toast-wrapper.toast-middle{opacity:.01}.toast-wrapper.toast-bottom{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);bottom:0}.toast-content{padding-left:15px;padding-right:15px;padding-top:15px;padding-bottom:15px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.toast-content{padding-left:unset;padding-right:unset;-webkit-padding-start:15px;padding-inline-start:15px;-webkit-padding-end:15px;padding-inline-end:15px}}.toast-header{margin-bottom:2px;font-weight:500}.toast-button{padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;height:44px;-webkit-transition:background-color,opacity .1s linear;transition:background-color,opacity .1s linear;border:0;background-color:transparent;font-family:var(--ion-font-family);font-size:17px;font-weight:500;overflow:hidden}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.toast-button{padding-left:unset;padding-right:unset;-webkit-padding-start:15px;padding-inline-start:15px;-webkit-padding-end:15px;padding-inline-end:15px}}.toast-button.activated{opacity:.4}\@media (any-hover:hover){.toast-button:hover{opacity:.6}}"; },
         enumerable: true,
         configurable: true
     });
     return class_1;
 }());
-/**
- * Check if the cancel button should never be shown.
- *
- * TODO: Remove this when the `true` and `false`
- * options are removed.
- */
-var isCancelButtonSetToNever = function (showCancelButton) {
-    return (showCancelButton === 'never' ||
-        showCancelButton === 'false' ||
-        showCancelButton === false);
-};
-/**
- * Check if the cancel button should be shown on focus.
- *
- * TODO: Remove this when the `true` and `false`
- * options are removed.
- */
-var isCancelButtonSetToFocus = function (showCancelButton) {
-    return (showCancelButton === 'focus' ||
-        showCancelButton === 'true' ||
-        showCancelButton === true ||
-        showCancelButton === '');
+var buttonClass = function (button) {
+    var _a;
+    return Object.assign((_a = { 'toast-button': true, 'toast-button-icon-only': button.icon !== undefined && button.text === undefined }, _a["toast-button-" + button.role] = button.role !== undefined, _a['ion-focusable'] = true, _a['ion-activatable'] = true, _a), Object(__WEBPACK_IMPORTED_MODULE_6__theme_18cbe2cc_js__["b" /* g */])(button.cssClass));
 };
 
 

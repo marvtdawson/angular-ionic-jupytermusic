@@ -25695,3 +25695,17 @@ ion-navbar.toolbar {
   padding-bottom: 4px;
   min-height: 46px;
 }
+
+@media (min-width: 768px) {
+  page-home ion-header button {
+    visibility: hidden;
+  }
+}
+
+page-home .jumboTron {
+  width: 100%;
+  height: 75rem;
+  background-image: url("../../assets/imgs/jumbotron/jupiter1.jpg");
+  background-size: cover;
+  padding: 0;
+}

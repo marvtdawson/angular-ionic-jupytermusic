@@ -1,1605 +1,1164 @@
 webpackJsonp([2],{
 
-/***/ 458:
+/***/ 450:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_app", function() { return App; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_buttons", function() { return Buttons; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_content", function() { return Content; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_footer", function() { return Footer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_header", function() { return Header; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_router_outlet", function() { return RouterOutlet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_title", function() { return ToolbarTitle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_toolbar", function() { return Toolbar; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants_3c3e1099_js__ = __webpack_require__(271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__ = __webpack_require__(534);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__framework_delegate_c2e2e1f4_js__ = __webpack_require__(536);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__index_35276576_js__ = __webpack_require__(537);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__ = __webpack_require__(539);
-
-
-
-
-
-
-
-
-
-var App = /** @class */ (function () {
-    function App(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-    }
-    App.prototype.componentDidLoad = function () {
-        {
-            rIC(function () {
-                var isHybrid = Object(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["f" /* i */])(window, 'hybrid');
-                if (!__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('_testing')) {
-                    __webpack_require__.e/* import() */(86/* duplicate */).then(__webpack_require__.bind(null, 544)).then(function (module) { return module.startTapClick(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"]); });
-                }
-                if (__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('statusTap', isHybrid)) {
-                    __webpack_require__.e/* import() */(88/* duplicate */).then(__webpack_require__.bind(null, 545)).then(function (module) { return module.startStatusTap(); });
-                }
-                if (__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('inputShims', needInputShims())) {
-                    __webpack_require__.e/* import() */(89/* duplicate */).then(__webpack_require__.bind(null, 546)).then(function (module) { return module.startInputShims(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"]); });
-                }
-                if (__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('hardwareBackButton', isHybrid)) {
-                    __webpack_require__.e/* import() */(90/* duplicate */).then(__webpack_require__.bind(null, 547)).then(function (module) { return module.startHardwareBackButton(); });
-                }
-                __webpack_require__.e/* import() */(91/* duplicate */).then(__webpack_require__.bind(null, 548)).then(function (module) { return module.startFocusVisible(); });
-            });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "create", function() { return create; });
+var transitionEnd = function (el, callback) {
+    var unRegTrans;
+    var opts = { passive: true };
+    var unregister = function () {
+        if (unRegTrans) {
+            unRegTrans();
         }
     };
-    App.prototype.render = function () {
-        var _a;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: (_a = {},
-                _a[mode] = true,
-                _a['ion-page'] = true,
-                _a['force-statusbar-padding'] = __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('_forceStatusbarPadding'),
-                _a) }));
+    var onTransitionEnd = function (ev) {
+        if (el === ev.target) {
+            unregister();
+            callback(ev);
+        }
     };
-    Object.defineProperty(App.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(App, "style", {
-        get: function () { return "html.plt-mobile ion-app{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}ion-app.force-statusbar-padding{--ion-safe-area-top:20px}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return App;
-}());
-var needInputShims = function () {
-    return Object(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["f" /* i */])(window, 'ios') && Object(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["f" /* i */])(window, 'mobile');
-};
-var rIC = function (callback) {
-    if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(callback);
-    }
-    else {
-        setTimeout(callback, 32);
-    }
-};
-var Buttons = /** @class */ (function () {
-    function Buttons(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        /**
-         * If true, buttons will disappear when its
-         * parent toolbar has fully collapsed if the toolbar
-         * is not the first toolbar. If the toolbar is the
-         * first toolbar, the buttons will be hidden and will
-         * only be shown once all toolbars have fully collapsed.
-         *
-         * Only applies in `ios` mode with `collapse` set to
-         * `true` on `ion-header`.
-         *
-         * Typically used for [Collapsible Large Titles](https://ionicframework.com/docs/api/title#collapsible-large-titles)
-         */
-        this.collapse = false;
-    }
-    Buttons.prototype.render = function () {
-        var _a;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: (_a = {},
-                _a[mode] = true,
-                _a['buttons-collapse'] = this.collapse,
-                _a) }));
-    };
-    Object.defineProperty(Buttons, "style", {
-        get: function () { return ".sc-ion-buttons-ios-h{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-webkit-transform:translateZ(0);transform:translateZ(0);z-index:99}.sc-ion-buttons-ios-s  ion-button {--padding-top:0;--padding-bottom:0;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;--padding-start:5px;--padding-end:5px;margin-left:2px;margin-right:2px;height:32px;font-size:17px;font-weight:400}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.sc-ion-buttons-ios-s  ion-button {margin-left:unset;margin-right:unset;-webkit-margin-start:2px;margin-inline-start:2px;-webkit-margin-end:2px;margin-inline-end:2px}}.sc-ion-buttons-ios-s  ion-button:not(.button-round) {--border-radius:4px}.sc-ion-buttons-ios-h.ion-color.sc-ion-buttons-ios-s  .button , .ion-color .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button {--color:initial;--border-color:initial;--background-focused:rgba(var(--ion-color-contrast-rgb),0.1)}.sc-ion-buttons-ios-h.ion-color.sc-ion-buttons-ios-s  .button-solid , .ion-color .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-solid {--background:var(--ion-color-contrast);--background-activated:rgba(var(--ion-color-contrast-rgb),0.8);--background-focused:rgba(var(--ion-color-contrast-rgb),0.6);--color:var(--ion-color-base);--color-focused:var(--ion-color-base)}.sc-ion-buttons-ios-h.ion-color.sc-ion-buttons-ios-s  .button-clear , .ion-color .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-clear {--background-focused:rgba(var(--ion-color-contrast-rgb),0.1);--color-activated:var(--ion-color-contrast);--color-focused:var(--ion-color-contrast)}.sc-ion-buttons-ios-h.ion-color.sc-ion-buttons-ios-s  .button-outline , .ion-color .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-outline {--background-activated:var(--ion-color-contrast);--background-focused:rgba(var(--ion-color-contrast-rgb),0.1);--color-activated:var(--ion-color-base);--color-focused:var(--ion-color-contrast)}.sc-ion-buttons-ios-hion-toolbar:not(.ion-color).sc-ion-buttons-ios-s  .button-clear , ion-toolbar:not(.ion-color) .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-clear {--color:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff));--color-activated:var(--ion-toolbar-color-activated,var(--ion-color-primary,#3880ff));--color-focused:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff))}.sc-ion-buttons-ios-hion-toolbar:not(.ion-color).sc-ion-buttons-ios-s  .button-outline , ion-toolbar:not(.ion-color) .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-outline {--color:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff));--color-activated:var(--ion-toolbar-background,var(--ion-color-primary-contrast,#fff));--color-focused:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff));--border-color:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff));--background-activated:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff))}.sc-ion-buttons-ios-hion-toolbar:not(.ion-color).sc-ion-buttons-ios-s  .button-solid , ion-toolbar:not(.ion-color) .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-solid {--color:var(--ion-toolbar-background,var(--ion-color-step-50,#fff));--color-activated:var(--ion-toolbar-background,var(--ion-color-step-50,#fff));--color-focused:var(--ion-toolbar-background,var(--ion-color-step-50,#fff));--background:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff));--background-activated:var(--ion-toolbar-color-activated,var(--ion-color-primary-shade,#3171e0));--background-focused:var(--ion-toolbar-color-activated,var(--ion-color-primary-shade,#3171e0))}.sc-ion-buttons-ios-s  ion-icon[slot=start] {margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;margin-right:.3em;font-size:24px;line-height:.67}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.sc-ion-buttons-ios-s  ion-icon[slot=start] {margin-right:unset;-webkit-margin-end:.3em;margin-inline-end:.3em}}.sc-ion-buttons-ios-s  ion-icon[slot=end] {margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;margin-left:.4em;font-size:24px;line-height:.67}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.sc-ion-buttons-ios-s  ion-icon[slot=end] {margin-left:unset;-webkit-margin-start:.4em;margin-inline-start:.4em}}.sc-ion-buttons-ios-s  ion-icon[slot=icon-only] {padding-left:0;padding-right:0;padding-top:0;padding-bottom:0;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;font-size:31px;line-height:.67}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Buttons;
-}());
-var Content = /** @class */ (function () {
-    function class_1(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.isScrolling = false;
-        this.lastScroll = 0;
-        this.queued = false;
-        this.cTop = -1;
-        this.cBottom = -1;
-        this.mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        // Detail is used in a hot loop in the scroll event, by allocating it here
-        // V8 will be able to inline any read/write to it since it's a monomorphic class.
-        // https://mrale.ph/blog/2015/01/11/whats-up-with-monomorphism.html
-        this.detail = {
-            scrollTop: 0,
-            scrollLeft: 0,
-            type: 'scroll',
-            event: undefined,
-            startX: 0,
-            startY: 0,
-            startTimeStamp: 0,
-            currentX: 0,
-            currentY: 0,
-            velocityX: 0,
-            velocityY: 0,
-            deltaX: 0,
-            deltaY: 0,
-            timeStamp: 0,
-            data: undefined,
-            isScrolling: true,
+    if (el) {
+        el.addEventListener('webkitTransitionEnd', onTransitionEnd, opts);
+        el.addEventListener('transitionend', onTransitionEnd, opts);
+        unRegTrans = function () {
+            el.removeEventListener('webkitTransitionEnd', onTransitionEnd, opts);
+            el.removeEventListener('transitionend', onTransitionEnd, opts);
         };
-        /**
-         * If `true`, the content will scroll behind the headers
-         * and footers. This effect can easily be seen by setting the toolbar
-         * to transparent.
-         */
-        this.fullscreen = false;
-        /**
-         * If you want to enable the content scrolling in the X axis, set this property to `true`.
-         */
-        this.scrollX = false;
-        /**
-         * If you want to disable the content scrolling in the Y axis, set this property to `false`.
-         */
-        this.scrollY = true;
-        /**
-         * Because of performance reasons, ionScroll events are disabled by default, in order to enable them
-         * and start listening from (ionScroll), set this property to `true`.
-         */
-        this.scrollEvents = false;
-        this.ionScrollStart = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionScrollStart", 7);
-        this.ionScroll = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionScroll", 7);
-        this.ionScrollEnd = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionScrollEnd", 7);
     }
-    class_1.prototype.disconnectedCallback = function () {
-        this.onScrollEnd();
+    return unregister;
+};
+var CSS_VALUE_REGEX = /(^-?\d*\.?\d*)(.*)/;
+var DURATION_MIN = 32;
+var TRANSITION_END_FALLBACK_PADDING_MS = 400;
+var TRANSFORM_PROPS = {
+    'translateX': 1,
+    'translateY': 1,
+    'translateZ': 1,
+    'scale': 1,
+    'scaleX': 1,
+    'scaleY': 1,
+    'scaleZ': 1,
+    'rotate': 1,
+    'rotateX': 1,
+    'rotateY': 1,
+    'rotateZ': 1,
+    'skewX': 1,
+    'skewY': 1,
+    'perspective': 1
+};
+var win = typeof window !== 'undefined' ? window : {};
+var raf = win.requestAnimationFrame
+    ? win.requestAnimationFrame.bind(win)
+    : function (f) { return f(Date.now()); };
+var Animator = /** @class */ (function () {
+    function Animator() {
+        this._hasDur = false;
+        this._hasTweenEffect = false;
+        this._isAsync = false;
+        this._isReverse = false;
+        this._destroyed = false;
+        this.hasChildren = false;
+        this.isPlaying = false;
+        this.hasCompleted = false;
+    }
+    Animator.prototype.addElement = function (el) {
+        if (el != null) {
+            if (el.length > 0) {
+                for (var i = 0; i < el.length; i++) {
+                    this._addEl(el[i]);
+                }
+            }
+            else {
+                this._addEl(el);
+            }
+        }
+        return this;
     };
-    class_1.prototype.componentDidLoad = function () {
-        this.resize();
-    };
-    class_1.prototype.onClick = function (ev) {
-        if (this.isScrolling) {
-            ev.preventDefault();
-            ev.stopPropagation();
+    /**
+     * NO DOM
+     */
+    Animator.prototype._addEl = function (el) {
+        if (el.nodeType === 1) {
+            (this._elements = this._elements || []).push(el);
         }
     };
-    class_1.prototype.shouldForceOverscroll = function () {
-        var _a = this, forceOverscroll = _a.forceOverscroll, mode = _a.mode;
-        return forceOverscroll === undefined
-            ? mode === 'ios' && Object(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["f" /* i */])('ios')
-            : forceOverscroll;
+    /**
+     * Add a child animation to this animation.
+     */
+    Animator.prototype.add = function (childAnimation) {
+        childAnimation.parent = this;
+        this.hasChildren = true;
+        (this._childAnimations = this._childAnimations || []).push(childAnimation);
+        return this;
     };
-    class_1.prototype.resize = function () {
-        if (this.fullscreen) {
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(this.readDimensions.bind(this));
+    /**
+     * Get the duration of this animation. If this animation does
+     * not have a duration, then it'll get the duration from its parent.
+     */
+    Animator.prototype.getDuration = function (opts) {
+        if (opts && opts.duration !== undefined) {
+            return opts.duration;
         }
-        else if (this.cTop !== 0 || this.cBottom !== 0) {
-            this.cTop = this.cBottom = 0;
-            this.el.forceUpdate();
+        else if (this._duration !== undefined) {
+            return this._duration;
         }
+        else if (this.parent) {
+            return this.parent.getDuration();
+        }
+        return 0;
     };
-    class_1.prototype.readDimensions = function () {
-        var page = getPageElement(this.el);
-        var top = Math.max(this.el.offsetTop, 0);
-        var bottom = Math.max(page.offsetHeight - top - this.el.offsetHeight, 0);
-        var dirty = top !== this.cTop || bottom !== this.cBottom;
-        if (dirty) {
-            this.cTop = top;
-            this.cBottom = bottom;
-            this.el.forceUpdate();
-        }
+    /**
+     * Returns if the animation is a root one.
+     */
+    Animator.prototype.isRoot = function () {
+        return !this.parent;
     };
-    class_1.prototype.onScroll = function (ev) {
+    /**
+     * Set the duration for this animation.
+     */
+    Animator.prototype.duration = function (milliseconds) {
+        this._duration = milliseconds;
+        return this;
+    };
+    /**
+     * Get the easing of this animation. If this animation does
+     * not have an easing, then it'll get the easing from its parent.
+     */
+    Animator.prototype.getEasing = function () {
+        if (this._isReverse && this._reversedEasingName !== undefined) {
+            return this._reversedEasingName;
+        }
+        return this._easingName !== undefined ? this._easingName : (this.parent && this.parent.getEasing()) || null;
+    };
+    /**
+     * Set the easing for this animation.
+     */
+    Animator.prototype.easing = function (name) {
+        this._easingName = name;
+        return this;
+    };
+    /**
+     * Set the easing for this reversed animation.
+     */
+    Animator.prototype.easingReverse = function (name) {
+        this._reversedEasingName = name;
+        return this;
+    };
+    /**
+     * Add the "from" value for a specific property.
+     */
+    Animator.prototype.from = function (prop, val) {
+        this._addProp('from', prop, val);
+        return this;
+    };
+    /**
+     * Add the "to" value for a specific property.
+     */
+    Animator.prototype.to = function (prop, val, clearProperyAfterTransition) {
+        if (clearProperyAfterTransition === void 0) { clearProperyAfterTransition = false; }
+        var fx = this._addProp('to', prop, val);
+        if (clearProperyAfterTransition) {
+            // if this effect is a transform then clear the transform effect
+            // otherwise just clear the actual property
+            this.afterClearStyles(fx.trans ? ['transform', '-webkit-transform'] : [prop]);
+        }
+        return this;
+    };
+    /**
+     * Shortcut to add both the "from" and "to" for the same property.
+     */
+    Animator.prototype.fromTo = function (prop, fromVal, toVal, clearProperyAfterTransition) {
+        return this.from(prop, fromVal).to(prop, toVal, clearProperyAfterTransition);
+    };
+    /**
+     * NO DOM
+     */
+    Animator.prototype._getProp = function (name) {
+        if (this._fxProperties) {
+            return this._fxProperties.find(function (prop) { return prop.effectName === name; });
+        }
+        return undefined;
+    };
+    Animator.prototype._addProp = function (state, prop, val) {
+        var fxProp = this._getProp(prop);
+        if (!fxProp) {
+            // first time we've see this EffectProperty
+            var shouldTrans = (TRANSFORM_PROPS[prop] === 1);
+            fxProp = {
+                effectName: prop,
+                trans: shouldTrans,
+                // add the will-change property for transforms or opacity
+                wc: (shouldTrans ? 'transform' : prop)
+            };
+            (this._fxProperties = this._fxProperties || []).push(fxProp);
+        }
+        // add from/to EffectState to the EffectProperty
+        var fxState = {
+            val: val,
+            num: 0,
+            effectUnit: '',
+        };
+        fxProp[state] = fxState;
+        if (typeof val === 'string' && val.indexOf(' ') < 0) {
+            var r = val.match(CSS_VALUE_REGEX);
+            if (r) {
+                var num = parseFloat(r[1]);
+                if (!isNaN(num)) {
+                    fxState.num = num;
+                }
+                fxState.effectUnit = (r[0] !== r[2] ? r[2] : '');
+            }
+        }
+        else if (typeof val === 'number') {
+            fxState.num = val;
+        }
+        return fxProp;
+    };
+    /**
+     * Add CSS class to this animation's elements
+     * before the animation begins.
+     */
+    Animator.prototype.beforeAddClass = function (className) {
+        (this._beforeAddClasses = this._beforeAddClasses || []).push(className);
+        return this;
+    };
+    /**
+     * Remove CSS class from this animation's elements
+     * before the animation begins.
+     */
+    Animator.prototype.beforeRemoveClass = function (className) {
+        (this._beforeRemoveClasses = this._beforeRemoveClasses || []).push(className);
+        return this;
+    };
+    /**
+     * Set CSS inline styles to this animation's elements
+     * before the animation begins.
+     */
+    Animator.prototype.beforeStyles = function (styles) {
+        this._beforeStyles = styles;
+        return this;
+    };
+    /**
+     * Clear CSS inline styles from this animation's elements
+     * before the animation begins.
+     */
+    Animator.prototype.beforeClearStyles = function (propertyNames) {
+        this._beforeStyles = this._beforeStyles || {};
+        for (var _i = 0, propertyNames_1 = propertyNames; _i < propertyNames_1.length; _i++) {
+            var prop = propertyNames_1[_i];
+            this._beforeStyles[prop] = '';
+        }
+        return this;
+    };
+    /**
+     * Add a function which contains DOM reads, which will run
+     * before the animation begins.
+     */
+    Animator.prototype.beforeAddRead = function (domReadFn) {
+        (this._readCallbacks = this._readCallbacks || []).push(domReadFn);
+        return this;
+    };
+    /**
+     * Add a function which contains DOM writes, which will run
+     * before the animation begins.
+     */
+    Animator.prototype.beforeAddWrite = function (domWriteFn) {
+        (this._writeCallbacks = this._writeCallbacks || []).push(domWriteFn);
+        return this;
+    };
+    /**
+     * Add CSS class to this animation's elements
+     * after the animation finishes.
+     */
+    Animator.prototype.afterAddClass = function (className) {
+        (this._afterAddClasses = this._afterAddClasses || []).push(className);
+        return this;
+    };
+    /**
+     * Remove CSS class from this animation's elements
+     * after the animation finishes.
+     */
+    Animator.prototype.afterRemoveClass = function (className) {
+        (this._afterRemoveClasses = this._afterRemoveClasses || []).push(className);
+        return this;
+    };
+    /**
+     * Set CSS inline styles to this animation's elements
+     * after the animation finishes.
+     */
+    Animator.prototype.afterStyles = function (styles) {
+        this._afterStyles = styles;
+        return this;
+    };
+    /**
+     * Clear CSS inline styles from this animation's elements
+     * after the animation finishes.
+     */
+    Animator.prototype.afterClearStyles = function (propertyNames) {
+        this._afterStyles = this._afterStyles || {};
+        for (var _i = 0, propertyNames_2 = propertyNames; _i < propertyNames_2.length; _i++) {
+            var prop = propertyNames_2[_i];
+            this._afterStyles[prop] = '';
+        }
+        return this;
+    };
+    /**
+     * Play the animation.
+     */
+    Animator.prototype.play = function (opts) {
         var _this = this;
-        var timeStamp = Date.now();
-        var shouldStart = !this.isScrolling;
-        this.lastScroll = timeStamp;
-        if (shouldStart) {
-            this.onScrollStart();
+        // If the animation was already invalidated (it did finish), do nothing
+        if (this._destroyed) {
+            return;
         }
-        if (!this.queued && this.scrollEvents) {
-            this.queued = true;
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(function (ts) {
-                _this.queued = false;
-                _this.detail.event = ev;
-                updateScrollDetail(_this.detail, _this.scrollEl, ts, shouldStart);
-                _this.ionScroll.emit(_this.detail);
+        // this is the top level animation and is in full control
+        // of when the async play() should actually kick off
+        // if there is no duration then it'll set the TO property immediately
+        // if there is a duration, then it'll stage all animations at the
+        // FROM property and transition duration, wait a few frames, then
+        // kick off the animation by setting the TO property for each animation
+        this._isAsync = this._hasDuration(opts);
+        // ensure all past transition end events have been cleared
+        this._clearAsync();
+        // recursively kicks off the correct progress step for each child animation
+        // ******** DOM WRITE ****************
+        this._playInit(opts);
+        // doubling up RAFs since this animation was probably triggered
+        // from an input event, and just having one RAF would have this code
+        // run within the same frame as the triggering input event, and the
+        // input event probably already did way too much work for one frame
+        raf(function () {
+            raf(function () {
+                _this._playDomInspect(opts);
+            });
+        });
+    };
+    Animator.prototype.playAsync = function (opts) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.onFinish(resolve, { oneTimeCallback: true, clearExistingCallbacks: true });
+            _this.play(opts);
+            return _this;
+        });
+    };
+    Animator.prototype.playSync = function () {
+        // If the animation was already invalidated (it did finish), do nothing
+        if (!this._destroyed) {
+            var opts = { duration: 0 };
+            this._isAsync = false;
+            this._clearAsync();
+            this._playInit(opts);
+            this._playDomInspect(opts);
+        }
+    };
+    /**
+     * DOM WRITE
+     * RECURSION
+     */
+    Animator.prototype._playInit = function (opts) {
+        // always default that an animation does not tween
+        // a tween requires that an Animation class has an element
+        // and that it has at least one FROM/TO effect
+        // and that the FROM/TO effect can tween numeric values
+        this._hasTweenEffect = false;
+        this.isPlaying = true;
+        this.hasCompleted = false;
+        this._hasDur = (this.getDuration(opts) > DURATION_MIN);
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_1 = children; _i < children_1.length; _i++) {
+                var child = children_1[_i];
+                // ******** DOM WRITE ****************
+                child._playInit(opts);
+            }
+        }
+        if (this._hasDur) {
+            // if there is a duration then we want to start at step 0
+            // ******** DOM WRITE ****************
+            this._progress(0);
+            // add the will-change properties
+            // ******** DOM WRITE ****************
+            this._willChange(true);
+        }
+    };
+    /**
+     * DOM WRITE
+     * NO RECURSION
+     * ROOT ANIMATION
+     */
+    Animator.prototype._playDomInspect = function (opts) {
+        var _this = this;
+        // fire off all the "before" function that have DOM READS in them
+        // elements will be in the DOM, however visibily hidden
+        // so we can read their dimensions if need be
+        // ******** DOM READ ****************
+        // ******** DOM WRITE ****************
+        this._beforeAnimation();
+        // for the root animation only
+        // set the async TRANSITION END event
+        // and run onFinishes when the transition ends
+        var dur = this.getDuration(opts);
+        if (this._isAsync) {
+            this._asyncEnd(dur, true);
+        }
+        // ******** DOM WRITE ****************
+        this._playProgress(opts);
+        if (this._isAsync && !this._destroyed) {
+            // this animation has a duration so we need another RAF
+            // for the CSS TRANSITION properties to kick in
+            raf(function () {
+                _this._playToStep(1);
             });
         }
     };
     /**
-     * Get the element where the actual scrolling takes place.
-     * This element can be used to subscribe to `scroll` events or manually modify
-     * `scrollTop`. However, it's recommended to use the API provided by `ion-content`:
-     *
-     * i.e. Using `ionScroll`, `ionScrollStart`, `ionScrollEnd` for scrolling events
-     * and `scrollToPoint()` to scroll the content into a certain point.
+     * DOM WRITE
+     * RECURSION
      */
-    class_1.prototype.getScrollElement = function () {
-        return Promise.resolve(this.scrollEl);
+    Animator.prototype._playProgress = function (opts) {
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_2 = children; _i < children_2.length; _i++) {
+                var child = children_2[_i];
+                // ******** DOM WRITE ****************
+                child._playProgress(opts);
+            }
+        }
+        if (this._hasDur) {
+            // set the CSS TRANSITION duration/easing
+            // ******** DOM WRITE ****************
+            this._setTrans(this.getDuration(opts), false);
+        }
+        else {
+            // this animation does not have a duration, so it should not animate
+            // just go straight to the TO properties and call it done
+            // ******** DOM WRITE ****************
+            this._progress(1);
+            // since there was no animation, immediately run the after
+            // ******** DOM WRITE ****************
+            this._setAfterStyles();
+            // this animation has no duration, so it has finished
+            // other animations could still be running
+            this._didFinish(true);
+        }
     };
     /**
-     * Scroll to the top of the component.
-     *
-     * @param duration The amount of time to take scrolling to the top. Defaults to `0`.
+     * DOM WRITE
+     * RECURSION
      */
-    class_1.prototype.scrollToTop = function (duration) {
-        if (duration === void 0) { duration = 0; }
-        return this.scrollToPoint(undefined, 0, duration);
-    };
-    /**
-     * Scroll to the bottom of the component.
-     *
-     * @param duration The amount of time to take scrolling to the bottom. Defaults to `0`.
-     */
-    class_1.prototype.scrollToBottom = function (duration) {
-        if (duration === void 0) { duration = 0; }
-        var y = this.scrollEl.scrollHeight - this.scrollEl.clientHeight;
-        return this.scrollToPoint(undefined, y, duration);
-    };
-    /**
-     * Scroll by a specified X/Y distance in the component.
-     *
-     * @param x The amount to scroll by on the horizontal axis.
-     * @param y The amount to scroll by on the vertical axis.
-     * @param duration The amount of time to take scrolling by that amount.
-     */
-    class_1.prototype.scrollByPoint = function (x, y, duration) {
-        return this.scrollToPoint(x + this.scrollEl.scrollLeft, y + this.scrollEl.scrollTop, duration);
-    };
-    /**
-     * Scroll to a specified X/Y location in the component.
-     *
-     * @param x The point to scroll to on the horizontal axis.
-     * @param y The point to scroll to on the vertical axis.
-     * @param duration The amount of time to take scrolling to that point. Defaults to `0`.
-     */
-    class_1.prototype.scrollToPoint = function (x, y, duration) {
-        if (duration === void 0) { duration = 0; }
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var el, resolve, startTime, promise, fromY, fromX, deltaY, deltaX, step;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                el = this.scrollEl;
-                if (duration < 32) {
-                    if (y != null) {
-                        el.scrollTop = y;
-                    }
-                    if (x != null) {
-                        el.scrollLeft = x;
-                    }
-                    return [2 /*return*/];
+    Animator.prototype._playToStep = function (stepValue) {
+        if (!this._destroyed) {
+            var children = this._childAnimations;
+            if (children) {
+                for (var _i = 0, children_3 = children; _i < children_3.length; _i++) {
+                    var child = children_3[_i];
+                    // ******** DOM WRITE ****************
+                    child._playToStep(stepValue);
                 }
-                startTime = 0;
-                promise = new Promise(function (r) { return resolve = r; });
-                fromY = el.scrollTop;
-                fromX = el.scrollLeft;
-                deltaY = y != null ? y - fromY : 0;
-                deltaX = x != null ? x - fromX : 0;
-                step = function (timeStamp) {
-                    var linearTime = Math.min(1, ((timeStamp - startTime) / duration)) - 1;
-                    var easedT = Math.pow(linearTime, 3) + 1;
-                    if (deltaY !== 0) {
-                        el.scrollTop = Math.floor((easedT * deltaY) + fromY);
-                    }
-                    if (deltaX !== 0) {
-                        el.scrollLeft = Math.floor((easedT * deltaX) + fromX);
-                    }
-                    if (easedT < 1) {
-                        // do not use DomController here
-                        // must use nativeRaf in order to fire in the next frame
-                        // TODO: remove as any
-                        requestAnimationFrame(step);
+            }
+            if (this._hasDur) {
+                // browser had some time to render everything in place
+                // and the transition duration/easing is set
+                // now set the TO properties which will trigger the transition to begin
+                // ******** DOM WRITE ****************
+                this._progress(stepValue);
+            }
+        }
+    };
+    /**
+     * DOM WRITE
+     * NO RECURSION
+     * ROOT ANIMATION
+     */
+    Animator.prototype._asyncEnd = function (dur, shouldComplete) {
+        var self = this;
+        var onTransitionEnd = function () {
+            // congrats! a successful transition completed!
+            // ensure transition end events and timeouts have been cleared
+            self._clearAsync();
+            // ******** DOM WRITE ****************
+            self._playEnd();
+            // transition finished
+            self._didFinishAll(shouldComplete, true, false);
+        };
+        var onTransitionFallback = function () {
+            // oh noz! the transition end event didn't fire in time!
+            // instead the fallback timer when first
+            // if all goes well this fallback should never fire
+            // clear the other async end events from firing
+            self._timerId = undefined;
+            self._clearAsync();
+            // set the after styles
+            // ******** DOM WRITE ****************
+            self._playEnd(shouldComplete ? 1 : 0);
+            // transition finished
+            self._didFinishAll(shouldComplete, true, false);
+        };
+        // set the TRANSITION END event on one of the transition elements
+        self._unregisterTrnsEnd = transitionEnd(self._transEl(), onTransitionEnd);
+        // set a fallback timeout if the transition end event never fires, or is too slow
+        // transition end fallback: (animation duration + XXms)
+        self._timerId = setTimeout(onTransitionFallback, (dur + TRANSITION_END_FALLBACK_PADDING_MS));
+    };
+    /**
+     * DOM WRITE
+     * RECURSION
+     */
+    Animator.prototype._playEnd = function (stepValue) {
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_4 = children; _i < children_4.length; _i++) {
+                var child = children_4[_i];
+                // ******** DOM WRITE ****************
+                child._playEnd(stepValue);
+            }
+        }
+        if (this._hasDur) {
+            if (stepValue !== undefined) {
+                // too late to have a smooth animation, just finish it
+                // ******** DOM WRITE ****************
+                this._setTrans(0, true);
+                // ensure the ending progress step gets rendered
+                // ******** DOM WRITE ****************
+                this._progress(stepValue);
+            }
+            // set the after styles
+            // ******** DOM WRITE ****************
+            this._setAfterStyles();
+            // remove the will-change properties
+            // ******** DOM WRITE ****************
+            this._willChange(false);
+        }
+    };
+    /**
+     * NO DOM
+     * RECURSION
+     */
+    Animator.prototype._hasDuration = function (opts) {
+        if (this.getDuration(opts) > DURATION_MIN) {
+            return true;
+        }
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_5 = children; _i < children_5.length; _i++) {
+                var child = children_5[_i];
+                if (child._hasDuration(opts)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+    /**
+     * NO DOM
+     * RECURSION
+     */
+    Animator.prototype._hasDomReads = function () {
+        if (this._readCallbacks && this._readCallbacks.length > 0) {
+            return true;
+        }
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_6 = children; _i < children_6.length; _i++) {
+                var child = children_6[_i];
+                if (child._hasDomReads()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+    /**
+     * Immediately stop at the end of the animation.
+     */
+    Animator.prototype.stop = function (stepValue) {
+        if (stepValue === void 0) { stepValue = 1; }
+        // ensure all past transition end events have been cleared
+        this._clearAsync();
+        this._hasDur = true;
+        this._playEnd(stepValue);
+    };
+    /**
+     * NO DOM
+     * NO RECURSION
+     */
+    Animator.prototype._clearAsync = function () {
+        if (this._unregisterTrnsEnd) {
+            this._unregisterTrnsEnd();
+        }
+        if (this._timerId) {
+            clearTimeout(this._timerId);
+        }
+        this._timerId = this._unregisterTrnsEnd = undefined;
+    };
+    /**
+     * DOM WRITE
+     * NO RECURSION
+     */
+    Animator.prototype._progress = function (stepValue) {
+        // bread 'n butter
+        var val;
+        var elements = this._elements;
+        var effects = this._fxProperties;
+        if (!elements || elements.length === 0 || !effects || this._destroyed) {
+            return;
+        }
+        // flip the number if we're going in reverse
+        if (this._isReverse) {
+            stepValue = 1 - stepValue;
+        }
+        var i = 0;
+        var j = 0;
+        var finalTransform = '';
+        var fx;
+        for (i = 0; i < effects.length; i++) {
+            fx = effects[i];
+            if (fx.from && fx.to) {
+                var fromNum = fx.from.num;
+                var toNum = fx.to.num;
+                var tweenEffect = (fromNum !== toNum);
+                if (tweenEffect) {
+                    this._hasTweenEffect = true;
+                }
+                if (stepValue === 0) {
+                    // FROM
+                    val = fx.from.val;
+                }
+                else if (stepValue === 1) {
+                    // TO
+                    val = fx.to.val;
+                }
+                else if (tweenEffect) {
+                    // EVERYTHING IN BETWEEN
+                    var valNum = (((toNum - fromNum) * stepValue) + fromNum);
+                    var unit = fx.to.effectUnit;
+                    val = valNum + unit;
+                }
+                if (val !== null) {
+                    var prop = fx.effectName;
+                    if (fx.trans) {
+                        finalTransform += prop + '(' + val + ') ';
                     }
                     else {
-                        resolve();
+                        for (j = 0; j < elements.length; j++) {
+                            // ******** DOM WRITE ****************
+                            elements[j].style.setProperty(prop, val);
+                        }
                     }
-                };
-                // chill out for a frame first
-                requestAnimationFrame(function (ts) {
-                    startTime = ts;
-                    step(ts);
-                });
-                return [2 /*return*/, promise];
-            });
-        });
-    };
-    class_1.prototype.onScrollStart = function () {
-        var _this = this;
-        this.isScrolling = true;
-        this.ionScrollStart.emit({
-            isScrolling: true
-        });
-        if (this.watchDog) {
-            clearInterval(this.watchDog);
-        }
-        // watchdog
-        this.watchDog = setInterval(function () {
-            if (_this.lastScroll < Date.now() - 120) {
-                _this.onScrollEnd();
+                }
             }
-        }, 100);
-    };
-    class_1.prototype.onScrollEnd = function () {
-        clearInterval(this.watchDog);
-        this.watchDog = null;
-        if (this.isScrolling) {
-            this.isScrolling = false;
-            this.ionScrollEnd.emit({
-                isScrolling: false
-            });
+        }
+        // place all transforms on the same property
+        if (finalTransform.length > 0) {
+            if (!this._isReverse && stepValue !== 1 || this._isReverse && stepValue !== 0) {
+                finalTransform += 'translateZ(0px)';
+            }
+            for (i = 0; i < elements.length; i++) {
+                // ******** DOM WRITE ****************
+                elements[i].style.setProperty('transform', finalTransform);
+                elements[i].style.setProperty('-webkit-transform', finalTransform);
+            }
         }
     };
-    class_1.prototype.render = function () {
-        var _a;
-        var _this = this;
-        var _b = this, scrollX = _b.scrollX, scrollY = _b.scrollY;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var forceOverscroll = this.shouldForceOverscroll();
-        var transitionShadow = (mode === 'ios' && __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('experimentalTransitionShadow', true));
-        this.resize();
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: Object.assign(Object.assign({}, Object(__WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__["a" /* c */])(this.color)), (_a = {}, _a[mode] = true, _a['content-sizing'] = Object(__WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__["c" /* h */])('ion-popover', this.el), _a['overscroll'] = forceOverscroll, _a)), style: {
-                '--offset-top': this.cTop + "px",
-                '--offset-bottom': this.cBottom + "px",
-            } }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("main", { class: {
-                'inner-scroll': true,
-                'scroll-x': scrollX,
-                'scroll-y': scrollY,
-                'overscroll': (scrollX || scrollY) && forceOverscroll
-            }, ref: function (el) { return _this.scrollEl = el; }, onScroll: function (ev) { return _this.onScroll(ev); } }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", null)), transitionShadow ? (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "transition-effect" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "transition-cover" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "transition-shadow" }))) : null, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", { name: "fixed" })));
-    };
-    Object.defineProperty(class_1.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(class_1, "style", {
-        get: function () { return ":host{--background:var(--ion-background-color,#fff);--color:var(--ion-text-color,#000);--padding-top:0px;--padding-bottom:0px;--padding-start:0px;--padding-end:0px;--keyboard-offset:0px;--offset-top:0px;--offset-bottom:0px;--overflow:auto;display:block;position:relative;-ms-flex:1;flex:1;width:100%;height:100%;margin:0!important;padding:0!important;font-family:var(--ion-font-family,inherit);contain:size style}:host(.ion-color) .inner-scroll{background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.outer-content){--background:var(--ion-color-step-50,#f2f2f2)}.inner-scroll{left:0;right:0;top:calc(var(--offset-top) * -1);bottom:calc(var(--offset-bottom) * -1);padding-left:var(--padding-start);padding-right:var(--padding-end);padding-top:calc(var(--padding-top) + var(--offset-top));padding-bottom:calc(var(--padding-bottom) + var(--keyboard-offset) + var(--offset-bottom));position:absolute;background:var(--background);color:var(--color);-webkit-box-sizing:border-box;box-sizing:border-box;overflow:hidden}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.inner-scroll{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--padding-start);padding-inline-start:var(--padding-start);-webkit-padding-end:var(--padding-end);padding-inline-end:var(--padding-end)}}.scroll-x,.scroll-y{-webkit-overflow-scrolling:touch;will-change:scroll-position;-ms-scroll-chaining:none;overscroll-behavior:contain}.scroll-y{-ms-touch-action:pan-y;touch-action:pan-y;overflow-y:var(--overflow)}.scroll-x{-ms-touch-action:pan-x;touch-action:pan-x;overflow-x:var(--overflow)}.scroll-x.scroll-y{-ms-touch-action:auto;touch-action:auto}.overscroll:after,.overscroll:before{position:absolute;width:1px;height:1px;content:\"\"}.overscroll:before{bottom:-1px}.overscroll:after{top:-1px}:host(.content-sizing){contain:none}:host(.content-sizing) .inner-scroll{position:relative}.transition-effect{left:-100%;opacity:0;pointer-events:none}.transition-cover,.transition-effect{position:absolute;width:100%;height:100%}.transition-cover{right:0;background:#000;opacity:.1}.transition-shadow{display:block;position:absolute;right:0;width:10px;height:100%;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTE3MDgzRkQ5QTkyMTFFOUEwNzQ5MkJFREE1NUY2MjQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTE3MDgzRkU5QTkyMTFFOUEwNzQ5MkJFREE1NUY2MjQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxMTcwODNGQjlBOTIxMUU5QTA3NDkyQkVEQTU1RjYyNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxMTcwODNGQzlBOTIxMUU5QTA3NDkyQkVEQTU1RjYyNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PmePEuQAAABNSURBVHjaYvz//z8DIxAwMDAwATGMhmFmPDQuOSZks0AMmoJBaQHjkPfB0Lfg/2gQjVow+HPy/yHvg9GiYjQfjMbBqAWjFgy/4hogwADYqwdzxy5BuwAAAABJRU5ErkJggg==);background-repeat:repeat-y;background-size:10px 16px}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return class_1;
-}());
-var getParentElement = function (el) {
-    if (el.parentElement) {
-        // normal element with a parent element
-        return el.parentElement;
-    }
-    if (el.parentNode && el.parentNode.host) {
-        // shadow dom's document fragment
-        return el.parentNode.host;
-    }
-    return null;
-};
-var getPageElement = function (el) {
-    var tabs = el.closest('ion-tabs');
-    if (tabs) {
-        return tabs;
-    }
-    var page = el.closest('ion-app,ion-page,.ion-page,page-inner');
-    if (page) {
-        return page;
-    }
-    return getParentElement(el);
-};
-// ******** DOM READ ****************
-var updateScrollDetail = function (detail, el, timestamp, shouldStart) {
-    var prevX = detail.currentX;
-    var prevY = detail.currentY;
-    var prevT = detail.timeStamp;
-    var currentX = el.scrollLeft;
-    var currentY = el.scrollTop;
-    var timeDelta = timestamp - prevT;
-    if (shouldStart) {
-        // remember the start positions
-        detail.startTimeStamp = timestamp;
-        detail.startX = currentX;
-        detail.startY = currentY;
-        detail.velocityX = detail.velocityY = 0;
-    }
-    detail.timeStamp = timestamp;
-    detail.currentX = detail.scrollLeft = currentX;
-    detail.currentY = detail.scrollTop = currentY;
-    detail.deltaX = currentX - detail.startX;
-    detail.deltaY = currentY - detail.startY;
-    if (timeDelta > 0 && timeDelta < 100) {
-        var velocityX = (currentX - prevX) / timeDelta;
-        var velocityY = (currentY - prevY) / timeDelta;
-        detail.velocityX = velocityX * 0.7 + detail.velocityX * 0.3;
-        detail.velocityY = velocityY * 0.7 + detail.velocityY * 0.3;
-    }
-};
-var Footer = /** @class */ (function () {
-    function Footer(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        /**
-         * If `true`, the footer will be translucent.
-         * Only applies when the mode is `"ios"` and the device supports
-         * [`backdrop-filter`](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility).
-         *
-         * Note: In order to scroll content behind the footer, the `fullscreen`
-         * attribute needs to be set on the content.
-         */
-        this.translucent = false;
-    }
-    Footer.prototype.render = function () {
-        var _a;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var translucent = this.translucent;
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { role: "contentinfo", class: (_a = {},
-                _a[mode] = true,
-                // Used internally for styling
-                _a["footer-" + mode] = true,
-                _a["footer-translucent"] = translucent,
-                _a["footer-translucent-" + mode] = translucent,
-                _a) }));
-    };
-    Object.defineProperty(Footer, "style", {
-        get: function () { return "ion-footer{display:block;position:relative;-ms-flex-order:1;order:1;width:100%;z-index:10}ion-footer ion-toolbar:last-child{padding-bottom:var(--ion-safe-area-bottom,0)}.footer-ios ion-toolbar:first-child{--border-width:0.55px 0 0}.footer-ios[no-border] ion-toolbar:first-child{--border-width:0}\@supports ((-webkit-backdrop-filter:blur(0)) or (backdrop-filter:blur(0))){.footer-translucent-ios{-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.footer-translucent-ios ion-toolbar{--opacity:.8;--backdrop-filter:saturate(180%) blur(20px)}}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Footer;
-}());
-var TRANSITION = 'all 0.2s ease-in-out';
-var cloneElement = function (tagName) {
-    var getCachedEl = document.querySelector(tagName + ".ion-cloned-element");
-    if (getCachedEl !== null) {
-        return getCachedEl;
-    }
-    var clonedEl = document.createElement(tagName);
-    clonedEl.classList.add('ion-cloned-element');
-    clonedEl.style.setProperty('display', 'none');
-    document.body.appendChild(clonedEl);
-    return clonedEl;
-};
-var createHeaderIndex = function (headerEl) {
-    if (!headerEl) {
-        return;
-    }
-    var toolbars = headerEl.querySelectorAll('ion-toolbar');
-    return {
-        el: headerEl,
-        toolbars: Array.from(toolbars).map(function (toolbar) {
-            var ionTitleEl = toolbar.querySelector('ion-title');
-            return {
-                el: toolbar,
-                background: toolbar.shadowRoot.querySelector('.toolbar-background'),
-                ionTitleEl: ionTitleEl,
-                innerTitleEl: (ionTitleEl) ? ionTitleEl.shadowRoot.querySelector('.toolbar-title') : null,
-                ionButtonsEl: Array.from(toolbar.querySelectorAll('ion-buttons')) || []
-            };
-        }) || [[]]
-    };
-};
-var handleContentScroll = function (scrollEl, mainHeaderIndex, scrollHeaderIndex, remainingHeight) {
-    if (remainingHeight === void 0) { remainingHeight = 0; }
-    Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(function () {
-        var scrollTop = scrollEl.scrollTop;
-        var lastMainToolbar = mainHeaderIndex.toolbars[mainHeaderIndex.toolbars.length - 1];
-        var scale = Object(__WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__["c"])(1, 1 + (-scrollTop / 500), 1.1);
-        var borderOpacity = Object(__WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__["c"])(0, (scrollTop - remainingHeight) / lastMainToolbar.el.clientHeight, 1);
-        var maxOpacity = 1;
-        var scaledOpacity = borderOpacity * maxOpacity;
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
-            scaleLargeTitles(scrollHeaderIndex.toolbars, scale);
-            setToolbarBackgroundOpacity(mainHeaderIndex.toolbars[0], (scaledOpacity === 1) ? undefined : scaledOpacity);
-        });
-    });
-};
-var setToolbarBackgroundOpacity = function (toolbar, opacity) {
-    if (opacity === undefined) {
-        toolbar.background.style.removeProperty('--opacity');
-    }
-    else {
-        toolbar.background.style.setProperty('--opacity', opacity.toString());
-    }
-};
-/**
- * If toolbars are intersecting, hide the scrollable toolbar content
- * and show the primary toolbar content. If the toolbars are not intersecting,
- * hide the primary toolbar content and show the scrollable toolbar content
- */
-var handleToolbarIntersection = function (ev, mainHeaderIndex, scrollHeaderIndex) {
-    Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
-        var event = ev[0];
-        var intersection = event.intersectionRect;
-        var intersectionArea = intersection.width * intersection.height;
-        var rootArea = event.rootBounds.width * event.rootBounds.height;
-        var isPageHidden = intersectionArea === 0 && rootArea === 0;
-        var leftDiff = Math.abs(intersection.left - event.boundingClientRect.left);
-        var rightDiff = Math.abs(intersection.right - event.boundingClientRect.right);
-        var isPageTransitioning = intersectionArea > 0 && (leftDiff >= 5 || rightDiff >= 5);
-        if (isPageHidden || isPageTransitioning) {
+    /**
+     * DOM WRITE
+     * NO RECURSION
+     */
+    Animator.prototype._setTrans = function (dur, forcedLinearEasing) {
+        // Transition is not enabled if there are not effects
+        var elements = this._elements;
+        if (!elements || elements.length === 0 || !this._fxProperties) {
             return;
         }
-        if (event.isIntersecting) {
-            setHeaderActive(mainHeaderIndex, false);
-            setHeaderActive(scrollHeaderIndex);
-        }
-        else {
-            /**
-             * There is a bug with IntersectionObserver on Safari
-             * where `event.isIntersecting === false` when cancelling
-             * a swipe to go back gesture. Checking the intersection
-             * x, y, width, and height provides a workaround. This bug
-             * does not happen when using Safari + Web Animations,
-             * only Safari + CSS Animations.
-             */
-            var hasValidIntersection = (intersection.x === 0 && intersection.y === 0) || (intersection.width !== 0 && intersection.height !== 0);
-            if (hasValidIntersection) {
-                setHeaderActive(mainHeaderIndex);
-                setHeaderActive(scrollHeaderIndex, false);
+        // set the TRANSITION properties inline on the element
+        var easing = (forcedLinearEasing ? 'linear' : this.getEasing());
+        var durString = dur + 'ms';
+        for (var _i = 0, elements_1 = elements; _i < elements_1.length; _i++) {
+            var style = elements_1[_i].style;
+            if (dur > 0) {
+                // ******** DOM WRITE ****************
+                style.transitionDuration = durString;
+                // each animation can have a different easing
+                if (easing !== null) {
+                    // ******** DOM WRITE ****************
+                    style.transitionTimingFunction = easing;
+                }
+            }
+            else {
+                style.transitionDuration = '0';
             }
         }
-    });
-};
-var setHeaderActive = function (headerIndex, active) {
-    if (active === void 0) { active = true; }
-    Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
-        if (active) {
-            headerIndex.el.classList.remove('header-collapse-condense-inactive');
-        }
-        else {
-            headerIndex.el.classList.add('header-collapse-condense-inactive');
-        }
-        setToolbarBackgroundOpacity(headerIndex.toolbars[0], (active) ? undefined : 0);
-    });
-};
-var scaleLargeTitles = function (toolbars, scale, transition) {
-    if (toolbars === void 0) { toolbars = []; }
-    if (scale === void 0) { scale = 1; }
-    if (transition === void 0) { transition = false; }
-    toolbars.forEach(function (toolbar) {
-        var ionTitle = toolbar.ionTitleEl;
-        var titleDiv = toolbar.innerTitleEl;
-        if (!ionTitle || ionTitle.size !== 'large') {
-            return;
-        }
-        titleDiv.style.transformOrigin = 'left center';
-        titleDiv.style.transition = (transition) ? TRANSITION : '';
-        titleDiv.style.transform = "scale3d(" + scale + ", " + scale + ", 1)";
-    });
-};
-var Header = /** @class */ (function () {
-    function class_2(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.collapsibleHeaderInitialized = false;
-        /**
-         * If `true`, the header will be translucent.
-         * Only applies when the mode is `"ios"` and the device supports
-         * [`backdrop-filter`](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility).
-         *
-         * Note: In order to scroll content behind the header, the `fullscreen`
-         * attribute needs to be set on the content.
-         */
-        this.translucent = false;
-    }
-    class_2.prototype.componentDidLoad = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.checkCollapsibleHeader()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
     };
-    class_2.prototype.componentDidUpdate = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.checkCollapsibleHeader()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    class_2.prototype.componentDidUnload = function () {
-        this.destroyCollapsibleHeader();
-    };
-    class_2.prototype.checkCollapsibleHeader = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var hasCollapse, canCollapse, tabs, page, pageEl, contentEl;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        hasCollapse = this.collapse === 'condense';
-                        canCollapse = (hasCollapse && Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this) === 'ios') ? hasCollapse : false;
-                        if (!(!canCollapse && this.collapsibleHeaderInitialized)) return [3 /*break*/, 1];
-                        this.destroyCollapsibleHeader();
-                        return [3 /*break*/, 3];
-                    case 1:
-                        if (!(canCollapse && !this.collapsibleHeaderInitialized)) return [3 /*break*/, 3];
-                        tabs = this.el.closest('ion-tabs');
-                        page = this.el.closest('ion-app,ion-page,.ion-page,page-inner');
-                        pageEl = (tabs) ? tabs : (page) ? page : null;
-                        contentEl = (pageEl) ? pageEl.querySelector('ion-content') : null;
-                        return [4 /*yield*/, this.setupCollapsibleHeader(contentEl, pageEl)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    class_2.prototype.destroyCollapsibleHeader = function () {
-        if (this.intersectionObserver) {
-            this.intersectionObserver.disconnect();
-            this.intersectionObserver = undefined;
-        }
-        if (this.scrollEl && this.contentScrollCallback) {
-            this.scrollEl.removeEventListener('scroll', this.contentScrollCallback);
-            this.contentScrollCallback = undefined;
-        }
-    };
-    class_2.prototype.setupCollapsibleHeader = function (contentEl, pageEl) {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var _a;
-            var _this = this;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (!contentEl || !pageEl) {
-                            console.error('ion-header requires a content to collapse, make sure there is an ion-content.');
-                            return [2 /*return*/];
-                        }
-                        _a = this;
-                        return [4 /*yield*/, contentEl.getScrollElement()];
-                    case 1:
-                        _a.scrollEl = _b.sent();
-                        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(function () {
-                            var headers = pageEl.querySelectorAll('ion-header');
-                            var mainHeader = Array.from(headers).find(function (header) { return header.collapse !== 'condense'; });
-                            if (!mainHeader || !_this.scrollEl) {
-                                return;
-                            }
-                            var mainHeaderIndex = createHeaderIndex(mainHeader);
-                            var scrollHeaderIndex = createHeaderIndex(_this.el);
-                            if (!mainHeaderIndex || !scrollHeaderIndex) {
-                                return;
-                            }
-                            setHeaderActive(mainHeaderIndex, false);
-                            // TODO: Find a better way to do this
-                            var remainingHeight = 0;
-                            for (var i = 1; i <= scrollHeaderIndex.toolbars.length - 1; i++) {
-                                remainingHeight += scrollHeaderIndex.toolbars[i].el.clientHeight;
-                            }
-                            /**
-                             * Handle interaction between toolbar collapse and
-                             * showing/hiding content in the primary ion-header
-                             */
-                            var toolbarIntersection = function (ev) { handleToolbarIntersection(ev, mainHeaderIndex, scrollHeaderIndex); };
-                            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(function () {
-                                var mainHeaderHeight = mainHeaderIndex.el.clientHeight;
-                                _this.intersectionObserver = new IntersectionObserver(toolbarIntersection, { threshold: 0.25, rootMargin: "-" + mainHeaderHeight + "px 0px 0px 0px" });
-                                _this.intersectionObserver.observe(scrollHeaderIndex.toolbars[0].el);
-                            });
-                            /**
-                             * Handle scaling of large iOS titles and
-                             * showing/hiding border on last toolbar
-                             * in primary header
-                             */
-                            _this.contentScrollCallback = function () { handleContentScroll(_this.scrollEl, mainHeaderIndex, scrollHeaderIndex, remainingHeight); };
-                            _this.scrollEl.addEventListener('scroll', _this.contentScrollCallback);
-                        });
-                        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
-                            cloneElement('ion-title');
-                            cloneElement('ion-back-button');
-                        });
-                        this.collapsibleHeaderInitialized = true;
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    class_2.prototype.render = function () {
-        var _a;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var collapse = this.collapse || 'none';
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { role: "banner", class: (_a = {},
-                _a[mode] = true,
-                // Used internally for styling
-                _a["header-" + mode] = true,
-                _a["header-translucent"] = this.translucent,
-                _a["header-collapse-" + collapse] = true,
-                _a["header-translucent-" + mode] = this.translucent,
-                _a) }));
-    };
-    Object.defineProperty(class_2.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(class_2, "style", {
-        get: function () { return "ion-header{display:block;position:relative;-ms-flex-order:-1;order:-1;width:100%;z-index:10}ion-header ion-toolbar:first-child{padding-top:var(--ion-safe-area-top,0)}.header-ios ion-toolbar:last-child{--border-width:0 0 0.55px}.header-ios[no-border] ion-toolbar:last-child{--border-width:0}\@supports ((-webkit-backdrop-filter:blur(0)) or (backdrop-filter:blur(0))){.header-translucent-ios{-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.header-translucent-ios ion-toolbar{--opacity:.8;--backdrop-filter:saturate(180%) blur(20px)}}.header-collapse-condense{z-index:9}.header-collapse-condense ion-toolbar{position:-webkit-sticky;position:sticky;top:0}.header-collapse-condense ion-toolbar:first-child{padding-top:7px;z-index:1}.header-collapse-condense ion-toolbar{z-index:0}.header-collapse-condense ion-toolbar ion-searchbar{height:48px;padding-top:0;padding-bottom:13px}ion-toolbar.in-toolbar ion-buttons,ion-toolbar.in-toolbar ion-title{-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out}.header-collapse-condense ion-toolbar ion-buttons,.header-collapse-condense ion-toolbar ion-title{-webkit-transition:none;transition:none}.header-collapse-condense-inactive ion-toolbar.in-toolbar ion-buttons.buttons-collapse,.header-collapse-condense-inactive ion-toolbar.in-toolbar ion-title{opacity:0;pointer-events:none}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return class_2;
-}());
-var RouterOutlet = /** @class */ (function () {
-    function class_3(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.animationEnabled = true;
-        /**
-         * The mode determines which platform styles to use.
-         */
-        this.mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        /**
-         * If `true`, the router-outlet should animate the transition of components.
-         */
-        this.animated = true;
-        this.ionNavWillLoad = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionNavWillLoad", 7);
-        this.ionNavWillChange = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionNavWillChange", 3);
-        this.ionNavDidChange = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionNavDidChange", 3);
-    }
-    class_3.prototype.swipeHandlerChanged = function () {
-        if (this.gesture) {
-            this.gesture.setDisabled(this.swipeHandler === undefined);
-        }
-    };
-    class_3.prototype.connectedCallback = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var _a;
-            var _this = this;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = this;
-                        return [4 /*yield*/, __webpack_require__.e/* import() */(85/* duplicate */).then(__webpack_require__.bind(null, 543))];
-                    case 1:
-                        _a.gesture = (_b.sent()).createSwipeBackGesture(this.el, function () { return !!_this.swipeHandler && _this.swipeHandler.canStart() && _this.animationEnabled; }, function () { return _this.swipeHandler && _this.swipeHandler.onStart(); }, function (step) { return _this.ani && _this.ani.progressStep(step); }, function (shouldComplete, step, dur) {
-                            if (_this.ani) {
-                                _this.animationEnabled = false;
-                                _this.ani.onFinish(function () {
-                                    _this.animationEnabled = true;
-                                    if (_this.swipeHandler) {
-                                        _this.swipeHandler.onEnd(shouldComplete);
-                                    }
-                                }, { oneTimeCallback: true });
-                                // Account for rounding errors in JS
-                                var newStepValue = (shouldComplete) ? -0.001 : 0.001;
-                                /**
-                                 * Animation will be reversed here, so need to
-                                 * reverse the easing curve as well
-                                 *
-                                 * Additionally, we need to account for the time relative
-                                 * to the new easing curve, as `stepValue` is going to be given
-                                 * in terms of a linear curve.
-                                 */
-                                if (!shouldComplete) {
-                                    _this.ani.easing('cubic-bezier(1, 0, 0.68, 0.28)');
-                                    newStepValue += Object(__WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["b" /* g */])(new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](0, 0), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](1, 0), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](0.68, 0.28), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](1, 1), step);
-                                }
-                                else {
-                                    newStepValue += Object(__WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["b" /* g */])(new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](0, 0), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](0.32, 0.72), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](0, 1), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](1, 1), step);
-                                }
-                                _this.ani.progressEnd(shouldComplete ? 1 : 0, newStepValue, dur);
-                            }
-                        });
-                        this.swipeHandlerChanged();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    class_3.prototype.componentWillLoad = function () {
-        this.ionNavWillLoad.emit();
-    };
-    class_3.prototype.disconnectedCallback = function () {
-        if (this.gesture) {
-            this.gesture.destroy();
-            this.gesture = undefined;
-        }
-    };
-    /** @internal */
-    class_3.prototype.commit = function (enteringEl, leavingEl, opts) {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var unlock, changed, e_1;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.lock()];
-                    case 1:
-                        unlock = _a.sent();
-                        changed = false;
-                        _a.label = 2;
-                    case 2:
-                        _a.trys.push([2, 4, , 5]);
-                        return [4 /*yield*/, this.transition(enteringEl, leavingEl, opts)];
-                    case 3:
-                        changed = _a.sent();
-                        return [3 /*break*/, 5];
-                    case 4:
-                        e_1 = _a.sent();
-                        console.error(e_1);
-                        return [3 /*break*/, 5];
-                    case 5:
-                        unlock();
-                        return [2 /*return*/, changed];
-                }
-            });
-        });
-    };
-    /** @internal */
-    class_3.prototype.setRouteId = function (id, params, direction) {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var changed;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.setRoot(id, params, {
-                            duration: direction === 'root' ? 0 : undefined,
-                            direction: direction === 'back' ? 'back' : 'forward',
-                        })];
-                    case 1:
-                        changed = _a.sent();
-                        return [2 /*return*/, {
-                                changed: changed,
-                                element: this.activeEl
-                            }];
-                }
-            });
-        });
-    };
-    /** @internal */
-    class_3.prototype.getRouteId = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var active;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                active = this.activeEl;
-                return [2 /*return*/, active ? {
-                        id: active.tagName,
-                        element: active,
-                    } : undefined];
-            });
-        });
-    };
-    class_3.prototype.setRoot = function (component, params, opts) {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var leavingEl, enteringEl;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (this.activeComponent === component) {
-                            return [2 /*return*/, false];
-                        }
-                        leavingEl = this.activeEl;
-                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_6__framework_delegate_c2e2e1f4_js__["a"])(this.delegate, this.el, component, ['ion-page', 'ion-page-invisible'], params)];
-                    case 1:
-                        enteringEl = _a.sent();
-                        this.activeComponent = component;
-                        this.activeEl = enteringEl;
-                        // commit animation
-                        return [4 /*yield*/, this.commit(enteringEl, leavingEl, opts)];
-                    case 2:
-                        // commit animation
-                        _a.sent();
-                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_6__framework_delegate_c2e2e1f4_js__["b" /* d */])(this.delegate, leavingEl)];
-                    case 3:
-                        _a.sent();
-                        return [2 /*return*/, true];
-                }
-            });
-        });
-    };
-    class_3.prototype.transition = function (enteringEl, leavingEl, opts) {
-        if (opts === void 0) { opts = {}; }
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var _a, el, mode, animated, animationBuilder;
-            var _this = this;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (leavingEl === enteringEl) {
-                            return [2 /*return*/, false];
-                        }
-                        // emit nav will change event
-                        this.ionNavWillChange.emit();
-                        _a = this, el = _a.el, mode = _a.mode;
-                        animated = this.animated && __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('animated', true);
-                        animationBuilder = this.animation || opts.animationBuilder || __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('navAnimation');
-                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_7__index_35276576_js__["d" /* t */])(Object.assign({ mode: mode,
-                                animated: animated,
-                                animationBuilder: animationBuilder,
-                                enteringEl: enteringEl,
-                                leavingEl: leavingEl, baseEl: el, progressCallback: (opts.progressAnimation
-                                    ? function (ani) { return _this.ani = ani; }
-                                    : undefined) }, opts))];
-                    case 1:
-                        _b.sent();
-                        // emit nav changed event
-                        this.ionNavDidChange.emit();
-                        return [2 /*return*/, true];
-                }
-            });
-        });
-    };
-    class_3.prototype.lock = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var p, resolve;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        p = this.waitPromise;
-                        this.waitPromise = new Promise(function (r) { return resolve = r; });
-                        if (!(p !== undefined)) return [3 /*break*/, 2];
-                        return [4 /*yield*/, p];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2 /*return*/, resolve];
-                }
-            });
-        });
-    };
-    class_3.prototype.render = function () {
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", null));
-    };
-    Object.defineProperty(class_3.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(class_3, "watchers", {
-        get: function () {
-            return {
-                "swipeHandler": ["swipeHandlerChanged"]
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(class_3, "style", {
-        get: function () { return ":host{left:0;right:0;top:0;bottom:0;position:absolute;contain:layout size style;overflow:hidden;z-index:0}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return class_3;
-}());
-var ToolbarTitle = /** @class */ (function () {
-    function ToolbarTitle(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.ionStyle = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionStyle", 7);
-    }
-    ToolbarTitle.prototype.sizeChanged = function () {
-        this.emitStyle();
-    };
-    ToolbarTitle.prototype.connectedCallback = function () {
-        this.emitStyle();
-    };
-    ToolbarTitle.prototype.emitStyle = function () {
-        var _a;
-        var size = this.getSize();
-        this.ionStyle.emit((_a = {},
-            _a["title-" + size] = true,
-            _a));
-    };
-    ToolbarTitle.prototype.getSize = function () {
-        return (this.size !== undefined) ? this.size : 'default';
-    };
-    ToolbarTitle.prototype.getMode = function () {
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var toolbar = this.el.closest('ion-toolbar');
-        return (toolbar && toolbar.mode) || mode;
-    };
-    ToolbarTitle.prototype.render = function () {
-        var _a;
-        var mode = this.getMode();
-        var size = this.getSize();
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: Object.assign((_a = {}, _a[mode] = true, _a["title-" + mode] = true, _a["title-" + size] = true, _a), Object(__WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__["a" /* c */])(this.color)) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toolbar-title" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", null))));
-    };
-    Object.defineProperty(ToolbarTitle.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ToolbarTitle, "watchers", {
-        get: function () {
-            return {
-                "size": ["sizeChanged"]
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ToolbarTitle, "style", {
-        get: function () { return ":host{--color:initial;display:-ms-flexbox;display:flex;-ms-flex:1;flex:1;-ms-flex-align:center;align-items:center;-webkit-transform:translateZ(0);transform:translateZ(0);color:var(--color)}:host(.title-ios.title-default),:host(.title-ios.title-large){left:0;top:0;padding-left:90px;padding-right:90px;padding-top:0;padding-bottom:0;position:absolute;width:100%;height:100%;-webkit-transform:translateZ(0);transform:translateZ(0);font-size:17px;font-weight:600;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;pointer-events:none}:host-context([dir=rtl]).title-ios.title-default,:host-context([dir=rtl]).title-ios.title-large,:host-context([dir=rtl]):host(.title-ios.title-default),:host-context([dir=rtl]):host(.title-ios.title-large){left:unset;right:unset;right:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.title-ios.title-default),:host(.title-ios.title-large){padding-left:unset;padding-right:unset;-webkit-padding-start:90px;padding-inline-start:90px;-webkit-padding-end:90px;padding-inline-end:90px}}:host(.title-md){padding-left:20px;padding-right:20px;padding-top:0;padding-bottom:0;font-size:20px;font-weight:500;letter-spacing:.0125em}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.title-md){padding-left:unset;padding-right:unset;-webkit-padding-start:20px;padding-inline-start:20px;-webkit-padding-end:20px;padding-inline-end:20px}}:host(.ion-color){color:var(--ion-color-base)}.toolbar-title{display:block;width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;pointer-events:auto}:host(.title-small) .toolbar-title{white-space:normal}:host(.title-ios.title-small){padding-left:9px;padding-right:9px;padding-top:6px;padding-bottom:16px;width:100%;height:100%;font-size:13px;text-align:center}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.title-ios.title-small){padding-left:unset;padding-right:unset;-webkit-padding-start:9px;padding-inline-start:9px;-webkit-padding-end:9px;padding-inline-end:9px}}:host(.title-md.title-small){width:100%;height:100%;font-size:15px;font-weight:400}:host(.title-ios.title-large){padding-left:16px;padding-right:16px;padding-top:0;padding-bottom:0;bottom:0;-ms-flex-align:end;align-items:flex-end;min-width:100%;padding-bottom:6px;font-size:34px;font-weight:700;text-align:start}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.title-ios.title-large){padding-left:unset;padding-right:unset;-webkit-padding-start:16px;padding-inline-start:16px;-webkit-padding-end:16px;padding-inline-end:16px}}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return ToolbarTitle;
-}());
-var Toolbar = /** @class */ (function () {
-    function Toolbar(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.childrenStyles = new Map();
-    }
-    Toolbar.prototype.componentWillLoad = function () {
-        var buttons = Array.from(this.el.querySelectorAll('ion-buttons'));
-        var firstButtons = buttons.find(function (button) {
-            return button.slot === 'start';
-        });
-        if (firstButtons) {
-            firstButtons.classList.add('buttons-first-slot');
-        }
-        var buttonsReversed = buttons.reverse();
-        var lastButtons = buttonsReversed.find(function (button) { return button.slot === 'end'; }) ||
-            buttonsReversed.find(function (button) { return button.slot === 'primary'; }) ||
-            buttonsReversed.find(function (button) { return button.slot === 'secondary'; });
-        if (lastButtons) {
-            lastButtons.classList.add('buttons-last-slot');
-        }
-    };
-    Toolbar.prototype.childrenStyle = function (ev) {
-        ev.stopPropagation();
-        var tagName = ev.target.tagName;
-        var updatedStyles = ev.detail;
-        var newStyles = {};
-        var childStyles = this.childrenStyles.get(tagName) || {};
-        var hasStyleChange = false;
-        Object.keys(updatedStyles).forEach(function (key) {
-            var childKey = "toolbar-" + key;
-            var newValue = updatedStyles[key];
-            if (newValue !== childStyles[childKey]) {
-                hasStyleChange = true;
-            }
-            if (newValue) {
-                newStyles[childKey] = true;
-            }
-        });
-        if (hasStyleChange) {
-            this.childrenStyles.set(tagName, newStyles);
-            this.el.forceUpdate();
-        }
-    };
-    Toolbar.prototype.render = function () {
-        var _a;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var childStyles = {};
-        this.childrenStyles.forEach(function (value) {
-            Object.assign(childStyles, value);
-        });
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: Object.assign(Object.assign((_a = { 'in-toolbar': Object(__WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__["c" /* h */])('ion-toolbar', this.el) }, _a[mode] = true, _a), childStyles), Object(__WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__["a" /* c */])(this.color)) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toolbar-background" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toolbar-container" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", { name: "start" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", { name: "secondary" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toolbar-content" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", null)), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", { name: "primary" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", { name: "end" }))));
-    };
-    Object.defineProperty(Toolbar.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Toolbar, "style", {
-        get: function () { return ":host{--border-width:0;--border-style:solid;--opacity:1;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;padding-left:var(--ion-safe-area-left);padding-right:var(--ion-safe-area-right);display:block;position:relative;width:100%;color:var(--color);font-family:var(--ion-font-family,inherit);contain:content;z-index:10;-webkit-box-sizing:border-box;box-sizing:border-box}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--ion-safe-area-left);padding-inline-start:var(--ion-safe-area-left);-webkit-padding-end:var(--ion-safe-area-right);padding-inline-end:var(--ion-safe-area-right)}}:host(.ion-color){color:var(--ion-color-contrast)}:host(.ion-color) .toolbar-background{background:var(--ion-color-base)}.toolbar-container{padding-left:var(--padding-start);padding-right:var(--padding-end);padding-top:var(--padding-top);padding-bottom:var(--padding-bottom);display:-ms-flexbox;display:flex;position:relative;-ms-flex-direction:row;flex-direction:row;-ms-flex-align:center;align-items:center;-ms-flex-pack:justify;justify-content:space-between;width:100%;min-height:var(--min-height);contain:content;overflow:hidden;z-index:10;-webkit-box-sizing:border-box;box-sizing:border-box}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.toolbar-container{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--padding-start);padding-inline-start:var(--padding-start);-webkit-padding-end:var(--padding-end);padding-inline-end:var(--padding-end)}}.toolbar-background{top:0;-webkit-transform:translateZ(0);transform:translateZ(0);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);background:var(--background);contain:strict;opacity:var(--opacity);z-index:-1;pointer-events:none}.toolbar-background,::slotted(ion-progress-bar){left:0;right:0;bottom:0;position:absolute}:host{--background:var(--ion-toolbar-background,var(--ion-color-step-50,#fff));--color:var(--ion-toolbar-color,var(--ion-text-color,#000));--border-color:var(--ion-toolbar-border-color,var(--ion-border-color,var(--ion-color-step-150,rgba(0,0,0,0.2))));--padding-top:3px;--padding-bottom:3px;--padding-start:4px;--padding-end:4px;--min-height:44px}.toolbar-content{-ms-flex:1;flex:1;-ms-flex-order:4;order:4;min-width:0}:host(.toolbar-segment){--min-height:auto}:host(.toolbar-searchbar) .toolbar-container{padding-top:0;padding-bottom:0}:host(.toolbar-searchbar) ::slotted(*){-ms-flex-item-align:start;align-self:start}:host(.toolbar-searchbar) ::slotted(ion-chip){margin-top:3px}:host(.toolbar-searchbar) ::slotted(ion-back-button){height:38px}::slotted(ion-buttons){min-height:38px}::slotted([slot=start]){-ms-flex-order:2;order:2}::slotted([slot=secondary]){-ms-flex-order:3;order:3}::slotted([slot=primary]){-ms-flex-order:5;order:5;text-align:end}::slotted([slot=end]){-ms-flex-order:6;order:6;text-align:end}:host(.toolbar-title-large) .toolbar-container{-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-align:start;align-items:flex-start}:host(.toolbar-title-large) .toolbar-content ion-title{-ms-flex:1;flex:1;-ms-flex-order:8;order:8;min-width:100%}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Toolbar;
-}());
-
-
-
-/***/ }),
-
-/***/ 534:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createColorClasses; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getClassMap; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hostContext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return openURL; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-
-var hostContext = function (selector, el) {
-    return el.closest(selector) !== null;
-};
-/**
- * Create the mode and color classes for the component based on the classes passed in
- */
-var createColorClasses = function (color) {
-    var _a;
-    return (typeof color === 'string' && color.length > 0) ? (_a = {
-            'ion-color': true
-        },
-        _a["ion-color-" + color] = true,
-        _a) : undefined;
-};
-var getClassList = function (classes) {
-    if (classes !== undefined) {
-        var array = Array.isArray(classes) ? classes : classes.split(' ');
-        return array
-            .filter(function (c) { return c != null; })
-            .map(function (c) { return c.trim(); })
-            .filter(function (c) { return c !== ''; });
-    }
-    return [];
-};
-var getClassMap = function (classes) {
-    var map = {};
-    getClassList(classes).forEach(function (c) { return map[c] = true; });
-    return map;
-};
-var SCHEME = /^[a-z][a-z0-9+\-.]*:/;
-var openURL = function (url, ev, direction) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
-    var router;
-    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-        if (url != null && url[0] !== '#' && !SCHEME.test(url)) {
-            router = document.querySelector('ion-router');
-            if (router) {
-                if (ev != null) {
-                    ev.preventDefault();
-                }
-                return [2 /*return*/, router.push(url, direction)];
-            }
-        }
-        return [2 /*return*/, false];
-    });
-}); };
-
-
-
-/***/ }),
-
-/***/ 536:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return attachComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return detachComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-
-var attachComponent = function (delegate, container, component, cssClasses, componentProps) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
-    var el;
-    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                if (delegate) {
-                    return [2 /*return*/, delegate.attachViewToDom(container, component, componentProps, cssClasses)];
-                }
-                if (typeof component !== 'string' && !(component instanceof HTMLElement)) {
-                    throw new Error('framework delegate is missing');
-                }
-                el = (typeof component === 'string')
-                    ? container.ownerDocument && container.ownerDocument.createElement(component)
-                    : component;
-                if (cssClasses) {
-                    cssClasses.forEach(function (c) { return el.classList.add(c); });
-                }
-                if (componentProps) {
-                    Object.assign(el, componentProps);
-                }
-                container.appendChild(el);
-                if (!el.componentOnReady) return [3 /*break*/, 2];
-                return [4 /*yield*/, el.componentOnReady()];
-            case 1:
-                _a.sent();
-                _a.label = 2;
-            case 2: return [2 /*return*/, el];
-        }
-    });
-}); };
-var detachComponent = function (delegate, element) {
-    if (element) {
-        if (delegate) {
-            var container = element.parentElement;
-            return delegate.removeViewFromDom(container, element);
-        }
-        element.remove();
-    }
-    return Promise.resolve();
-};
-
-
-
-/***/ }),
-
-/***/ 537:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return deepReady; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return lifecycle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return setPageHidden; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return transition; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__ = __webpack_require__(271);
-
-
-
-var iosTransitionAnimation = function () { return __webpack_require__.e/* import() */(93).then(__webpack_require__.bind(null, 540)); };
-var mdTransitionAnimation = function () { return __webpack_require__.e/* import() */(92).then(__webpack_require__.bind(null, 541)); };
-var transition = function (opts) {
-    return new Promise(function (resolve, reject) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
-            beforeTransition(opts);
-            runTransition(opts).then(function (result) {
-                if (result.animation) {
-                    result.animation.destroy();
-                }
-                afterTransition(opts);
-                resolve(result);
-            }, function (error) {
-                afterTransition(opts);
-                reject(error);
-            });
-        });
-    });
-};
-var beforeTransition = function (opts) {
-    var enteringEl = opts.enteringEl;
-    var leavingEl = opts.leavingEl;
-    setZIndex(enteringEl, leavingEl, opts.direction);
-    if (opts.showGoBack) {
-        enteringEl.classList.add('can-go-back');
-    }
-    else {
-        enteringEl.classList.remove('can-go-back');
-    }
-    setPageHidden(enteringEl, false);
-    if (leavingEl) {
-        setPageHidden(leavingEl, false);
-    }
-};
-var runTransition = function (opts) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
-    var animationBuilder, ani;
-    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, getAnimationBuilder(opts)];
-            case 1:
-                animationBuilder = _a.sent();
-                ani = (animationBuilder)
-                    ? animation(animationBuilder, opts)
-                    : noAnimation(opts);
-                return [2 /*return*/, ani];
-        }
-    });
-}); };
-var afterTransition = function (opts) {
-    var enteringEl = opts.enteringEl;
-    var leavingEl = opts.leavingEl;
-    enteringEl.classList.remove('ion-page-invisible');
-    if (leavingEl !== undefined) {
-        leavingEl.classList.remove('ion-page-invisible');
-    }
-};
-var getAnimationBuilder = function (opts) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
-    var getAnimation, _a;
-    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                if (!opts.leavingEl || !opts.animated || opts.duration === 0) {
-                    return [2 /*return*/, undefined];
-                }
-                if (opts.animationBuilder) {
-                    return [2 /*return*/, opts.animationBuilder];
-                }
-                if (!(opts.mode === 'ios')) return [3 /*break*/, 2];
-                return [4 /*yield*/, iosTransitionAnimation()];
-            case 1:
-                _a = (_b.sent()).iosTransitionAnimation;
-                return [3 /*break*/, 4];
-            case 2: return [4 /*yield*/, mdTransitionAnimation()];
-            case 3:
-                _a = (_b.sent()).mdTransitionAnimation;
-                _b.label = 4;
-            case 4:
-                getAnimation = _a;
-                return [2 /*return*/, getAnimation];
-        }
-    });
-}); };
-var animation = function (animationBuilder, opts) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
-    var trans, mod, err_1, didComplete;
-    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, waitForReady(opts, true)];
-            case 1:
-                _a.sent();
-                _a.label = 2;
-            case 2:
-                _a.trys.push([2, 5, , 6]);
-                return [4 /*yield*/, __webpack_require__.e/* import() */(0/* duplicate */).then(__webpack_require__.bind(null, 450))];
-            case 3:
-                mod = _a.sent();
-                return [4 /*yield*/, mod.create(animationBuilder, opts.baseEl, opts)];
-            case 4:
-                trans = _a.sent();
-                return [3 /*break*/, 6];
-            case 5:
-                err_1 = _a.sent();
-                trans = animationBuilder(opts.baseEl, opts);
-                return [3 /*break*/, 6];
-            case 6:
-                fireWillEvents(opts.enteringEl, opts.leavingEl);
-                return [4 /*yield*/, playTransition(trans, opts)];
-            case 7:
-                didComplete = _a.sent();
-                if (opts.progressCallback) {
-                    opts.progressCallback(undefined);
-                }
-                if (didComplete) {
-                    fireDidEvents(opts.enteringEl, opts.leavingEl);
-                }
-                return [2 /*return*/, {
-                        hasCompleted: didComplete,
-                        animation: trans
-                    }];
-        }
-    });
-}); };
-var noAnimation = function (opts) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
-    var enteringEl, leavingEl;
-    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                enteringEl = opts.enteringEl;
-                leavingEl = opts.leavingEl;
-                return [4 /*yield*/, waitForReady(opts, false)];
-            case 1:
-                _a.sent();
-                fireWillEvents(enteringEl, leavingEl);
-                fireDidEvents(enteringEl, leavingEl);
-                return [2 /*return*/, {
-                        hasCompleted: true
-                    }];
-        }
-    });
-}); };
-var waitForReady = function (opts, defaultDeep) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
-    var deep, promises;
-    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                deep = opts.deepWait !== undefined ? opts.deepWait : defaultDeep;
-                promises = deep ? [
-                    deepReady(opts.enteringEl),
-                    deepReady(opts.leavingEl),
-                ] : [
-                    shallowReady(opts.enteringEl),
-                    shallowReady(opts.leavingEl),
-                ];
-                return [4 /*yield*/, Promise.all(promises)];
-            case 1:
-                _a.sent();
-                return [4 /*yield*/, notifyViewReady(opts.viewIsReady, opts.enteringEl)];
-            case 2:
-                _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}); };
-var notifyViewReady = function (viewIsReady, enteringEl) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
-    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                if (!viewIsReady) return [3 /*break*/, 2];
-                return [4 /*yield*/, viewIsReady(enteringEl)];
-            case 1:
-                _a.sent();
-                _a.label = 2;
-            case 2: return [2 /*return*/];
-        }
-    });
-}); };
-var playTransition = function (trans, opts) {
-    var progressCallback = opts.progressCallback;
-    // TODO: Remove AnimationBuilder
-    var promise = new Promise(function (resolve) {
-        trans.onFinish(function (currentStep) {
-            if (typeof currentStep === 'number') {
-                resolve(currentStep === 1);
-            }
-            else if (trans.hasCompleted !== undefined) {
-                resolve(trans.hasCompleted);
-            }
-        });
-    });
-    // cool, let's do this, start the transition
-    if (progressCallback) {
-        // this is a swipe to go back, just get the transition progress ready
-        // kick off the swipe animation start
-        trans.progressStart(true);
-        progressCallback(trans);
-    }
-    else {
-        // only the top level transition should actually start "play"
-        // kick it off and let it play through
+    /**
+     * DOM READ
+     * DOM WRITE
+     * RECURSION
+     */
+    Animator.prototype._beforeAnimation = function () {
+        // fire off all the "before" function that have DOM READS in them
+        // elements will be in the DOM, however visibily hidden
+        // so we can read their dimensions if need be
+        // ******** DOM READ ****************
+        this._fireBeforeReadFunc();
+        // ******** DOM READS ABOVE / DOM WRITES BELOW ****************
+        // fire off all the "before" function that have DOM WRITES in them
         // ******** DOM WRITE ****************
-        trans.play();
-    }
-    // create a callback for when the animation is done
-    return promise;
-};
-var fireWillEvents = function (enteringEl, leavingEl) {
-    lifecycle(leavingEl, __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__["c" /* b */]);
-    lifecycle(enteringEl, __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__["a" /* L */]);
-};
-var fireDidEvents = function (enteringEl, leavingEl) {
-    lifecycle(enteringEl, __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__["b" /* a */]);
-    lifecycle(leavingEl, __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__["d" /* c */]);
-};
-var lifecycle = function (el, eventName) {
-    if (el) {
-        var ev = new CustomEvent(eventName, {
-            bubbles: false,
-            cancelable: false,
-        });
-        el.dispatchEvent(ev);
-    }
-};
-var shallowReady = function (el) {
-    if (el && el.componentOnReady) {
-        return el.componentOnReady();
-    }
-    return Promise.resolve();
-};
-var deepReady = function (el) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
-    var element, stencilEl;
-    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                element = el;
-                if (!element) return [3 /*break*/, 4];
-                if (!(element.componentOnReady != null)) return [3 /*break*/, 2];
-                return [4 /*yield*/, element.componentOnReady()];
-            case 1:
-                stencilEl = _a.sent();
-                if (stencilEl != null) {
-                    return [2 /*return*/];
-                }
-                _a.label = 2;
-            case 2: return [4 /*yield*/, Promise.all(Array.from(element.children).map(deepReady))];
-            case 3:
-                _a.sent();
-                _a.label = 4;
-            case 4: return [2 /*return*/];
+        this._fireBeforeWriteFunc();
+        // stage all of the before css classes and inline styles
+        // ******** DOM WRITE ****************
+        this._setBeforeStyles();
+    };
+    /**
+     * DOM WRITE
+     * RECURSION
+     */
+    Animator.prototype._setBeforeStyles = function () {
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_7 = children; _i < children_7.length; _i++) {
+                var child = children_7[_i];
+                child._setBeforeStyles();
+            }
         }
-    });
-}); };
-var setPageHidden = function (el, hidden) {
-    if (hidden) {
-        el.setAttribute('aria-hidden', 'true');
-        el.classList.add('ion-page-hidden');
-    }
-    else {
-        el.hidden = false;
-        el.removeAttribute('aria-hidden');
-        el.classList.remove('ion-page-hidden');
-    }
-};
-var setZIndex = function (enteringEl, leavingEl, direction) {
-    if (enteringEl !== undefined) {
-        enteringEl.style.zIndex = (direction === 'back')
-            ? '99'
-            : '101';
-    }
-    if (leavingEl !== undefined) {
-        leavingEl.style.zIndex = '100';
-    }
-};
-
-
-
-/***/ }),
-
-/***/ 539:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Point; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getTimeGivenProgression; });
-/**
- * Based on:
- * https://stackoverflow.com/questions/7348009/y-coordinate-for-a-given-x-cubic-bezier
- * https://math.stackexchange.com/questions/26846/is-there-an-explicit-form-for-cubic-b%C3%A9zier-curves
- * TODO: Reduce rounding error
- */
-var Point = /** @class */ (function () {
-    function Point(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-    return Point;
+        var elements = this._elements;
+        // before the animations have started
+        // only set before styles if animation is not reversed
+        if (!elements || elements.length === 0 || this._isReverse) {
+            return;
+        }
+        var addClasses = this._beforeAddClasses;
+        var removeClasses = this._beforeRemoveClasses;
+        for (var _a = 0, elements_2 = elements; _a < elements_2.length; _a++) {
+            var el = elements_2[_a];
+            var elementClassList = el.classList;
+            // css classes to add before the animation
+            if (addClasses) {
+                for (var _b = 0, addClasses_1 = addClasses; _b < addClasses_1.length; _b++) {
+                    var c = addClasses_1[_b];
+                    // ******** DOM WRITE ****************
+                    elementClassList.add(c);
+                }
+            }
+            // css classes to remove before the animation
+            if (removeClasses) {
+                for (var _c = 0, removeClasses_1 = removeClasses; _c < removeClasses_1.length; _c++) {
+                    var c = removeClasses_1[_c];
+                    // ******** DOM WRITE ****************
+                    elementClassList.remove(c);
+                }
+            }
+            // inline styles to add before the animation
+            if (this._beforeStyles) {
+                for (var _d = 0, _e = Object.entries(this._beforeStyles); _d < _e.length; _d++) {
+                    var _f = _e[_d], key = _f[0], value = _f[1];
+                    // ******** DOM WRITE ****************
+                    el.style.setProperty(key, value);
+                }
+            }
+        }
+    };
+    /**
+     * DOM READ
+     * RECURSION
+     */
+    Animator.prototype._fireBeforeReadFunc = function () {
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_8 = children; _i < children_8.length; _i++) {
+                var child = children_8[_i];
+                // ******** DOM READ ****************
+                child._fireBeforeReadFunc();
+            }
+        }
+        var readFunctions = this._readCallbacks;
+        if (readFunctions) {
+            for (var _a = 0, readFunctions_1 = readFunctions; _a < readFunctions_1.length; _a++) {
+                var callback = readFunctions_1[_a];
+                // ******** DOM READ ****************
+                callback();
+            }
+        }
+    };
+    /**
+     * DOM WRITE
+     * RECURSION
+     */
+    Animator.prototype._fireBeforeWriteFunc = function () {
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_9 = children; _i < children_9.length; _i++) {
+                var child = children_9[_i];
+                // ******** DOM WRITE ****************
+                child._fireBeforeWriteFunc();
+            }
+        }
+        var writeFunctions = this._writeCallbacks;
+        if (writeFunctions) {
+            for (var _a = 0, writeFunctions_1 = writeFunctions; _a < writeFunctions_1.length; _a++) {
+                var callback = writeFunctions_1[_a];
+                // ******** DOM WRITE ****************
+                callback();
+            }
+        }
+    };
+    /**
+     * DOM WRITE
+     */
+    Animator.prototype._setAfterStyles = function () {
+        var elements = this._elements;
+        if (!elements) {
+            return;
+        }
+        for (var _i = 0, elements_3 = elements; _i < elements_3.length; _i++) {
+            var el = elements_3[_i];
+            var elementClassList = el.classList;
+            // remove the transition duration/easing
+            // ******** DOM WRITE ****************
+            el.style.transitionDuration = el.style.transitionTimingFunction = '';
+            if (this._isReverse) {
+                // finished in reverse direction
+                // css classes that were added before the animation should be removed
+                var beforeAddClasses = this._beforeAddClasses;
+                if (beforeAddClasses) {
+                    for (var _a = 0, beforeAddClasses_1 = beforeAddClasses; _a < beforeAddClasses_1.length; _a++) {
+                        var c = beforeAddClasses_1[_a];
+                        elementClassList.remove(c);
+                    }
+                }
+                // css classes that were removed before the animation should be added
+                var beforeRemoveClasses = this._beforeRemoveClasses;
+                if (beforeRemoveClasses) {
+                    for (var _b = 0, beforeRemoveClasses_1 = beforeRemoveClasses; _b < beforeRemoveClasses_1.length; _b++) {
+                        var c = beforeRemoveClasses_1[_b];
+                        elementClassList.add(c);
+                    }
+                }
+                // inline styles that were added before the animation should be removed
+                var beforeStyles = this._beforeStyles;
+                if (beforeStyles) {
+                    for (var _c = 0, _d = Object.keys(beforeStyles); _c < _d.length; _c++) {
+                        var propName = _d[_c];
+                        // ******** DOM WRITE ****************
+                        el.style.removeProperty(propName);
+                    }
+                }
+            }
+            else {
+                // finished in forward direction
+                // css classes to add after the animation
+                var afterAddClasses = this._afterAddClasses;
+                if (afterAddClasses) {
+                    for (var _e = 0, afterAddClasses_1 = afterAddClasses; _e < afterAddClasses_1.length; _e++) {
+                        var c = afterAddClasses_1[_e];
+                        // ******** DOM WRITE ****************
+                        elementClassList.add(c);
+                    }
+                }
+                // css classes to remove after the animation
+                var afterRemoveClasses = this._afterRemoveClasses;
+                if (afterRemoveClasses) {
+                    for (var _f = 0, afterRemoveClasses_1 = afterRemoveClasses; _f < afterRemoveClasses_1.length; _f++) {
+                        var c = afterRemoveClasses_1[_f];
+                        // ******** DOM WRITE ****************
+                        elementClassList.remove(c);
+                    }
+                }
+                // inline styles to add after the animation
+                var afterStyles = this._afterStyles;
+                if (afterStyles) {
+                    for (var _g = 0, _h = Object.entries(afterStyles); _g < _h.length; _g++) {
+                        var _j = _h[_g], key = _j[0], value = _j[1];
+                        el.style.setProperty(key, value);
+                    }
+                }
+            }
+        }
+    };
+    /**
+     * DOM WRITE
+     * NO RECURSION
+     */
+    Animator.prototype._willChange = function (addWillChange) {
+        var wc;
+        var effects = this._fxProperties;
+        var willChange;
+        if (addWillChange && effects) {
+            wc = [];
+            for (var _i = 0, effects_1 = effects; _i < effects_1.length; _i++) {
+                var effect = effects_1[_i];
+                var propWC = effect.wc;
+                if (propWC === 'webkitTransform') {
+                    wc.push('transform', '-webkit-transform');
+                }
+                else if (propWC !== undefined) {
+                    wc.push(propWC);
+                }
+            }
+            willChange = wc.join(',');
+        }
+        else {
+            willChange = '';
+        }
+        var elements = this._elements;
+        if (elements) {
+            for (var _a = 0, elements_4 = elements; _a < elements_4.length; _a++) {
+                var el = elements_4[_a];
+                // ******** DOM WRITE ****************
+                el.style.setProperty('will-change', willChange);
+            }
+        }
+    };
+    /**
+     * Start the animation with a user controlled progress.
+     */
+    Animator.prototype.progressStart = function () {
+        // ensure all past transition end events have been cleared
+        this._clearAsync();
+        // ******** DOM READ/WRITE ****************
+        this._beforeAnimation();
+        // ******** DOM WRITE ****************
+        this._progressStart();
+    };
+    /**
+     * DOM WRITE
+     * RECURSION
+     */
+    Animator.prototype._progressStart = function () {
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_10 = children; _i < children_10.length; _i++) {
+                var child = children_10[_i];
+                // ******** DOM WRITE ****************
+                child._progressStart();
+            }
+        }
+        // force no duration, linear easing
+        // ******** DOM WRITE ****************
+        this._setTrans(0, true);
+        // ******** DOM WRITE ****************
+        this._willChange(true);
+    };
+    /**
+     * Set the progress step for this animation.
+     * progressStep() is not debounced, so it should not be called faster than 60FPS.
+     */
+    Animator.prototype.progressStep = function (stepValue) {
+        // only update if the last update was more than 16ms ago
+        stepValue = Math.min(1, Math.max(0, stepValue));
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_11 = children; _i < children_11.length; _i++) {
+                var child = children_11[_i];
+                // ******** DOM WRITE ****************
+                child.progressStep(stepValue);
+            }
+        }
+        // ******** DOM WRITE ****************
+        this._progress(stepValue);
+    };
+    /**
+     * End the progress animation.
+     */
+    Animator.prototype.progressEnd = function (shouldComplete, currentStepValue, dur) {
+        var _this = this;
+        if (dur === void 0) { dur = -1; }
+        if (this._isReverse) {
+            // if the animation is going in reverse then
+            // flip the step value: 0 becomes 1, 1 becomes 0
+            currentStepValue = 1 - currentStepValue;
+        }
+        var stepValue = shouldComplete ? 1 : 0;
+        var diff = Math.abs(currentStepValue - stepValue);
+        if (dur < 0) {
+            dur = this._duration || 0;
+        }
+        else if (diff < 0.05) {
+            dur = 0;
+        }
+        this._isAsync = (dur > 30);
+        this._progressEnd(shouldComplete, stepValue, dur, this._isAsync);
+        if (this._isAsync) {
+            // for the root animation only
+            // set the async TRANSITION END event
+            // and run onFinishes when the transition ends
+            // ******** DOM WRITE ****************
+            this._asyncEnd(dur, shouldComplete);
+            // this animation has a duration so we need another RAF
+            // for the CSS TRANSITION properties to kick in
+            if (!this._destroyed) {
+                raf(function () {
+                    _this._playToStep(stepValue);
+                });
+            }
+        }
+    };
+    /**
+     * DOM WRITE
+     * RECURSION
+     */
+    Animator.prototype._progressEnd = function (shouldComplete, stepValue, dur, isAsync) {
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_12 = children; _i < children_12.length; _i++) {
+                var child = children_12[_i];
+                // ******** DOM WRITE ****************
+                child._progressEnd(shouldComplete, stepValue, dur, isAsync);
+            }
+        }
+        if (!isAsync) {
+            // stop immediately
+            // set all the animations to their final position
+            // ******** DOM WRITE ****************
+            this._progress(stepValue);
+            this._willChange(false);
+            this._setAfterStyles();
+            this._didFinish(shouldComplete);
+        }
+        else {
+            // animate it back to it's ending position
+            this.isPlaying = true;
+            this.hasCompleted = false;
+            this._hasDur = true;
+            // ******** DOM WRITE ****************
+            this._willChange(true);
+            this._setTrans(dur, false);
+        }
+    };
+    /**
+     * Add a callback to fire when the animation has finished.
+     */
+    Animator.prototype.onFinish = function (callback, opts) {
+        if (opts && opts.clearExistingCallbacks) {
+            this._onFinishCallbacks = this._onFinishOneTimeCallbacks = undefined;
+        }
+        if (opts && opts.oneTimeCallback) {
+            this._onFinishOneTimeCallbacks = this._onFinishOneTimeCallbacks || [];
+            this._onFinishOneTimeCallbacks.push(callback);
+        }
+        else {
+            this._onFinishCallbacks = this._onFinishCallbacks || [];
+            this._onFinishCallbacks.push(callback);
+        }
+        return this;
+    };
+    /**
+     * NO DOM
+     * RECURSION
+     */
+    Animator.prototype._didFinishAll = function (hasCompleted, finishAsyncAnimations, finishNoDurationAnimations) {
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_13 = children; _i < children_13.length; _i++) {
+                var child = children_13[_i];
+                child._didFinishAll(hasCompleted, finishAsyncAnimations, finishNoDurationAnimations);
+            }
+        }
+        if (finishAsyncAnimations && this._isAsync || finishNoDurationAnimations && !this._isAsync) {
+            this._didFinish(hasCompleted);
+        }
+    };
+    /**
+     * NO RECURSION
+     */
+    Animator.prototype._didFinish = function (hasCompleted) {
+        this.isPlaying = false;
+        this.hasCompleted = hasCompleted;
+        if (this._onFinishCallbacks) {
+            // run all finish callbacks
+            for (var _i = 0, _a = this._onFinishCallbacks; _i < _a.length; _i++) {
+                var callback = _a[_i];
+                callback(this);
+            }
+        }
+        if (this._onFinishOneTimeCallbacks) {
+            // run all "onetime" finish callbacks
+            for (var _b = 0, _c = this._onFinishOneTimeCallbacks; _b < _c.length; _b++) {
+                var callback = _c[_b];
+                callback(this);
+            }
+            this._onFinishOneTimeCallbacks.length = 0;
+        }
+    };
+    /**
+     * Reverse the animation.
+     */
+    Animator.prototype.reverse = function (shouldReverse) {
+        if (shouldReverse === void 0) { shouldReverse = true; }
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_14 = children; _i < children_14.length; _i++) {
+                var child = children_14[_i];
+                child.reverse(shouldReverse);
+            }
+        }
+        this._isReverse = !!shouldReverse;
+        return this;
+    };
+    /**
+     * Recursively destroy this animation and all child animations.
+     */
+    Animator.prototype.destroy = function () {
+        this._didFinish(false);
+        this._destroyed = true;
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_15 = children; _i < children_15.length; _i++) {
+                var child = children_15[_i];
+                child.destroy();
+            }
+        }
+        this._clearAsync();
+        if (this._elements) {
+            this._elements.length = 0;
+        }
+        if (this._readCallbacks) {
+            this._readCallbacks.length = 0;
+        }
+        if (this._writeCallbacks) {
+            this._writeCallbacks.length = 0;
+        }
+        this.parent = undefined;
+        if (this._childAnimations) {
+            this._childAnimations.length = 0;
+        }
+        if (this._onFinishCallbacks) {
+            this._onFinishCallbacks.length = 0;
+        }
+        if (this._onFinishOneTimeCallbacks) {
+            this._onFinishOneTimeCallbacks.length = 0;
+        }
+    };
+    /**
+     * NO DOM
+     */
+    Animator.prototype._transEl = function () {
+        // get the lowest level element that has an Animator
+        var children = this._childAnimations;
+        if (children) {
+            for (var _i = 0, children_16 = children; _i < children_16.length; _i++) {
+                var child = children_16[_i];
+                var targetEl = child._transEl();
+                if (targetEl) {
+                    return targetEl;
+                }
+            }
+        }
+        return (this._hasTweenEffect &&
+            this._hasDur &&
+            this._elements !== undefined &&
+            this._elements.length > 0 ?
+            this._elements[0] : null);
+    };
+    return Animator;
 }());
-/**
- * Given a cubic-bezier curve, get the x value (time) given
- * the y value (progression).
- * Ex: cubic-bezier(0.32, 0.72, 0, 1);
- * P0: (0, 0)
- * P1: (0.32, 0.72)
- * P2: (0, 1)
- * P3: (1, 1)
- */
-var getTimeGivenProgression = function (p0, p1, p2, p3, progression) {
-    var tValues = solveCubicBezier(p0.y, p1.y, p2.y, p3.y, progression);
-    return solveCubicParametricEquation(p0.x, p1.x, p2.x, p3.x, tValues[0]); // TODO: Add better strategy for dealing with multiple solutions
-};
-/**
- * Solve a cubic equation in one dimension (time)
- */
-var solveCubicParametricEquation = function (p0, p1, p2, p3, t) {
-    var partA = (3 * p1) * Math.pow(t - 1, 2);
-    var partB = (-3 * p2 * t) + (3 * p2) + (p3 * t);
-    var partC = p0 * Math.pow(t - 1, 3);
-    return t * (partA + (t * partB)) - partC;
-};
-/**
- * Find the `t` value for a cubic bezier using Cardano's formula
- */
-var solveCubicBezier = function (p0, p1, p2, p3, refPoint) {
-    p0 -= refPoint;
-    p1 -= refPoint;
-    p2 -= refPoint;
-    p3 -= refPoint;
-    var roots = solveCubicEquation(p3 - 3 * p2 + 3 * p1 - p0, 3 * p2 - 6 * p1 + 3 * p0, 3 * p1 - 3 * p0, p0);
-    return roots.filter(function (root) { return root >= 0 && root <= 1; });
-};
-var solveQuadraticEquation = function (a, b, c) {
-    var discriminant = b * b - 4 * a * c;
-    if (discriminant < 0) {
-        return [];
+var create = function (animationBuilder, baseEl, opts) {
+    if (animationBuilder) {
+        return animationBuilder(Animator, baseEl, opts);
     }
-    else {
-        return [
-            (-b + Math.sqrt(discriminant)) / (2 * a),
-            (-b - Math.sqrt(discriminant)) / (2 * a)
-        ];
-    }
-};
-var solveCubicEquation = function (a, b, c, d) {
-    if (a === 0) {
-        return solveQuadraticEquation(b, c, d);
-    }
-    b /= a;
-    c /= a;
-    d /= a;
-    var p = (3 * c - b * b) / 3;
-    var q = (2 * b * b * b - 9 * b * c + 27 * d) / 27;
-    if (p === 0) {
-        return [Math.pow(-q, 1 / 3)];
-    }
-    else if (q === 0) {
-        return [Math.sqrt(-p), -Math.sqrt(-p)];
-    }
-    var discriminant = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
-    if (discriminant === 0) {
-        return [Math.pow(q / 2, 1 / 2) - b / 3];
-    }
-    else if (discriminant > 0) {
-        return [Math.pow(-(q / 2) + Math.sqrt(discriminant), 1 / 3) - Math.pow((q / 2) + Math.sqrt(discriminant), 1 / 3) - b / 3];
-    }
-    var r = Math.sqrt(Math.pow(-(p / 3), 3));
-    var phi = Math.acos(-(q / (2 * Math.sqrt(Math.pow(-(p / 3), 3)))));
-    var s = 2 * Math.pow(r, 1 / 3);
-    return [
-        s * Math.cos(phi / 3) - b / 3,
-        s * Math.cos((phi + 2 * Math.PI) / 3) - b / 3,
-        s * Math.cos((phi + 4 * Math.PI) / 3) - b / 3
-    ];
+    return Promise.resolve(new Animator());
 };
 
 

@@ -9,8 +9,11 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { LayoutModule } from './layout/layout.module';
+// import { LayoutModule } from './layout/layout.module';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import {IonicModule} from "@ionic/angular";
+import {LayoutModule} from "./layout/layout.module";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    LayoutModule
+    IonicModule,
+    LayoutModule,
+    RouterModule,
+    // LayoutModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -5,14 +5,29 @@
     </button>
     <ion-title>Home</ion-title>
   </ion-navbar>
+  <ion-grid>
+    <ion-row class="nav">
+      <ion-col>ABOUT
+        <!--a [routerLink]="['/about']">ABOUT</a-->
+      </ion-col>
+      |
+      <ion-col>MUSIC
+        <!--a [routerLink]="['/solutions']">SOLUTIONS</a-->
+      </ion-col>
+      |
+      <!--ng-template #anonymousUser>
+        <ion-col>
+          <a class="nav-link" routerLink="/login"><i class="far fa-user-circle"></i></a>
+        </ion-col>
+      </ng-template-->
+      <!--ion-col *ngIf="adminService.user$ | async as user; else anonymousUser">{{ user.displayName }} |
+          <a [routerLink]="['/log-out']">LOG OUT</a>
+      </ion-col-->
+
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<ion-content>
+  <ion-card class="jumboTron"></ion-card>
 </ion-content>

@@ -1,505 +1,314 @@
 webpackJsonp([62],{
 
-/***/ 504:
+/***/ 454:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_refresher", function() { return Refresher; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_refresher_content", function() { return RefresherContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_action_sheet", function() { return ActionSheet; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__ = __webpack_require__(535);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(434);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__ = __webpack_require__(432);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__ = __webpack_require__(433);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__ = __webpack_require__(436);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__theme_18cbe2cc_js__ = __webpack_require__(534);
 
 
 
 
-var Refresher = /** @class */ (function () {
+
+
+
+/**
+ * iOS Action Sheet Enter Animation
+ */
+var iosEnterAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.01, 0.4);
+    wrapperAnimation
+        .addElement(baseEl.querySelector('.action-sheet-wrapper'))
+        .fromTo('transform', 'translateY(100%)', 'translateY(0%)');
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(400)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+};
+/**
+ * iOS Action Sheet Leave Animation
+ */
+var iosLeaveAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.4, 0);
+    wrapperAnimation
+        .addElement(baseEl.querySelector('.action-sheet-wrapper'))
+        .fromTo('transform', 'translateY(0%)', 'translateY(100%)');
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(450)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+};
+/**
+ * MD Action Sheet Enter Animation
+ */
+var mdEnterAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.01, 0.32);
+    wrapperAnimation
+        .addElement(baseEl.querySelector('.action-sheet-wrapper'))
+        .fromTo('transform', 'translateY(100%)', 'translateY(0%)');
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(400)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+};
+/**
+ * MD Action Sheet Leave Animation
+ */
+var mdLeaveAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_7ed5bc6a_js__["a" /* c */])();
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.32, 0);
+    wrapperAnimation
+        .addElement(baseEl.querySelector('.action-sheet-wrapper'))
+        .fromTo('transform', 'translateY(0%)', 'translateY(100%)');
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(450)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+};
+var ActionSheet = /** @class */ (function () {
     function class_1(hostRef) {
+        var _this = this;
         Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.appliedStyles = false;
-        this.didStart = false;
-        this.progress = 0;
+        this.presented = false;
+        this.mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
         /**
-         * The current state which the refresher is in. The refresher's states include:
-         *
-         * - `inactive` - The refresher is not being pulled down or refreshing and is currently hidden.
-         * - `pulling` - The user is actively pulling down the refresher, but has not reached the point yet that if the user lets go, it'll refresh.
-         * - `cancelling` - The user pulled down the refresher and let go, but did not pull down far enough to kick off the `refreshing` state. After letting go, the refresher is in the `cancelling` state while it is closing, and will go back to the `inactive` state once closed.
-         * - `ready` - The user has pulled down the refresher far enough that if they let go, it'll begin the `refreshing` state.
-         * - `refreshing` - The refresher is actively waiting on the async operation to end. Once the refresh handler calls `complete()` it will begin the `completing` state.
-         * - `completing` - The `refreshing` state has finished and the refresher is in the way of closing itself. Once closed, the refresher will go back to the `inactive` state.
+         * If `true`, the keyboard will be automatically dismissed when the overlay is presented.
          */
-        this.state = 1 /* Inactive */;
+        this.keyboardClose = true;
         /**
-         * The minimum distance the user must pull down until the
-         * refresher will go into the `refreshing` state.
+         * An array of buttons for the action sheet.
          */
-        this.pullMin = 60;
+        this.buttons = [];
         /**
-         * The maximum distance of the pull until the refresher
-         * will automatically go into the `refreshing` state.
-         * Defaults to the result of `pullMin + 60`.
+         * If `true`, the action sheet will be dismissed when the backdrop is clicked.
          */
-        this.pullMax = this.pullMin + 60;
+        this.backdropDismiss = true;
         /**
-         * Time it takes to close the refresher.
+         * If `true`, the action sheet will be translucent.
+         * Only applies when the mode is `"ios"` and the device supports
+         * [`backdrop-filter`](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility).
          */
-        this.closeDuration = '280ms';
+        this.translucent = false;
         /**
-         * Time it takes the refresher to to snap back to the `refreshing` state.
+         * If `true`, the action sheet will animate.
          */
-        this.snapbackDuration = '280ms';
-        /**
-         * How much to multiply the pull speed by. To slow the pull animation down,
-         * pass a number less than `1`. To speed up the pull, pass a number greater
-         * than `1`. The default value is `1` which is equal to the speed of the cursor.
-         * If a negative value is passed in, the factor will be `1` instead.
-         *
-         * For example: If the value passed is `1.2` and the content is dragged by
-         * `10` pixels, instead of `10` pixels the content will be pulled by `12` pixels
-         * (an increase of 20 percent). If the value passed is `0.8`, the dragged amount
-         * will be `8` pixels, less than the amount the cursor has moved.
-         */
-        this.pullFactor = 1;
-        /**
-         * If `true`, the refresher will be hidden.
-         */
-        this.disabled = false;
-        this.ionRefresh = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionRefresh", 7);
-        this.ionPull = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionPull", 7);
-        this.ionStart = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionStart", 7);
+        this.animated = true;
+        this.onBackdropTap = function () {
+            _this.dismiss(undefined, __WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["a" /* B */]);
+        };
+        this.dispatchCancelHandler = function (ev) {
+            var role = ev.detail.role;
+            if (Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["j" /* i */])(role)) {
+                var cancelButton = _this.getButtons().find(function (b) { return b.role === 'cancel'; });
+                _this.callButtonHandler(cancelButton);
+            }
+        };
+        Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["e" /* d */])(this.el);
+        this.didPresent = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionActionSheetDidPresent", 7);
+        this.willPresent = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionActionSheetWillPresent", 7);
+        this.willDismiss = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionActionSheetWillDismiss", 7);
+        this.didDismiss = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionActionSheetDidDismiss", 7);
     }
-    class_1.prototype.disabledChanged = function () {
-        if (this.gesture) {
-            this.gesture.setDisabled(this.disabled);
-        }
+    /**
+     * Present the action sheet overlay after it has been created.
+     */
+    class_1.prototype.present = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["f" /* e */])(this, 'actionSheetEnter', iosEnterAnimation, mdEnterAnimation);
     };
-    class_1.prototype.connectedCallback = function () {
+    /**
+     * Dismiss the action sheet overlay after it has been presented.
+     *
+     * @param data Any data to emit in the dismiss events.
+     * @param role The role of the element that is dismissing the action sheet.
+     * This can be useful in a button handler for determining which button was
+     * clicked to dismiss the action sheet.
+     * Some examples include: ``"cancel"`, `"destructive"`, "selected"`, and `"backdrop"`.
+     */
+    class_1.prototype.dismiss = function (data, role) {
+        return Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["g" /* f */])(this, data, role, 'actionSheetLeave', iosLeaveAnimation, mdLeaveAnimation);
+    };
+    /**
+     * Returns a promise that resolves when the action sheet did dismiss.
+     */
+    class_1.prototype.onDidDismiss = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["h" /* g */])(this.el, 'ionActionSheetDidDismiss');
+    };
+    /**
+     * Returns a promise that resolves when the action sheet will dismiss.
+     *
+     */
+    class_1.prototype.onWillDismiss = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["h" /* g */])(this.el, 'ionActionSheetWillDismiss');
+    };
+    class_1.prototype.buttonClick = function (button) {
         return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var contentEl, _a, _b;
-            var _this = this;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_c) {
-                switch (_c.label) {
+            var role, shouldDismiss;
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        if (this.el.getAttribute('slot') !== 'fixed') {
-                            console.error('Make sure you use: <ion-refresher slot="fixed">');
-                            return [2 /*return*/];
+                        role = button.role;
+                        if (Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["j" /* i */])(role)) {
+                            return [2 /*return*/, this.dismiss(undefined, role)];
                         }
-                        contentEl = this.el.closest('ion-content');
-                        if (!contentEl) {
-                            console.error('<ion-refresher> must be used inside an <ion-content>');
-                            return [2 /*return*/];
-                        }
-                        _a = this;
-                        return [4 /*yield*/, contentEl.getScrollElement()];
+                        return [4 /*yield*/, this.callButtonHandler(button)];
                     case 1:
-                        _a.scrollEl = _c.sent();
-                        _b = this;
-                        return [4 /*yield*/, new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, 269))];
-                    case 2:
-                        _b.gesture = (_c.sent()).createGesture({
-                            el: contentEl,
-                            gestureName: 'refresher',
-                            gesturePriority: 10,
-                            direction: 'y',
-                            threshold: 20,
-                            passive: false,
-                            canStart: function () { return _this.canStart(); },
-                            onStart: function () { return _this.onStart(); },
-                            onMove: function (ev) { return _this.onMove(ev); },
-                            onEnd: function () { return _this.onEnd(); },
-                        });
-                        this.disabledChanged();
-                        return [2 /*return*/];
+                        shouldDismiss = _a.sent();
+                        if (shouldDismiss) {
+                            return [2 /*return*/, this.dismiss(undefined, button.role)];
+                        }
+                        return [2 /*return*/, Promise.resolve()];
                 }
             });
         });
     };
-    class_1.prototype.disconnectedCallback = function () {
-        this.scrollEl = undefined;
-        if (this.gesture) {
-            this.gesture.destroy();
-            this.gesture = undefined;
-        }
-    };
-    /**
-     * Call `complete()` when your async operation has completed.
-     * For example, the `refreshing` state is while the app is performing
-     * an asynchronous operation, such as receiving more data from an
-     * AJAX request. Once the data has been received, you then call this
-     * method to signify that the refreshing has completed and to close
-     * the refresher. This method also changes the refresher's state from
-     * `refreshing` to `completing`.
-     */
-    class_1.prototype.complete = function () {
+    class_1.prototype.callButtonHandler = function (button) {
         return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            var rtn;
             return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                this.close(32 /* Completing */, '120ms');
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        if (!button) return [3 /*break*/, 2];
+                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["p" /* s */])(button.handler)];
+                    case 1:
+                        rtn = _a.sent();
+                        if (rtn === false) {
+                            // if the return value of the handler is false then do not dismiss
+                            return [2 /*return*/, false];
+                        }
+                        _a.label = 2;
+                    case 2: return [2 /*return*/, true];
+                }
             });
         });
     };
-    /**
-     * Changes the refresher's state from `refreshing` to `cancelling`.
-     */
-    class_1.prototype.cancel = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                this.close(16 /* Cancelling */, '');
-                return [2 /*return*/];
-            });
-        });
-    };
-    /**
-     * A number representing how far down the user has pulled.
-     * The number `0` represents the user hasn't pulled down at all. The
-     * number `1`, and anything greater than `1`, represents that the user
-     * has pulled far enough down that when they let go then the refresh will
-     * happen. If they let go and the number is less than `1`, then the
-     * refresh will not happen, and the content will return to it's original
-     * position.
-     */
-    class_1.prototype.getProgress = function () {
-        return Promise.resolve(this.progress);
-    };
-    class_1.prototype.canStart = function () {
-        if (!this.scrollEl) {
-            return false;
-        }
-        if (this.state !== 1 /* Inactive */) {
-            return false;
-        }
-        // if the scrollTop is greater than zero then it's
-        // not possible to pull the content down yet
-        if (this.scrollEl.scrollTop > 0) {
-            return false;
-        }
-        return true;
-    };
-    class_1.prototype.onStart = function () {
-        this.progress = 0;
-        this.state = 1 /* Inactive */;
-    };
-    class_1.prototype.onMove = function (detail) {
-        if (!this.scrollEl) {
-            return;
-        }
-        // this method can get called like a bazillion times per second,
-        // so it's built to be as efficient as possible, and does its
-        // best to do any DOM read/writes only when absolutely necessary
-        // if multi-touch then get out immediately
-        var ev = detail.event;
-        if (ev.touches && ev.touches.length > 1) {
-            return;
-        }
-        // do nothing if it's actively refreshing
-        // or it's in the way of closing
-        // or this was never a startY
-        if ((this.state & 56 /* _BUSY_ */) !== 0) {
-            return;
-        }
-        var pullFactor = (Number.isNaN(this.pullFactor) || this.pullFactor < 0) ? 1 : this.pullFactor;
-        var deltaY = detail.deltaY * pullFactor;
-        // don't bother if they're scrolling up
-        // and have not already started dragging
-        if (deltaY <= 0) {
-            // the current Y is higher than the starting Y
-            // so they scrolled up enough to be ignored
-            this.progress = 0;
-            this.state = 1 /* Inactive */;
-            if (this.appliedStyles) {
-                // reset the styles only if they were applied
-                this.setCss(0, '', false, '');
-                return;
-            }
-            return;
-        }
-        if (this.state === 1 /* Inactive */) {
-            // this refresh is not already actively pulling down
-            // get the content's scrollTop
-            var scrollHostScrollTop = this.scrollEl.scrollTop;
-            // if the scrollTop is greater than zero then it's
-            // not possible to pull the content down yet
-            if (scrollHostScrollTop > 0) {
-                this.progress = 0;
-                return;
-            }
-            // content scrolled all the way to the top, and dragging down
-            this.state = 2 /* Pulling */;
-        }
-        // prevent native scroll events
-        if (ev.cancelable) {
-            ev.preventDefault();
-        }
-        // the refresher is actively pulling at this point
-        // move the scroll element within the content element
-        this.setCss(deltaY, '0ms', true, '');
-        if (deltaY === 0) {
-            // don't continue if there's no delta yet
-            this.progress = 0;
-            return;
-        }
-        var pullMin = this.pullMin;
-        // set pull progress
-        this.progress = deltaY / pullMin;
-        // emit "start" if it hasn't started yet
-        if (!this.didStart) {
-            this.didStart = true;
-            this.ionStart.emit();
-        }
-        // emit "pulling" on every move
-        this.ionPull.emit();
-        // do nothing if the delta is less than the pull threshold
-        if (deltaY < pullMin) {
-            // ensure it stays in the pulling state, cuz its not ready yet
-            this.state = 2 /* Pulling */;
-            return;
-        }
-        if (deltaY > this.pullMax) {
-            // they pulled farther than the max, so kick off the refresh
-            this.beginRefresh();
-            return;
-        }
-        // pulled farther than the pull min!!
-        // it is now in the `ready` state!!
-        // if they let go then it'll refresh, kerpow!!
-        this.state = 4 /* Ready */;
-        return;
-    };
-    class_1.prototype.onEnd = function () {
-        // only run in a zone when absolutely necessary
-        if (this.state === 4 /* Ready */) {
-            // they pulled down far enough, so it's ready to refresh
-            this.beginRefresh();
-        }
-        else if (this.state === 2 /* Pulling */) {
-            // they were pulling down, but didn't pull down far enough
-            // set the content back to it's original location
-            // and close the refresher
-            // set that the refresh is actively cancelling
-            this.cancel();
-        }
-    };
-    class_1.prototype.beginRefresh = function () {
-        // assumes we're already back in a zone
-        // they pulled down far enough, so it's ready to refresh
-        this.state = 8 /* Refreshing */;
-        // place the content in a hangout position while it thinks
-        this.setCss(this.pullMin, this.snapbackDuration, true, '');
-        // emit "refresh" because it was pulled down far enough
-        // and they let go to begin refreshing
-        this.ionRefresh.emit({
-            complete: this.complete.bind(this)
-        });
-    };
-    class_1.prototype.close = function (state, delay) {
-        var _this = this;
-        // create fallback timer incase something goes wrong with transitionEnd event
-        setTimeout(function () {
-            _this.state = 1 /* Inactive */;
-            _this.progress = 0;
-            _this.didStart = false;
-            _this.setCss(0, '0ms', false, '');
-        }, 600);
-        // reset set the styles on the scroll element
-        // set that the refresh is actively cancelling/completing
-        this.state = state;
-        this.setCss(0, this.closeDuration, true, delay);
-        // TODO: stop gesture
-    };
-    class_1.prototype.setCss = function (y, duration, overflowVisible, delay) {
-        var _this = this;
-        this.appliedStyles = (y > 0);
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
-            if (_this.scrollEl) {
-                var style = _this.scrollEl.style;
-                style.transform = ((y > 0) ? "translateY(" + y + "px) translateZ(0px)" : 'translateZ(0px)');
-                style.transitionDuration = duration;
-                style.transitionDelay = delay;
-                style.overflow = (overflowVisible ? 'hidden' : '');
-            }
+    class_1.prototype.getButtons = function () {
+        return this.buttons.map(function (b) {
+            return (typeof b === 'string')
+                ? { text: b }
+                : b;
         });
     };
     class_1.prototype.render = function () {
         var _a;
+        var _this = this;
         var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { slot: "fixed", class: (_a = {},
-                _a[mode] = true,
-                // Used internally for styling
-                _a["refresher-" + mode] = true,
-                _a['refresher-active'] = this.state !== 1 /* Inactive */,
-                _a['refresher-pulling'] = this.state === 2 /* Pulling */,
-                _a['refresher-ready'] = this.state === 4 /* Ready */,
-                _a['refresher-refreshing'] = this.state === 8 /* Refreshing */,
-                _a['refresher-cancelling'] = this.state === 16 /* Cancelling */,
-                _a['refresher-completing'] = this.state === 32 /* Completing */,
-                _a) }));
+        var allButtons = this.getButtons();
+        var cancelButton = allButtons.find(function (b) { return b.role === 'cancel'; });
+        var buttons = allButtons.filter(function (b) { return b.role !== 'cancel'; });
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { role: "dialog", "aria-modal": "true", style: {
+                zIndex: "" + (20000 + this.overlayIndex),
+            }, class: Object.assign(Object.assign((_a = {}, _a[mode] = true, _a), Object(__WEBPACK_IMPORTED_MODULE_6__theme_18cbe2cc_js__["b" /* g */])(this.cssClass)), { 'action-sheet-translucent': this.translucent }), onIonActionSheetWillDismiss: this.dispatchCancelHandler, onIonBackdropTap: this.onBackdropTap }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-backdrop", { tappable: this.backdropDismiss }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "action-sheet-wrapper", role: "dialog" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "action-sheet-container" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "action-sheet-group" }, this.header !== undefined &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "action-sheet-title" }, this.header, this.subHeader && Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "action-sheet-sub-title" }, this.subHeader)), buttons.map(function (b) { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("button", { type: "button", "ion-activatable": true, class: buttonClass(b), onClick: function () { return _this.buttonClick(b); } }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("span", { class: "action-sheet-button-inner" }, b.icon && Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-icon", { icon: b.icon, lazy: false, class: "action-sheet-icon" }), b.text), mode === 'md' && Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-ripple-effect", null)); })), cancelButton &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "action-sheet-group action-sheet-group-cancel" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("button", { type: "button", class: buttonClass(cancelButton), onClick: function () { return _this.buttonClick(cancelButton); } }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("span", { class: "action-sheet-button-inner" }, cancelButton.icon &&
+                Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-icon", { icon: cancelButton.icon, lazy: false, class: "action-sheet-icon" }), cancelButton.text)))))));
     };
     Object.defineProperty(class_1.prototype, "el", {
         get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(class_1, "watchers", {
-        get: function () {
-            return {
-                "disabled": ["disabledChanged"]
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(class_1, "style", {
-        get: function () { return "ion-refresher{left:0;top:0;display:none;position:absolute;width:100%;height:60px;z-index:-1}:host-context([dir=rtl]) ion-refresher,[dir=rtl] ion-refresher{left:unset;right:unset;right:0}ion-refresher.refresher-active{display:block}ion-refresher-content{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;-ms-flex-pack:center;justify-content:center;height:100%}.refresher-pulling,.refresher-refreshing{display:none;width:100%}.refresher-pulling-icon,.refresher-refreshing-icon{-webkit-transform-origin:center;transform-origin:center;-webkit-transition:.2s;transition:.2s;font-size:30px;text-align:center}:host-context([dir=rtl]) .refresher-pulling-icon,:host-context([dir=rtl]) .refresher-refreshing-icon,[dir=rtl] .refresher-pulling-icon,[dir=rtl] .refresher-refreshing-icon{-webkit-transform-origin:calc(100% - center);transform-origin:calc(100% - center)}.refresher-pulling-text,.refresher-refreshing-text{font-size:16px;text-align:center}.refresher-pulling ion-refresher-content .refresher-pulling,.refresher-ready ion-refresher-content .refresher-pulling{display:block}.refresher-ready ion-refresher-content .refresher-pulling-icon{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.refresher-cancelling ion-refresher-content .refresher-pulling,.refresher-refreshing ion-refresher-content .refresher-refreshing{display:block}.refresher-cancelling ion-refresher-content .refresher-pulling-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-completing ion-refresher-content .refresher-refreshing{display:block}.refresher-completing ion-refresher-content .refresher-refreshing-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-md .refresher-pulling-icon,.refresher-md .refresher-pulling-text,.refresher-md .refresher-refreshing-icon,.refresher-md .refresher-refreshing-text{color:var(--ion-text-color,#000)}.refresher-md .refresher-refreshing .spinner-crescent circle,.refresher-md .refresher-refreshing .spinner-lines-md line,.refresher-md .refresher-refreshing .spinner-lines-small-md line{stroke:var(--ion-text-color,#000)}.refresher-md .refresher-refreshing .spinner-bubbles circle,.refresher-md .refresher-refreshing .spinner-circles circle,.refresher-md .refresher-refreshing .spinner-dots circle{fill:var(--ion-text-color,#000)}"; },
+        get: function () { return ".sc-ion-action-sheet-ios-h{--color:initial;--min-width:auto;--width:100%;--max-width:500px;--min-height:auto;--height:100%;--max-height:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;left:0;right:0;top:0;bottom:0;display:block;position:fixed;font-family:var(--ion-font-family,inherit);-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:1001}.overlay-hidden.sc-ion-action-sheet-ios-h{display:none}.action-sheet-wrapper.sc-ion-action-sheet-ios{left:0;right:0;bottom:0;margin-top:auto;margin-bottom:auto;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);display:block;position:absolute;width:var(--width);min-width:var(--min-width);max-width:var(--max-width);height:var(--height);min-height:var(--min-height);max-height:var(--max-height);z-index:10;pointer-events:none}.action-sheet-button.sc-ion-action-sheet-ios{display:block;width:100%;border:0;outline:none;font-family:inherit}.action-sheet-button.activated.sc-ion-action-sheet-ios{background:var(--background-activated)}.action-sheet-button-inner.sc-ion-action-sheet-ios{display:-ms-flexbox;display:flex;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}.action-sheet-container.sc-ion-action-sheet-ios{display:-ms-flexbox;display:flex;-ms-flex-flow:column;flex-flow:column;-ms-flex-pack:end;justify-content:flex-end;height:100%;max-height:100%}.action-sheet-group.sc-ion-action-sheet-ios{-ms-flex-negative:2;flex-shrink:2;overscroll-behavior-y:contain;overflow-y:auto;-webkit-overflow-scrolling:touch;pointer-events:all;background:var(--background)}.action-sheet-group.sc-ion-action-sheet-ios::-webkit-scrollbar{display:none}.action-sheet-group-cancel.sc-ion-action-sheet-ios{-ms-flex-negative:0;flex-shrink:0;overflow:hidden}.sc-ion-action-sheet-ios-h{--background:var(--ion-overlay-background-color,var(--ion-color-step-100,#f9f9f9));--background-selected:var(--ion-background-color,#fff);--background-activated:rgba(var(--ion-text-color-rgb,0,0,0),0.08);text-align:center}.action-sheet-wrapper.sc-ion-action-sheet-ios{margin-left:auto;margin-right:auto;margin-top:var(--ion-safe-area-top,0);margin-bottom:var(--ion-safe-area-bottom,0)}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.action-sheet-wrapper.sc-ion-action-sheet-ios{margin-left:unset;margin-right:unset;-webkit-margin-start:auto;margin-inline-start:auto;-webkit-margin-end:auto;margin-inline-end:auto}}.action-sheet-container.sc-ion-action-sheet-ios{padding-left:8px;padding-right:8px;padding-top:0;padding-bottom:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.action-sheet-container.sc-ion-action-sheet-ios{padding-left:unset;padding-right:unset;-webkit-padding-start:8px;padding-inline-start:8px;-webkit-padding-end:8px;padding-inline-end:8px}}.action-sheet-group.sc-ion-action-sheet-ios{border-radius:13px;margin-bottom:8px;overflow:hidden}.action-sheet-group.sc-ion-action-sheet-ios:first-child{margin-top:10px}.action-sheet-group.sc-ion-action-sheet-ios:last-child{margin-bottom:10px}\@supports ((-webkit-backdrop-filter:blur(0)) or (backdrop-filter:blur(0))){.action-sheet-translucent.sc-ion-action-sheet-ios-h .action-sheet-group.sc-ion-action-sheet-ios{background-color:transparent;-webkit-backdrop-filter:saturate(280%) blur(20px);backdrop-filter:saturate(280%) blur(20px)}.action-sheet-translucent.sc-ion-action-sheet-ios-h .action-sheet-button.sc-ion-action-sheet-ios, .action-sheet-translucent.sc-ion-action-sheet-ios-h .action-sheet-title.sc-ion-action-sheet-ios{background-color:transparent;background-image:-webkit-gradient(linear,left bottom,left top,from(rgba(var(--ion-background-color-rgb,255,255,255),.8)),to(rgba(var(--ion-background-color-rgb,255,255,255),.8))),-webkit-gradient(linear,left bottom,left top,from(rgba(var(--ion-background-color-rgb,255,255,255),.4)),color-stop(50%,rgba(var(--ion-background-color-rgb,255,255,255),.4)),color-stop(50%,rgba(var(--ion-background-color-rgb,255,255,255),.8)));background-image:linear-gradient(0deg,rgba(var(--ion-background-color-rgb,255,255,255),.8),rgba(var(--ion-background-color-rgb,255,255,255),.8) 100%),linear-gradient(0deg,rgba(var(--ion-background-color-rgb,255,255,255),.4),rgba(var(--ion-background-color-rgb,255,255,255),.4) 50%,rgba(var(--ion-background-color-rgb,255,255,255),.8) 0);background-repeat:no-repeat;background-position:top,bottom;background-size:100% calc(100% - 1px),100% 1px;-webkit-backdrop-filter:saturate(120%);backdrop-filter:saturate(120%)}.action-sheet-translucent.sc-ion-action-sheet-ios-h .action-sheet-button.activated.sc-ion-action-sheet-ios{background-color:rgba(var(--ion-background-color-rgb,255,255,255),.7);background-image:none}.action-sheet-translucent.sc-ion-action-sheet-ios-h .action-sheet-cancel.sc-ion-action-sheet-ios{background:var(--background-selected)}}.action-sheet-button.sc-ion-action-sheet-ios, .action-sheet-title.sc-ion-action-sheet-ios{background-color:transparent;background-image:-webkit-gradient(linear,left bottom,left top,from(rgba(var(--ion-text-color-rgb,0,0,0),.08)),color-stop(50%,rgba(var(--ion-text-color-rgb,0,0,0),.08)),color-stop(50%,transparent));background-image:linear-gradient(0deg,rgba(var(--ion-text-color-rgb,0,0,0),.08),rgba(var(--ion-text-color-rgb,0,0,0),.08) 50%,transparent 0);background-repeat:no-repeat;background-position:bottom;background-size:100% 1px}.action-sheet-title.sc-ion-action-sheet-ios{padding-left:10px;padding-right:10px;padding-top:14px;padding-bottom:13px;color:var(--color,var(--ion-color-step-400,#999));font-size:13px;font-weight:400;text-align:center}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.action-sheet-title.sc-ion-action-sheet-ios{padding-left:unset;padding-right:unset;-webkit-padding-start:10px;padding-inline-start:10px;-webkit-padding-end:10px;padding-inline-end:10px}}.action-sheet-sub-title.sc-ion-action-sheet-ios{padding-left:0;padding-right:0;padding-top:15px;padding-bottom:0;font-size:12px}.action-sheet-button.sc-ion-action-sheet-ios{padding-left:18px;padding-right:18px;padding-top:18px;padding-bottom:18px;height:56px;color:var(--color,var(--ion-color-primary,#3880ff));font-size:20px;contain:strict}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.action-sheet-button.sc-ion-action-sheet-ios{padding-left:unset;padding-right:unset;-webkit-padding-start:18px;padding-inline-start:18px;-webkit-padding-end:18px;padding-inline-end:18px}}.action-sheet-button.sc-ion-action-sheet-ios .action-sheet-icon.sc-ion-action-sheet-ios{margin-right:.1em;font-size:28px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.action-sheet-button.sc-ion-action-sheet-ios .action-sheet-icon.sc-ion-action-sheet-ios{margin-right:unset;-webkit-margin-end:.1em;margin-inline-end:.1em}}.action-sheet-button.sc-ion-action-sheet-ios:last-child{background-image:none}.action-sheet-selected.sc-ion-action-sheet-ios{background:var(--background-selected);font-weight:700}.action-sheet-destructive.sc-ion-action-sheet-ios{color:var(--ion-color-danger,#f04141)}.action-sheet-cancel.sc-ion-action-sheet-ios{background:var(--background-selected);font-weight:600}"; },
         enumerable: true,
         configurable: true
     });
     return class_1;
 }());
-var RefresherContent = /** @class */ (function () {
-    function RefresherContent(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-    }
-    RefresherContent.prototype.componentWillLoad = function () {
-        if (this.pullingIcon === undefined) {
-            this.pullingIcon = __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('refreshingIcon', 'arrow-down');
-        }
-        if (this.refreshingSpinner === undefined) {
-            var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-            this.refreshingSpinner = __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('refreshingSpinner', __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('spinner', mode === 'ios' ? 'lines' : 'crescent'));
-        }
-    };
-    RefresherContent.prototype.render = function () {
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-pulling" }, this.pullingIcon &&
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-pulling-icon" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-icon", { icon: this.pullingIcon, lazy: false })), this.pullingText &&
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-pulling-text", innerHTML: Object(__WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__["a" /* s */])(this.pullingText) })), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-refreshing" }, this.refreshingSpinner &&
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-refreshing-icon" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-spinner", { name: this.refreshingSpinner })), this.refreshingText &&
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-refreshing-text", innerHTML: Object(__WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__["a" /* s */])(this.refreshingText) }))));
-    };
-    return RefresherContent;
-}());
+var buttonClass = function (button) {
+    var _a;
+    return Object.assign((_a = { 'action-sheet-button': true, 'ion-activatable': true }, _a["action-sheet-" + button.role] = button.role !== undefined, _a), Object(__WEBPACK_IMPORTED_MODULE_6__theme_18cbe2cc_js__["b" /* g */])(button.cssClass));
+};
 
 
 
 /***/ }),
 
-/***/ 535:
+/***/ 534:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return sanitizeDOMString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createColorClasses; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getClassMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hostContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return openURL; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
+
+var hostContext = function (selector, el) {
+    return el.closest(selector) !== null;
+};
 /**
- * Does a simple sanitization of all elements
- * in an untrusted string
+ * Create the mode and color classes for the component based on the classes passed in
  */
-var sanitizeDOMString = function (untrustedString) {
-    try {
-        if (typeof untrustedString !== 'string' || untrustedString === '') {
-            return untrustedString;
-        }
-        /**
-         * Create a document fragment
-         * separate from the main DOM,
-         * create a div to do our work in
-         */
-        var documentFragment_1 = document.createDocumentFragment();
-        var workingDiv = document.createElement('div');
-        documentFragment_1.appendChild(workingDiv);
-        workingDiv.innerHTML = untrustedString;
-        /**
-         * Remove any elements
-         * that are blocked
-         */
-        blockedTags.forEach(function (blockedTag) {
-            var getElementsToRemove = documentFragment_1.querySelectorAll(blockedTag);
-            for (var elementIndex = getElementsToRemove.length - 1; elementIndex >= 0; elementIndex--) {
-                var element = getElementsToRemove[elementIndex];
-                if (element.parentNode) {
-                    element.parentNode.removeChild(element);
+var createColorClasses = function (color) {
+    var _a;
+    return (typeof color === 'string' && color.length > 0) ? (_a = {
+            'ion-color': true
+        },
+        _a["ion-color-" + color] = true,
+        _a) : undefined;
+};
+var getClassList = function (classes) {
+    if (classes !== undefined) {
+        var array = Array.isArray(classes) ? classes : classes.split(' ');
+        return array
+            .filter(function (c) { return c != null; })
+            .map(function (c) { return c.trim(); })
+            .filter(function (c) { return c !== ''; });
+    }
+    return [];
+};
+var getClassMap = function (classes) {
+    var map = {};
+    getClassList(classes).forEach(function (c) { return map[c] = true; });
+    return map;
+};
+var SCHEME = /^[a-z][a-z0-9+\-.]*:/;
+var openURL = function (url, ev, direction) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
+    var router;
+    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+        if (url != null && url[0] !== '#' && !SCHEME.test(url)) {
+            router = document.querySelector('ion-router');
+            if (router) {
+                if (ev != null) {
+                    ev.preventDefault();
                 }
-                else {
-                    documentFragment_1.removeChild(element);
-                }
-                /**
-                 * We still need to sanitize
-                 * the children of this element
-                 * as they are left behind
-                 */
-                var childElements = getElementChildren(element);
-                /* tslint:disable-next-line */
-                for (var childIndex = 0; childIndex < childElements.length; childIndex++) {
-                    sanitizeElement(childElements[childIndex]);
-                }
+                return [2 /*return*/, router.push(url, direction)];
             }
-        });
-        /**
-         * Go through remaining elements and remove
-         * non-allowed attribs
-         */
-        // IE does not support .children on document fragments, only .childNodes
-        var dfChildren = getElementChildren(documentFragment_1);
-        /* tslint:disable-next-line */
-        for (var childIndex = 0; childIndex < dfChildren.length; childIndex++) {
-            sanitizeElement(dfChildren[childIndex]);
         }
-        // Append document fragment to div
-        var fragmentDiv = document.createElement('div');
-        fragmentDiv.appendChild(documentFragment_1);
-        // First child is always the div we did our work in
-        var getInnerDiv = fragmentDiv.querySelector('div');
-        return (getInnerDiv !== null) ? getInnerDiv.innerHTML : fragmentDiv.innerHTML;
-    }
-    catch (err) {
-        console.error(err);
-        return '';
-    }
-};
-/**
- * Clean up current element based on allowed attributes
- * and then recursively dig down into any child elements to
- * clean those up as well
- */
-var sanitizeElement = function (element) {
-    // IE uses childNodes, so ignore nodes that are not elements
-    if (element.nodeType && element.nodeType !== 1) {
-        return;
-    }
-    for (var i = element.attributes.length - 1; i >= 0; i--) {
-        var attribute = element.attributes.item(i);
-        var attributeName = attribute.name;
-        // remove non-allowed attribs
-        if (!allowedAttributes.includes(attributeName.toLowerCase())) {
-            element.removeAttribute(attributeName);
-            continue;
-        }
-        // clean up any allowed attribs
-        // that attempt to do any JS funny-business
-        var attributeValue = attribute.value;
-        /* tslint:disable-next-line */
-        if (attributeValue != null && attributeValue.toLowerCase().includes('javascript:')) {
-            element.removeAttribute(attributeName);
-        }
-    }
-    /**
-     * Sanitize any nested children
-     */
-    var childElements = getElementChildren(element);
-    /* tslint:disable-next-line */
-    for (var i = 0; i < childElements.length; i++) {
-        sanitizeElement(childElements[i]);
-    }
-};
-/**
- * IE doesn't always support .children
- * so we revert to .childNodes instead
- */
-var getElementChildren = function (el) {
-    return (el.children != null) ? el.children : el.childNodes;
-};
-var allowedAttributes = ['class', 'id', 'href', 'src', 'name', 'slot'];
-var blockedTags = ['script', 'style', 'iframe', 'meta', 'link', 'object', 'embed'];
+        return [2 /*return*/, false];
+    });
+}); };
 
 
 

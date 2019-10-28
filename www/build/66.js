@@ -1,294 +1,226 @@
 webpackJsonp([66],{
 
-/***/ 506:
+/***/ 481:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_reorder", function() { return Reorder; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_reorder_group", function() { return ReorderGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_infinite_scroll", function() { return InfiniteScroll; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_infinite_scroll_content", function() { return InfiniteScrollContent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__haptic_c8f1473e_js__ = __webpack_require__(538);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(434);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__ = __webpack_require__(535);
 
 
 
 
-var Reorder = /** @class */ (function () {
-    function Reorder(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-    }
-    Reorder.prototype.onClick = function (ev) {
-        ev.preventDefault();
-        ev.stopImmediatePropagation();
-    };
-    Reorder.prototype.render = function () {
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", null, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-icon", { name: "reorder", lazy: false, class: "reorder-icon" }))));
-    };
-    Object.defineProperty(Reorder, "style", {
-        get: function () { return ":host([slot]){display:none;line-height:0;z-index:100}.reorder-icon{display:block;font-size:22px;font-size:31px;opacity:.3}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Reorder;
-}());
-var ReorderGroup = /** @class */ (function () {
+var InfiniteScroll = /** @class */ (function () {
     function class_1(hostRef) {
+        var _this = this;
         Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.lastToIndex = -1;
-        this.cachedHeights = [];
-        this.scrollElTop = 0;
-        this.scrollElBottom = 0;
-        this.scrollElInitial = 0;
-        this.containerTop = 0;
-        this.containerBottom = 0;
-        this.state = 0 /* Idle */;
+        this.thrPx = 0;
+        this.thrPc = 0;
+        this.didFire = false;
+        this.isBusy = false;
+        this.isLoading = false;
         /**
-         * If `true`, the reorder will be hidden.
+         * The threshold distance from the bottom
+         * of the content to call the `infinite` output event when scrolled.
+         * The threshold value can be either a percent, or
+         * in pixels. For example, use the value of `10%` for the `infinite`
+         * output event to get called when the user has scrolled 10%
+         * from the bottom of the page. Use the value `100px` when the
+         * scroll is within 100 pixels from the bottom of the page.
          */
-        this.disabled = true;
-        this.ionItemReorder = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionItemReorder", 7);
+        this.threshold = '15%';
+        /**
+         * If `true`, the infinite scroll will be hidden and scroll event listeners
+         * will be removed.
+         *
+         * Set this to true to disable the infinite scroll from actively
+         * trying to receive new data while scrolling. This is useful
+         * when it is known that there is no more data that can be added, and
+         * the infinite scroll is no longer needed.
+         */
+        this.disabled = false;
+        /**
+         * The position of the infinite scroll element.
+         * The value can be either `top` or `bottom`.
+         */
+        this.position = 'bottom';
+        this.onScroll = function () {
+            var scrollEl = _this.scrollEl;
+            if (!scrollEl || !_this.canStart()) {
+                return 1;
+            }
+            var infiniteHeight = _this.el.offsetHeight;
+            if (infiniteHeight === 0) {
+                // if there is no height of this element then do nothing
+                return 2;
+            }
+            var scrollTop = scrollEl.scrollTop;
+            var scrollHeight = scrollEl.scrollHeight;
+            var height = scrollEl.offsetHeight;
+            var threshold = _this.thrPc !== 0 ? (height * _this.thrPc) : _this.thrPx;
+            var distanceFromInfinite = (_this.position === 'bottom')
+                ? scrollHeight - infiniteHeight - scrollTop - threshold - height
+                : scrollTop - infiniteHeight - threshold;
+            if (distanceFromInfinite < 0) {
+                if (!_this.didFire) {
+                    _this.isLoading = true;
+                    _this.didFire = true;
+                    _this.ionInfinite.emit();
+                    return 3;
+                }
+            }
+            else {
+                _this.didFire = false;
+            }
+            return 4;
+        };
+        this.ionInfinite = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionInfinite", 7);
     }
-    class_1.prototype.disabledChanged = function () {
-        if (this.gesture) {
-            this.gesture.setDisabled(this.disabled);
+    class_1.prototype.thresholdChanged = function () {
+        var val = this.threshold;
+        if (val.lastIndexOf('%') > -1) {
+            this.thrPx = 0;
+            this.thrPc = (parseFloat(val) / 100);
         }
+        else {
+            this.thrPx = parseFloat(val);
+            this.thrPc = 0;
+        }
+    };
+    class_1.prototype.disabledChanged = function () {
+        var disabled = this.disabled;
+        if (disabled) {
+            this.isLoading = false;
+            this.isBusy = false;
+        }
+        this.enableScrollEvents(!disabled);
     };
     class_1.prototype.connectedCallback = function () {
         return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var contentEl, _a, _b;
+            var contentEl, _a;
             var _this = this;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_c) {
-                switch (_c.label) {
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         contentEl = this.el.closest('ion-content');
-                        if (!contentEl) return [3 /*break*/, 2];
+                        if (!contentEl) {
+                            console.error('<ion-infinite-scroll> must be used inside an <ion-content>');
+                            return [2 /*return*/];
+                        }
                         _a = this;
                         return [4 /*yield*/, contentEl.getScrollElement()];
                     case 1:
-                        _a.scrollEl = _c.sent();
-                        _c.label = 2;
-                    case 2:
-                        _b = this;
-                        return [4 /*yield*/, new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, 269))];
-                    case 3:
-                        _b.gesture = (_c.sent()).createGesture({
-                            el: this.el,
-                            gestureName: 'reorder',
-                            gesturePriority: 110,
-                            threshold: 0,
-                            direction: 'y',
-                            passive: false,
-                            canStart: function (detail) { return _this.canStart(detail); },
-                            onStart: function (ev) { return _this.onStart(ev); },
-                            onMove: function (ev) { return _this.onMove(ev); },
-                            onEnd: function () { return _this.onEnd(); },
-                        });
+                        _a.scrollEl = _b.sent();
+                        this.thresholdChanged();
                         this.disabledChanged();
+                        if (this.position === 'top') {
+                            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
+                                if (_this.scrollEl) {
+                                    _this.scrollEl.scrollTop = _this.scrollEl.scrollHeight - _this.scrollEl.clientHeight;
+                                }
+                            });
+                        }
                         return [2 /*return*/];
                 }
             });
         });
     };
     class_1.prototype.disconnectedCallback = function () {
-        this.onEnd();
-        if (this.gesture) {
-            this.gesture.destroy();
-            this.gesture = undefined;
-        }
+        this.enableScrollEvents(false);
+        this.scrollEl = undefined;
     };
     /**
-     * Completes the reorder operation. Must be called by the `ionItemReorder` event.
-     *
-     * If a list of items is passed, the list will be reordered and returned in the
-     * proper order.
-     *
-     * If no parameters are passed or if `true` is passed in, the reorder will complete
-     * and the item will remain in the position it was dragged to. If `false` is passed,
-     * the reorder will complete and the item will bounce back to its original position.
-     *
-     * @param listOrReorder A list of items to be sorted and returned in the new order or a
-     * boolean of whether or not the reorder should reposition the item.
+     * Call `complete()` within the `ionInfinite` output event handler when
+     * your async operation has completed. For example, the `loading`
+     * state is while the app is performing an asynchronous operation,
+     * such as receiving more data from an AJAX request to add more items
+     * to a data list. Once the data has been received and UI updated, you
+     * then call this method to signify that the loading has completed.
+     * This method will change the infinite scroll's state from `loading`
+     * to `enabled`.
      */
-    class_1.prototype.complete = function (listOrReorder) {
-        return Promise.resolve(this.completeSync(listOrReorder));
-    };
-    class_1.prototype.canStart = function (ev) {
-        if (this.selectedItemEl || this.state !== 0 /* Idle */) {
-            return false;
-        }
-        var target = ev.event.target;
-        var reorderEl = target.closest('ion-reorder');
-        if (!reorderEl) {
-            return false;
-        }
-        var item = findReorderItem(reorderEl, this.el);
-        if (!item) {
-            return false;
-        }
-        ev.data = item;
-        return true;
-    };
-    class_1.prototype.onStart = function (ev) {
-        ev.event.preventDefault();
-        var item = this.selectedItemEl = ev.data;
-        var heights = this.cachedHeights;
-        heights.length = 0;
-        var el = this.el;
-        var children = el.children;
-        if (!children || children.length === 0) {
-            return;
-        }
-        var sum = 0;
-        for (var i = 0; i < children.length; i++) {
-            var child = children[i];
-            sum += child.offsetHeight;
-            heights.push(sum);
-            child.$ionIndex = i;
-        }
-        var box = el.getBoundingClientRect();
-        this.containerTop = box.top;
-        this.containerBottom = box.bottom;
-        if (this.scrollEl) {
-            var scrollBox = this.scrollEl.getBoundingClientRect();
-            this.scrollElInitial = this.scrollEl.scrollTop;
-            this.scrollElTop = scrollBox.top + AUTO_SCROLL_MARGIN;
-            this.scrollElBottom = scrollBox.bottom - AUTO_SCROLL_MARGIN;
-        }
-        else {
-            this.scrollElInitial = 0;
-            this.scrollElTop = 0;
-            this.scrollElBottom = 0;
-        }
-        this.lastToIndex = indexForItem(item);
-        this.selectedItemHeight = item.offsetHeight;
-        this.state = 1 /* Active */;
-        item.classList.add(ITEM_REORDER_SELECTED);
-        Object(__WEBPACK_IMPORTED_MODULE_3__haptic_c8f1473e_js__["a"])();
-    };
-    class_1.prototype.onMove = function (ev) {
-        var selectedItem = this.selectedItemEl;
-        if (!selectedItem) {
-            return;
-        }
-        // Scroll if we reach the scroll margins
-        var scroll = this.autoscroll(ev.currentY);
-        // // Get coordinate
-        var top = this.containerTop - scroll;
-        var bottom = this.containerBottom - scroll;
-        var currentY = Math.max(top, Math.min(ev.currentY, bottom));
-        var deltaY = scroll + currentY - ev.startY;
-        var normalizedY = currentY - top;
-        var toIndex = this.itemIndexForTop(normalizedY);
-        if (toIndex !== this.lastToIndex) {
-            var fromIndex = indexForItem(selectedItem);
-            this.lastToIndex = toIndex;
-            Object(__WEBPACK_IMPORTED_MODULE_3__haptic_c8f1473e_js__["b"])();
-            this.reorderMove(fromIndex, toIndex);
-        }
-        // Update selected item position
-        selectedItem.style.transform = "translateY(" + deltaY + "px)";
-    };
-    class_1.prototype.onEnd = function () {
-        var selectedItemEl = this.selectedItemEl;
-        this.state = 2 /* Complete */;
-        if (!selectedItemEl) {
-            this.state = 0 /* Idle */;
-            return;
-        }
-        var toIndex = this.lastToIndex;
-        var fromIndex = indexForItem(selectedItemEl);
-        if (toIndex === fromIndex) {
-            this.completeSync();
-        }
-        else {
-            this.ionItemReorder.emit({
-                from: fromIndex,
-                to: toIndex,
-                complete: this.completeSync.bind(this)
+    class_1.prototype.complete = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            var scrollEl, prev_1;
+            var _this = this;
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+                scrollEl = this.scrollEl;
+                if (!this.isLoading || !scrollEl) {
+                    return [2 /*return*/];
+                }
+                this.isLoading = false;
+                if (this.position === 'top') {
+                    /**
+                     * New content is being added at the top, but the scrollTop position stays the same,
+                     * which causes a scroll jump visually. This algorithm makes sure to prevent this.
+                     * (Frame 1)
+                     *    - complete() is called, but the UI hasn't had time to update yet.
+                     *    - Save the current content dimensions.
+                     *    - Wait for the next frame using _dom.read, so the UI will be updated.
+                     * (Frame 2)
+                     *    - Read the new content dimensions.
+                     *    - Calculate the height difference and the new scroll position.
+                     *    - Delay the scroll position change until other possible dom reads are done using _dom.write to be performant.
+                     * (Still frame 2, if I'm correct)
+                     *    - Change the scroll position (= visually maintain the scroll position).
+                     *    - Change the state to re-enable the InfiniteScroll.
+                     *    - This should be after changing the scroll position, or it could
+                     *    cause the InfiniteScroll to be triggered again immediately.
+                     * (Frame 3)
+                     *    Done.
+                     */
+                    this.isBusy = true;
+                    prev_1 = scrollEl.scrollHeight - scrollEl.scrollTop;
+                    // ******** DOM READ ****************
+                    requestAnimationFrame(function () {
+                        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(function () {
+                            // UI has updated, save the new content dimensions
+                            var scrollHeight = scrollEl.scrollHeight;
+                            // New content was added on top, so the scroll position should be changed immediately to prevent it from jumping around
+                            var newScrollTop = scrollHeight - prev_1;
+                            // ******** DOM WRITE ****************
+                            requestAnimationFrame(function () {
+                                Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
+                                    scrollEl.scrollTop = newScrollTop;
+                                    _this.isBusy = false;
+                                });
+                            });
+                        });
+                    });
+                }
+                return [2 /*return*/];
             });
-        }
-        Object(__WEBPACK_IMPORTED_MODULE_3__haptic_c8f1473e_js__["c"])();
+        });
     };
-    class_1.prototype.completeSync = function (listOrReorder) {
-        var selectedItemEl = this.selectedItemEl;
-        if (selectedItemEl && this.state === 2 /* Complete */) {
-            var children = this.el.children;
-            var len = children.length;
-            var toIndex = this.lastToIndex;
-            var fromIndex = indexForItem(selectedItemEl);
-            if (toIndex !== fromIndex && (!listOrReorder || listOrReorder === true)) {
-                var ref = (fromIndex < toIndex)
-                    ? children[toIndex + 1]
-                    : children[toIndex];
-                this.el.insertBefore(selectedItemEl, ref);
-            }
-            if (Array.isArray(listOrReorder)) {
-                listOrReorder = reorderArray(listOrReorder, fromIndex, toIndex);
-            }
-            for (var i = 0; i < len; i++) {
-                children[i].style['transform'] = '';
-            }
-            selectedItemEl.style.transition = '';
-            selectedItemEl.classList.remove(ITEM_REORDER_SELECTED);
-            this.selectedItemEl = undefined;
-            this.state = 0 /* Idle */;
-        }
-        return listOrReorder;
+    class_1.prototype.canStart = function () {
+        return (!this.disabled &&
+            !this.isBusy &&
+            !!this.scrollEl &&
+            !this.isLoading);
     };
-    class_1.prototype.itemIndexForTop = function (deltaY) {
-        var heights = this.cachedHeights;
-        var i = 0;
-        // TODO: since heights is a sorted array of integers, we can do
-        // speed up the search using binary search. Remember that linear-search is still
-        // faster than binary-search for small arrays (<64) due CPU branch misprediction.
-        for (i = 0; i < heights.length; i++) {
-            if (heights[i] > deltaY) {
-                break;
+    class_1.prototype.enableScrollEvents = function (shouldListen) {
+        if (this.scrollEl) {
+            if (shouldListen) {
+                this.scrollEl.addEventListener('scroll', this.onScroll);
+            }
+            else {
+                this.scrollEl.removeEventListener('scroll', this.onScroll);
             }
         }
-        return i;
-    };
-    /********* DOM WRITE ********* */
-    class_1.prototype.reorderMove = function (fromIndex, toIndex) {
-        var itemHeight = this.selectedItemHeight;
-        var children = this.el.children;
-        for (var i = 0; i < children.length; i++) {
-            var style = children[i].style;
-            var value = '';
-            if (i > fromIndex && i <= toIndex) {
-                value = "translateY(" + -itemHeight + "px)";
-            }
-            else if (i < fromIndex && i >= toIndex) {
-                value = "translateY(" + itemHeight + "px)";
-            }
-            style['transform'] = value;
-        }
-    };
-    class_1.prototype.autoscroll = function (posY) {
-        if (!this.scrollEl) {
-            return 0;
-        }
-        var amount = 0;
-        if (posY < this.scrollElTop) {
-            amount = -SCROLL_JUMP;
-        }
-        else if (posY > this.scrollElBottom) {
-            amount = SCROLL_JUMP;
-        }
-        if (amount !== 0) {
-            this.scrollEl.scrollBy(0, amount);
-        }
-        return this.scrollEl.scrollTop - this.scrollElInitial;
     };
     class_1.prototype.render = function () {
         var _a;
         var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
+        var disabled = this.disabled;
         return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: (_a = {},
                 _a[mode] = true,
-                _a['reorder-enabled'] = !this.disabled,
-                _a['reorder-list-active'] = this.state !== 0 /* Idle */,
+                _a['infinite-scroll-loading'] = this.isLoading,
+                _a['infinite-scroll-enabled'] = !disabled,
                 _a) }));
     };
     Object.defineProperty(class_1.prototype, "el", {
@@ -299,6 +231,7 @@ var ReorderGroup = /** @class */ (function () {
     Object.defineProperty(class_1, "watchers", {
         get: function () {
             return {
+                "threshold": ["thresholdChanged"],
                 "disabled": ["disabledChanged"]
             };
         },
@@ -306,90 +239,158 @@ var ReorderGroup = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(class_1, "style", {
-        get: function () { return ".reorder-list-active>*{-webkit-transition:-webkit-transform .3s;transition:-webkit-transform .3s;transition:transform .3s;transition:transform .3s,-webkit-transform .3s;will-change:transform}.reorder-enabled{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.reorder-enabled ion-reorder{display:block;cursor:-webkit-grab;cursor:grab;pointer-events:all;-ms-touch-action:none;touch-action:none}.reorder-selected,.reorder-selected ion-reorder{cursor:-webkit-grabbing;cursor:grabbing}.reorder-selected{position:relative;-webkit-transition:none!important;transition:none!important;-webkit-box-shadow:0 0 10px rgba(0,0,0,.4);box-shadow:0 0 10px rgba(0,0,0,.4);opacity:.8;z-index:100}.reorder-visible ion-reorder .reorder-icon{-webkit-transform:translateZ(0);transform:translateZ(0)}"; },
+        get: function () { return "ion-infinite-scroll{display:none;width:100%}.infinite-scroll-enabled{display:block}"; },
         enumerable: true,
         configurable: true
     });
     return class_1;
 }());
-var indexForItem = function (element) {
-    return element['$ionIndex'];
-};
-var findReorderItem = function (node, container) {
-    var parent;
-    while (node) {
-        parent = node.parentElement;
-        if (parent === container) {
-            return node;
-        }
-        node = parent;
+var InfiniteScrollContent = /** @class */ (function () {
+    function InfiniteScrollContent(hostRef) {
+        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
     }
-    return undefined;
-};
-var AUTO_SCROLL_MARGIN = 60;
-var SCROLL_JUMP = 10;
-var ITEM_REORDER_SELECTED = 'reorder-selected';
-var reorderArray = function (array, from, to) {
-    var element = array[from];
-    array.splice(from, 1);
-    array.splice(to, 0, element);
-    return array.slice();
-};
+    InfiniteScrollContent.prototype.componentDidLoad = function () {
+        if (this.loadingSpinner === undefined) {
+            var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
+            this.loadingSpinner = __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('infiniteLoadingSpinner', __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('spinner', mode === 'ios' ? 'lines' : 'crescent'));
+        }
+    };
+    InfiniteScrollContent.prototype.render = function () {
+        var _a;
+        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: (_a = {},
+                _a[mode] = true,
+                // Used internally for styling
+                _a["infinite-scroll-content-" + mode] = true,
+                _a) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "infinite-loading" }, this.loadingSpinner && (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "infinite-loading-spinner" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-spinner", { name: this.loadingSpinner }))), this.loadingText && (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "infinite-loading-text", innerHTML: Object(__WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__["a" /* s */])(this.loadingText) })))));
+    };
+    Object.defineProperty(InfiniteScrollContent, "style", {
+        get: function () { return "ion-infinite-scroll-content{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;-ms-flex-pack:center;justify-content:center;min-height:84px;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.infinite-loading{margin-left:0;margin-right:0;margin-top:0;margin-bottom:32px;display:none;width:100%}.infinite-loading-text{margin-left:32px;margin-right:32px;margin-top:4px;margin-bottom:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.infinite-loading-text{margin-left:unset;margin-right:unset;-webkit-margin-start:32px;margin-inline-start:32px;-webkit-margin-end:32px;margin-inline-end:32px}}.infinite-scroll-loading ion-infinite-scroll-content>.infinite-loading{display:block}.infinite-scroll-content-md .infinite-loading-text{color:var(--ion-color-step-600,#666)}.infinite-scroll-content-md .infinite-loading-spinner .spinner-crescent circle,.infinite-scroll-content-md .infinite-loading-spinner .spinner-lines-md line,.infinite-scroll-content-md .infinite-loading-spinner .spinner-lines-small-md line{stroke:var(--ion-color-step-600,#666)}.infinite-scroll-content-md .infinite-loading-spinner .spinner-bubbles circle,.infinite-scroll-content-md .infinite-loading-spinner .spinner-circles circle,.infinite-scroll-content-md .infinite-loading-spinner .spinner-dots circle{fill:var(--ion-color-step-600,#666)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return InfiniteScrollContent;
+}());
 
 
 
 /***/ }),
 
-/***/ 538:
+/***/ 535:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return hapticSelectionStart; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return hapticSelectionChanged; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hapticSelectionEnd; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return hapticSelection; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return sanitizeDOMString; });
 /**
- * Check to see if the Haptic Plugin is available
- * @return Returns `true` or false if the plugin is available
+ * Does a simple sanitization of all elements
+ * in an untrusted string
  */
-/**
- * Trigger a selection changed haptic event. Good for one-time events
- * (not for gestures)
- */
-var hapticSelection = function () {
-    var engine = window.TapticEngine;
-    if (engine) {
-        engine.selection();
+var sanitizeDOMString = function (untrustedString) {
+    try {
+        if (typeof untrustedString !== 'string' || untrustedString === '') {
+            return untrustedString;
+        }
+        /**
+         * Create a document fragment
+         * separate from the main DOM,
+         * create a div to do our work in
+         */
+        var documentFragment_1 = document.createDocumentFragment();
+        var workingDiv = document.createElement('div');
+        documentFragment_1.appendChild(workingDiv);
+        workingDiv.innerHTML = untrustedString;
+        /**
+         * Remove any elements
+         * that are blocked
+         */
+        blockedTags.forEach(function (blockedTag) {
+            var getElementsToRemove = documentFragment_1.querySelectorAll(blockedTag);
+            for (var elementIndex = getElementsToRemove.length - 1; elementIndex >= 0; elementIndex--) {
+                var element = getElementsToRemove[elementIndex];
+                if (element.parentNode) {
+                    element.parentNode.removeChild(element);
+                }
+                else {
+                    documentFragment_1.removeChild(element);
+                }
+                /**
+                 * We still need to sanitize
+                 * the children of this element
+                 * as they are left behind
+                 */
+                var childElements = getElementChildren(element);
+                /* tslint:disable-next-line */
+                for (var childIndex = 0; childIndex < childElements.length; childIndex++) {
+                    sanitizeElement(childElements[childIndex]);
+                }
+            }
+        });
+        /**
+         * Go through remaining elements and remove
+         * non-allowed attribs
+         */
+        // IE does not support .children on document fragments, only .childNodes
+        var dfChildren = getElementChildren(documentFragment_1);
+        /* tslint:disable-next-line */
+        for (var childIndex = 0; childIndex < dfChildren.length; childIndex++) {
+            sanitizeElement(dfChildren[childIndex]);
+        }
+        // Append document fragment to div
+        var fragmentDiv = document.createElement('div');
+        fragmentDiv.appendChild(documentFragment_1);
+        // First child is always the div we did our work in
+        var getInnerDiv = fragmentDiv.querySelector('div');
+        return (getInnerDiv !== null) ? getInnerDiv.innerHTML : fragmentDiv.innerHTML;
+    }
+    catch (err) {
+        console.error(err);
+        return '';
     }
 };
 /**
- * Tell the haptic engine that a gesture for a selection change is starting.
+ * Clean up current element based on allowed attributes
+ * and then recursively dig down into any child elements to
+ * clean those up as well
  */
-var hapticSelectionStart = function () {
-    var engine = window.TapticEngine;
-    if (engine) {
-        engine.gestureSelectionStart();
+var sanitizeElement = function (element) {
+    // IE uses childNodes, so ignore nodes that are not elements
+    if (element.nodeType && element.nodeType !== 1) {
+        return;
+    }
+    for (var i = element.attributes.length - 1; i >= 0; i--) {
+        var attribute = element.attributes.item(i);
+        var attributeName = attribute.name;
+        // remove non-allowed attribs
+        if (!allowedAttributes.includes(attributeName.toLowerCase())) {
+            element.removeAttribute(attributeName);
+            continue;
+        }
+        // clean up any allowed attribs
+        // that attempt to do any JS funny-business
+        var attributeValue = attribute.value;
+        /* tslint:disable-next-line */
+        if (attributeValue != null && attributeValue.toLowerCase().includes('javascript:')) {
+            element.removeAttribute(attributeName);
+        }
+    }
+    /**
+     * Sanitize any nested children
+     */
+    var childElements = getElementChildren(element);
+    /* tslint:disable-next-line */
+    for (var i = 0; i < childElements.length; i++) {
+        sanitizeElement(childElements[i]);
     }
 };
 /**
- * Tell the haptic engine that a selection changed during a gesture.
+ * IE doesn't always support .children
+ * so we revert to .childNodes instead
  */
-var hapticSelectionChanged = function () {
-    var engine = window.TapticEngine;
-    if (engine) {
-        engine.gestureSelectionChanged();
-    }
+var getElementChildren = function (el) {
+    return (el.children != null) ? el.children : el.childNodes;
 };
-/**
- * Tell the haptic engine we are done with a gesture. This needs to be
- * called lest resources are not properly recycled.
- */
-var hapticSelectionEnd = function () {
-    var engine = window.TapticEngine;
-    if (engine) {
-        engine.gestureSelectionEnd();
-    }
-};
+var allowedAttributes = ['class', 'id', 'href', 'src', 'name', 'slot'];
+var blockedTags = ['script', 'style', 'iframe', 'meta', 'link', 'object', 'embed'];
 
 
 
