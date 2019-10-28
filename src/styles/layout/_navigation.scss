@@ -1,0 +1,146 @@
+ion-header {
+
+  & ion-toolbar {
+
+    & ion-buttons {}
+
+    & ion-menu-button {
+      display: none;
+
+      @media only screen and (max-width: $bp-medium) {
+        display: block;
+      }
+
+    }
+
+    & .title__link {
+      text-align: center;
+      width: 10%;
+
+      & :hover {
+        cursor: pointer;
+      }
+
+      & a {
+        text-decoration: none;
+
+        & :hover {
+          text-decoration: none;
+        }
+      }
+      ion-header {
+
+        & ion-toolbar {
+
+          & ion-buttons {}
+
+          & ion-menu-button {
+            display: none;
+
+            @media only screen and (max-width: $bp-medium) {
+              display: block;
+            }
+
+          }
+
+          & .title__link {
+            text-align: center;
+            width: 10%;
+
+            & :hover {
+              cursor: pointer;
+            }
+
+            & a {
+              text-decoration: none;
+
+              & :hover {
+                text-decoration: none;
+              }
+            }
+
+
+            @media only screen and (max-width: $bp-medium) {
+              width: 100%;
+            }
+
+            & ion-item {
+              font-size: 1.6rem;
+
+              @media only screen and (max-width: $bp-medium) {
+                width: 80%;
+                margin: 0 auto;
+              }
+
+            }
+
+            .tag-line {
+              font-size: .8rem;
+              text-decoration: none;
+
+              @media only screen and (max-width: $bp-medium) {
+                display: none;
+              }
+            }
+          }
+
+          & .nav {
+            display: block;
+            right: 6rem;
+            position: absolute;
+            z-index: 10;
+            top: 2rem;
+
+            & a {
+              text-decoration: none;
+            }
+
+            @media only screen and (max-width: $bp-medium) {
+              display: none;
+            }
+          }
+        }
+      }
+
+
+      @media only screen and (max-width: $bp-medium) {
+        width: 100%;
+      }
+
+      & ion-item {
+        font-size: 1.6rem;
+
+        @media only screen and (max-width: $bp-medium) {
+          width: 80%;
+          margin: 0 auto;
+        }
+
+      }
+
+      .tag-line {
+        font-size: .8rem;
+        text-decoration: none;
+
+        @media only screen and (max-width: $bp-medium) {
+          display: none;
+        }
+      }
+    }
+
+    & .nav {
+      display: block;
+      right: 6rem;
+      position: absolute;
+      z-index: 10;
+      top: 2rem;
+
+      & a {
+        text-decoration: none;
+      }
+
+      @media only screen and (max-width: $bp-medium) {
+        display: none;
+      }
+    }
+  }
+}

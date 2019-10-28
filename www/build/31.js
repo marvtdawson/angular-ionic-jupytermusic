@@ -1,182 +1,178 @@
 webpackJsonp([31],{
 
-/***/ 521:
+/***/ 517:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_tab_bar", function() { return TabBar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_tab_button", function() { return TabButton; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__ = __webpack_require__(434);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config_3c7f3790_js__ = __webpack_require__(430);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_spinner", function() { return Spinner; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config_3c7f3790_js__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__theme_18cbe2cc_js__ = __webpack_require__(534);
 
 
 
-var TabBar = /** @class */ (function () {
-    function TabBar(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.keyboardVisible = false;
-        /**
-         * If `true`, the tab bar will be translucent.
-         * Only applies when the mode is `"ios"` and the device supports
-         * [`backdrop-filter`](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility).
-         */
-        this.translucent = false;
-        this.ionTabBarChanged = Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["d" /* c */])(this, "ionTabBarChanged", 7);
-    }
-    TabBar.prototype.selectedTabChanged = function () {
-        if (this.selectedTab !== undefined) {
-            this.ionTabBarChanged.emit({
-                tab: this.selectedTab
-            });
-        }
-    };
-    TabBar.prototype.onKeyboardWillHide = function () {
-        var _this = this;
-        setTimeout(function () { return _this.keyboardVisible = false; }, 50);
-    };
-    TabBar.prototype.onKeyboardWillShow = function () {
-        if (this.el.getAttribute('slot') !== 'top') {
-            this.keyboardVisible = true;
-        }
-    };
-    TabBar.prototype.componentWillLoad = function () {
-        this.selectedTabChanged();
-    };
-    TabBar.prototype.render = function () {
-        var _a;
-        var _b = this, color = _b.color, translucent = _b.translucent, keyboardVisible = _b.keyboardVisible;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["e" /* d */])(this);
-        return (Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["a" /* H */], { role: "tablist", "aria-hidden": keyboardVisible ? 'true' : null, class: Object.assign(Object.assign({}, Object(__WEBPACK_IMPORTED_MODULE_2__theme_18cbe2cc_js__["a" /* c */])(color)), (_a = {}, _a[mode] = true, _a['tab-bar-translucent'] = translucent, _a['tab-bar-hidden'] = keyboardVisible, _a)) }, Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["i" /* h */])("slot", null)));
-    };
-    Object.defineProperty(TabBar.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TabBar, "watchers", {
-        get: function () {
+var spinners = {
+    'bubbles': {
+        dur: 1000,
+        circles: 9,
+        fn: function (dur, index, total) {
+            var animationDelay = (dur * index / total) - dur + "ms";
+            var angle = 2 * Math.PI * index / total;
             return {
-                "selectedTab": ["selectedTabChanged"]
+                r: 5,
+                style: {
+                    'top': 9 * Math.sin(angle) + "px",
+                    'left': 9 * Math.cos(angle) + "px",
+                    'animation-delay': animationDelay,
+                }
             };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TabBar, "style", {
-        get: function () { return ":host{padding-left:var(--ion-safe-area-left);padding-right:var(--ion-safe-area-right);display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:auto;padding-bottom:var(--ion-safe-area-bottom,0);border-top:var(--border);background:var(--background);color:var(--color);text-align:center;contain:strict;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:10;-webkit-box-sizing:content-box!important;box-sizing:content-box!important}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--ion-safe-area-left);padding-inline-start:var(--ion-safe-area-left);-webkit-padding-end:var(--ion-safe-area-right);padding-inline-end:var(--ion-safe-area-right)}}:host(.ion-color) ::slotted(ion-tab-button){--background-focused:var(--ion-color-shade);--color-selected:var(--ion-color-contrast)}:host(.ion-color) ::slotted(.tab-selected){color:var(--ion-color-contrast)}:host(.ion-color),:host(.ion-color) ::slotted(ion-tab-button){color:rgba(var(--ion-color-contrast-rgb),.7);background:var(--ion-color-base)}:host(.ion-color) ::slotted(ion-tab-button.ion-focused),:host(.tab-bar-translucent) ::slotted(ion-tab-button.ion-focused){background:var(--background-focused)}:host(.tab-bar-translucent) ::slotted(ion-tab-button){background:transparent}:host([slot=top]){padding-bottom:0;border-top:0;border-bottom:var(--border)}:host(.tab-bar-hidden){display:none!important}:host{--background:var(--ion-tab-bar-background,var(--ion-background-color,#fff));--background-focused:var(--ion-tab-bar-background-focused,#e0e0e0);--border:1px solid var(--ion-tab-bar-border-color,var(--ion-border-color,var(--ion-color-step-150,rgba(0,0,0,0.07))));--color:var(--ion-tab-bar-color,var(--ion-color-step-600,#666));--color-selected:var(--ion-tab-bar-color-activated,var(--ion-color-primary,#3880ff));height:56px}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return TabBar;
-}());
-var TabButton = /** @class */ (function () {
-    function TabButton(hostRef) {
-        var _this = this;
+        }
+    },
+    'circles': {
+        dur: 1000,
+        circles: 8,
+        fn: function (dur, index, total) {
+            var step = index / total;
+            var animationDelay = (dur * step) - dur + "ms";
+            var angle = 2 * Math.PI * step;
+            return {
+                r: 5,
+                style: {
+                    'top': 9 * Math.sin(angle) + "px",
+                    'left': 9 * Math.cos(angle) + "px",
+                    'animation-delay': animationDelay,
+                }
+            };
+        }
+    },
+    'circular': {
+        dur: 1400,
+        elmDuration: true,
+        circles: 1,
+        fn: function () {
+            return {
+                r: 20,
+                cx: 44,
+                cy: 44,
+                fill: 'none',
+                viewBox: '22 22 44 44',
+                transform: 'translate(0,0)',
+                style: {}
+            };
+        }
+    },
+    'crescent': {
+        dur: 750,
+        circles: 1,
+        fn: function () {
+            return {
+                r: 26,
+                style: {}
+            };
+        }
+    },
+    'dots': {
+        dur: 750,
+        circles: 3,
+        fn: function (_, index) {
+            var animationDelay = -(110 * index) + 'ms';
+            return {
+                r: 6,
+                style: {
+                    'left': 9 - (9 * index) + "px",
+                    'animation-delay': animationDelay,
+                }
+            };
+        }
+    },
+    'lines': {
+        dur: 1000,
+        lines: 12,
+        fn: function (dur, index, total) {
+            var transform = "rotate(" + (30 * index + (index < 6 ? 180 : -180)) + "deg)";
+            var animationDelay = (dur * index / total) - dur + "ms";
+            return {
+                y1: 17,
+                y2: 29,
+                style: {
+                    'transform': transform,
+                    'animation-delay': animationDelay,
+                }
+            };
+        }
+    },
+    'lines-small': {
+        dur: 1000,
+        lines: 12,
+        fn: function (dur, index, total) {
+            var transform = "rotate(" + (30 * index + (index < 6 ? 180 : -180)) + "deg)";
+            var animationDelay = (dur * index / total) - dur + "ms";
+            return {
+                y1: 12,
+                y2: 20,
+                style: {
+                    'transform': transform,
+                    'animation-delay': animationDelay,
+                }
+            };
+        }
+    }
+};
+var SPINNERS = spinners;
+var Spinner = /** @class */ (function () {
+    function Spinner(hostRef) {
         Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["l" /* r */])(this, hostRef);
         /**
-         * If `true`, the user cannot interact with the tab button.
+         * If `true`, the spinner's animation will be paused.
          */
-        this.disabled = false;
-        /**
-         * The selected tab component
-         */
-        this.selected = false;
-        this.onKeyUp = function (ev) {
-            if (ev.key === 'Enter' || ev.key === ' ') {
-                _this.selectTab(ev);
-            }
-        };
-        this.onClick = function (ev) {
-            _this.selectTab(ev);
-        };
-        this.ionTabButtonClick = Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["d" /* c */])(this, "ionTabButtonClick", 7);
+        this.paused = false;
     }
-    TabButton.prototype.onTabBarChanged = function (ev) {
-        this.selected = this.tab === ev.detail.tab;
-    };
-    TabButton.prototype.componentWillLoad = function () {
-        if (this.layout === undefined) {
-            this.layout = __WEBPACK_IMPORTED_MODULE_1__config_3c7f3790_js__["b"].get('tabButtonLayout', 'icon-top');
-        }
-    };
-    TabButton.prototype.selectTab = function (ev) {
-        if (this.tab !== undefined) {
-            if (!this.disabled) {
-                this.ionTabButtonClick.emit({
-                    tab: this.tab,
-                    href: this.href,
-                    selected: this.selected
-                });
-            }
-            ev.preventDefault();
-        }
-    };
-    Object.defineProperty(TabButton.prototype, "hasLabel", {
-        get: function () {
-            return !!this.el.querySelector('ion-label');
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TabButton.prototype, "hasIcon", {
-        get: function () {
-            return !!this.el.querySelector('ion-icon');
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TabButton.prototype, "tabIndex", {
-        get: function () {
-            if (this.disabled) {
-                return -1;
-            }
-            var hasTabIndex = this.el.hasAttribute('tabindex');
-            if (hasTabIndex) {
-                return this.el.getAttribute('tabindex');
-            }
-            return 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    TabButton.prototype.render = function () {
-        var _a;
-        var _b = this, disabled = _b.disabled, hasIcon = _b.hasIcon, hasLabel = _b.hasLabel, tabIndex = _b.tabIndex, href = _b.href, rel = _b.rel, target = _b.target, layout = _b.layout, selected = _b.selected, tab = _b.tab;
+    Spinner.prototype.getName = function () {
+        var spinnerName = this.name || __WEBPACK_IMPORTED_MODULE_1__config_3c7f3790_js__["b"].get('spinner');
         var mode = Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["e" /* d */])(this);
-        var attrs = {
-            download: this.download,
-            href: href,
-            rel: rel,
-            target: target
-        };
-        return (Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["a" /* H */], { onClick: this.onClick, onKeyup: this.onKeyUp, role: "tab", tabindex: tabIndex, "aria-selected": selected ? 'true' : null, id: tab !== undefined ? "tab-button-" + tab : null, class: (_a = {},
-                _a[mode] = true,
-                _a['tab-selected'] = selected,
-                _a['tab-disabled'] = disabled,
-                _a['tab-has-label'] = hasLabel,
-                _a['tab-has-icon'] = hasIcon,
-                _a['tab-has-label-only'] = hasLabel && !hasIcon,
-                _a['tab-has-icon-only'] = hasIcon && !hasLabel,
-                _a["tab-layout-" + layout] = true,
-                _a['ion-activatable'] = true,
-                _a['ion-selectable'] = true,
-                _a['ion-focusable'] = true,
-                _a) }, Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["i" /* h */])("a", Object.assign({}, attrs, { tabIndex: -1 }), Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["i" /* h */])("slot", null), mode === 'md' && Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["i" /* h */])("ion-ripple-effect", { type: "unbounded" }))));
+        if (spinnerName) {
+            return spinnerName;
+        }
+        return (mode === 'ios') ? 'lines' : 'circular';
     };
-    Object.defineProperty(TabButton.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["f" /* e */])(this); },
+    Spinner.prototype.render = function () {
+        var _a;
+        var self = this;
+        var mode = Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["e" /* d */])(self);
+        var spinnerName = self.getName();
+        var spinner = SPINNERS[spinnerName] || SPINNERS['lines'];
+        var duration = (typeof self.duration === 'number' && self.duration > 10 ? self.duration : spinner.dur);
+        var svgs = [];
+        if (spinner.circles !== undefined) {
+            for (var i = 0; i < spinner.circles; i++) {
+                svgs.push(buildCircle(spinner, duration, i, spinner.circles));
+            }
+        }
+        else if (spinner.lines !== undefined) {
+            for (var i = 0; i < spinner.lines; i++) {
+                svgs.push(buildLine(spinner, duration, i, spinner.lines));
+            }
+        }
+        return (Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["a" /* H */], { class: Object.assign(Object.assign({}, Object(__WEBPACK_IMPORTED_MODULE_2__theme_18cbe2cc_js__["a" /* c */])(self.color)), (_a = {}, _a[mode] = true, _a["spinner-" + spinnerName] = true, _a['spinner-paused'] = !!self.paused || __WEBPACK_IMPORTED_MODULE_1__config_3c7f3790_js__["b"].getBoolean('_testing'), _a)), role: "progressbar", style: spinner.elmDuration ? { animationDuration: duration + 'ms' } : {} }, svgs));
+    };
+    Object.defineProperty(Spinner, "style", {
+        get: function () { return ":host{display:inline-block;position:relative;width:28px;height:28px;color:var(--color);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}:host(.ion-color){color:var(--ion-color-base)}svg{left:0;top:0;-webkit-transform-origin:center;transform-origin:center;position:absolute;width:100%;height:100%;-webkit-transform:translateZ(0);transform:translateZ(0)}:host-context([dir=rtl]) svg,[dir=rtl] svg{left:unset;right:unset;right:0;-webkit-transform-origin:calc(100% - center);transform-origin:calc(100% - center)}:host(.spinner-lines) line,:host(.spinner-lines-small) line{stroke-width:4px;stroke-linecap:round;stroke:currentColor}:host(.spinner-lines) svg,:host(.spinner-lines-small) svg{-webkit-animation:spinner-fade-out 1s linear infinite;animation:spinner-fade-out 1s linear infinite}:host(.spinner-bubbles) svg{-webkit-animation:spinner-scale-out 1s linear infinite;animation:spinner-scale-out 1s linear infinite;fill:currentColor}:host(.spinner-circles) svg{-webkit-animation:spinner-fade-out 1s linear infinite;animation:spinner-fade-out 1s linear infinite;fill:currentColor}:host(.spinner-crescent) circle{fill:transparent;stroke-width:4px;stroke-dasharray:128px;stroke-dashoffset:82px;stroke:currentColor}:host(.spinner-crescent) svg{-webkit-animation:spinner-rotate 1s linear infinite;animation:spinner-rotate 1s linear infinite}:host(.spinner-dots) circle{stroke-width:0;fill:currentColor}:host(.spinner-dots) svg{-webkit-animation:spinner-dots 1s linear infinite;animation:spinner-dots 1s linear infinite}:host(.spinner-circular){-webkit-animation:spinner-circular linear infinite;animation:spinner-circular linear infinite}:host(.spinner-circular) circle{-webkit-animation:spinner-circular-inner ease-in-out infinite;animation:spinner-circular-inner ease-in-out infinite;stroke:currentColor;stroke-dasharray:80px,200px;stroke-dashoffset:0px;stroke-width:3.6;fill:none}:host(.spinner-paused),:host(.spinner-paused) circle,:host(.spinner-paused) svg{-webkit-animation-play-state:paused;animation-play-state:paused}\@-webkit-keyframes spinner-fade-out{0%{opacity:1}to{opacity:0}}\@keyframes spinner-fade-out{0%{opacity:1}to{opacity:0}}\@-webkit-keyframes spinner-scale-out{0%{-webkit-transform:scale(1);transform:scale(1)}to{-webkit-transform:scale(0);transform:scale(0)}}\@keyframes spinner-scale-out{0%{-webkit-transform:scale(1);transform:scale(1)}to{-webkit-transform:scale(0);transform:scale(0)}}\@-webkit-keyframes spinner-rotate{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}\@keyframes spinner-rotate{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}\@-webkit-keyframes spinner-dots{0%{-webkit-transform:scale(1);transform:scale(1);opacity:.9}50%{-webkit-transform:scale(.4);transform:scale(.4);opacity:.3}to{-webkit-transform:scale(1);transform:scale(1);opacity:.9}}\@keyframes spinner-dots{0%{-webkit-transform:scale(1);transform:scale(1);opacity:.9}50%{-webkit-transform:scale(.4);transform:scale(.4);opacity:.3}to{-webkit-transform:scale(1);transform:scale(1);opacity:.9}}\@-webkit-keyframes spinner-circular{to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}\@keyframes spinner-circular{to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}\@-webkit-keyframes spinner-circular-inner{0%{stroke-dasharray:1px,200px;stroke-dashoffset:0px}50%{stroke-dasharray:100px,200px;stroke-dashoffset:-15px}to{stroke-dasharray:100px,200px;stroke-dashoffset:-125px}}\@keyframes spinner-circular-inner{0%{stroke-dasharray:1px,200px;stroke-dashoffset:0px}50%{stroke-dasharray:100px,200px;stroke-dashoffset:-15px}to{stroke-dasharray:100px,200px;stroke-dashoffset:-125px}}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TabButton, "style", {
-        get: function () { return ":host{--ripple-color:var(--color-selected);-ms-flex:1;flex:1;-ms-flex-direction:column;flex-direction:column;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;background:var(--background);color:var(--color)}:host,a{height:100%;outline:none}a{margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;padding-left:var(--padding-start);padding-right:var(--padding-end);padding-top:var(--padding-top);padding-bottom:var(--padding-bottom);font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:-ms-flexbox;display:flex;position:relative;-ms-flex-direction:inherit;flex-direction:inherit;-ms-flex-align:inherit;align-items:inherit;-ms-flex-pack:inherit;justify-content:inherit;width:100%;border:0;background:transparent;text-decoration:none;cursor:pointer;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-user-drag:none}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){a{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--padding-start);padding-inline-start:var(--padding-start);-webkit-padding-end:var(--padding-end);padding-inline-end:var(--padding-end)}}:host(.ion-focused){background:var(--background-focused)}\@media (any-hover:hover){a:hover{color:var(--color-selected)}}:host(.tab-selected){color:var(--color-selected)}:host(.tab-hidden){display:none!important}:host(.tab-disabled){pointer-events:none;opacity:.4}::slotted(ion-icon),::slotted(ion-label){display:block;-ms-flex-item-align:center;align-self:center;max-width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}::slotted(ion-label){-ms-flex-order:0;order:0}::slotted(ion-icon){-ms-flex-order:-1;order:-1;height:1em}:host(.tab-has-label-only) ::slotted(ion-label){white-space:normal}::slotted(ion-badge){-webkit-box-sizing:border-box;box-sizing:border-box;position:absolute;z-index:1}:host(.tab-layout-icon-start){-ms-flex-direction:row;flex-direction:row}:host(.tab-layout-icon-end){-ms-flex-direction:row-reverse;flex-direction:row-reverse}:host(.tab-layout-icon-bottom){-ms-flex-direction:column-reverse;flex-direction:column-reverse}:host(.tab-layout-icon-hide) ::slotted(ion-icon),:host(.tab-layout-label-hide) ::slotted(ion-label){display:none}ion-ripple-effect{color:var(--ripple-color)}:host{--padding-top:0;--padding-end:12px;--padding-bottom:0;--padding-start:12px;max-width:168px;font-size:12px;font-weight:400;letter-spacing:.03em}::slotted(ion-label){margin-left:0;margin-right:0;margin-top:2px;margin-bottom:2px;text-transform:none}::slotted(ion-icon){margin-left:0;margin-right:0;margin-top:16px;margin-bottom:16px;-webkit-transform-origin:center center;transform-origin:center center;font-size:22px}:host-context([dir=rtl]) ::slotted(ion-icon),[dir=rtl] ::slotted(ion-icon){-webkit-transform-origin:calc(100% - center) center;transform-origin:calc(100% - center) center}::slotted(ion-badge){border-radius:8px;padding-left:2px;padding-right:2px;padding-top:3px;padding-bottom:2px;left:calc(50% + 6px);top:8px;min-width:12px;font-size:8px;font-weight:400}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){::slotted(ion-badge){padding-left:unset;padding-right:unset;-webkit-padding-start:2px;padding-inline-start:2px;-webkit-padding-end:2px;padding-inline-end:2px}}:host-context([dir=rtl]) ::slotted(ion-badge),[dir=rtl] ::slotted(ion-badge){left:unset;right:unset;right:calc(50% + 6px)}::slotted(ion-badge:empty){display:block;min-width:8px;height:8px}:host(.tab-layout-icon-top) ::slotted(ion-icon){margin-top:6px;margin-bottom:2px}:host(.tab-layout-icon-top) ::slotted(ion-label){margin-top:0;margin-bottom:6px}:host(.tab-layout-icon-bottom) ::slotted(ion-badge){left:70%;top:8px}:host-context([dir=rtl]).tab-layout-icon-bottom ::slotted(ion-badge),:host-context([dir=rtl]):host(.tab-layout-icon-bottom) ::slotted(ion-badge){left:unset;right:unset;right:70%}:host(.tab-layout-icon-bottom) ::slotted(ion-icon){margin-top:0;margin-bottom:6px}:host(.tab-layout-icon-bottom) ::slotted(ion-label){margin-top:6px;margin-bottom:0}:host(.tab-layout-icon-end) ::slotted(ion-badge),:host(.tab-layout-icon-start) ::slotted(ion-badge){left:80%;top:16px}:host-context([dir=rtl]).tab-layout-icon-end ::slotted(ion-badge),:host-context([dir=rtl]).tab-layout-icon-start ::slotted(ion-badge),:host-context([dir=rtl]):host(.tab-layout-icon-end) ::slotted(ion-badge),:host-context([dir=rtl]):host(.tab-layout-icon-start) ::slotted(ion-badge){left:unset;right:unset;right:80%}:host(.tab-layout-icon-start) ::slotted(ion-icon){margin-right:6px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.tab-layout-icon-start) ::slotted(ion-icon){margin-right:unset;-webkit-margin-end:6px;margin-inline-end:6px}}:host(.tab-layout-icon-end) ::slotted(ion-icon){margin-left:6px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.tab-layout-icon-end) ::slotted(ion-icon){margin-left:unset;-webkit-margin-start:6px;margin-inline-start:6px}}:host(.tab-has-label-only) ::slotted(ion-badge),:host(.tab-layout-icon-hide) ::slotted(ion-badge){left:70%;top:16px}:host-context([dir=rtl]).tab-has-label-only ::slotted(ion-badge),:host-context([dir=rtl]).tab-layout-icon-hide ::slotted(ion-badge),:host-context([dir=rtl]):host(.tab-has-label-only) ::slotted(ion-badge),:host-context([dir=rtl]):host(.tab-layout-icon-hide) ::slotted(ion-badge){left:unset;right:unset;right:70%}:host(.tab-has-label-only) ::slotted(ion-label),:host(.tab-layout-icon-hide) ::slotted(ion-label){margin-top:0;margin-bottom:0}:host(.tab-has-icon-only) ::slotted(ion-badge),:host(.tab-layout-label-hide) ::slotted(ion-badge){top:16px}:host(.tab-has-icon-only) ::slotted(ion-icon),:host(.tab-layout-label-hide) ::slotted(ion-icon){margin-top:0;margin-bottom:0;font-size:24px}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return TabButton;
+    return Spinner;
 }());
+var buildCircle = function (spinner, duration, index, total) {
+    var data = spinner.fn(duration, index, total);
+    data.style['animation-duration'] = duration + 'ms';
+    return (Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["i" /* h */])("svg", { viewBox: data.viewBox || '0 0 64 64', style: data.style }, Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["i" /* h */])("circle", { transform: data.transform || 'translate(32,32)', cx: data.cx, cy: data.cy, r: data.r, style: spinner.elmDuration ? { animationDuration: duration + 'ms' } : {} })));
+};
+var buildLine = function (spinner, duration, index, total) {
+    var data = spinner.fn(duration, index, total);
+    data.style['animation-duration'] = duration + 'ms';
+    return (Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["i" /* h */])("svg", { viewBox: data.viewBox || '0 0 64 64', style: data.style }, Object(__WEBPACK_IMPORTED_MODULE_0__core_ca0488fc_js__["i" /* h */])("line", { transform: "translate(32,32)", y1: data.y1, y2: data.y2 })));
+};
 
 
 

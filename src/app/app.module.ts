@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -11,7 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 // import { LayoutModule } from './layout/layout.module';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
-import {IonicModule} from "@ionic/angular";
+// import {IonicModule} from "@ionic/angular";
 import {LayoutModule} from "./layout/layout.module";
 import {RouterModule} from "@angular/router";
 
@@ -24,7 +24,6 @@ import {RouterModule} from "@angular/router";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicModule,
     LayoutModule,
     RouterModule,
     // LayoutModule

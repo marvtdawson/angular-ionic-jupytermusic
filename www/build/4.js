@@ -1,27 +1,21 @@
 webpackJsonp([4],{
 
-/***/ 458:
+/***/ 495:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_app", function() { return App; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_buttons", function() { return Buttons; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_content", function() { return Content; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_footer", function() { return Footer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_header", function() { return Header; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_router_outlet", function() { return RouterOutlet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_title", function() { return ToolbarTitle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_toolbar", function() { return Toolbar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_popover", function() { return Popover; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(434);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(430);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__ = __webpack_require__(432);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants_3c3e1099_js__ = __webpack_require__(437);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__ = __webpack_require__(534);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__framework_delegate_c2e2e1f4_js__ = __webpack_require__(536);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__index_35276576_js__ = __webpack_require__(537);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__ = __webpack_require__(539);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__constants_3c3e1099_js__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__theme_18cbe2cc_js__ = __webpack_require__(534);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__framework_delegate_c2e2e1f4_js__ = __webpack_require__(536);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__index_6826f2f6_js__ = __webpack_require__(537);
 
 
 
@@ -31,342 +25,352 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var App = /** @class */ (function () {
-    function App(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
+
+/**
+ * iOS Popover Enter Animation
+ */
+var iosEnterAnimation = function (baseEl, ev) {
+    var originY = 'top';
+    var originX = 'left';
+    var contentEl = baseEl.querySelector('.popover-content');
+    var contentDimentions = contentEl.getBoundingClientRect();
+    var contentWidth = contentDimentions.width;
+    var contentHeight = contentDimentions.height;
+    var bodyWidth = baseEl.ownerDocument.defaultView.innerWidth;
+    var bodyHeight = baseEl.ownerDocument.defaultView.innerHeight;
+    // If ev was passed, use that for target element
+    var targetDim = ev && ev.target && ev.target.getBoundingClientRect();
+    var targetTop = targetDim != null && 'top' in targetDim ? targetDim.top : bodyHeight / 2 - contentHeight / 2;
+    var targetLeft = targetDim != null && 'left' in targetDim ? targetDim.left : bodyWidth / 2;
+    var targetWidth = (targetDim && targetDim.width) || 0;
+    var targetHeight = (targetDim && targetDim.height) || 0;
+    var arrowEl = baseEl.querySelector('.popover-arrow');
+    var arrowDim = arrowEl.getBoundingClientRect();
+    var arrowWidth = arrowDim.width;
+    var arrowHeight = arrowDim.height;
+    if (targetDim == null) {
+        arrowEl.style.display = 'none';
     }
-    App.prototype.componentDidLoad = function () {
-        {
-            rIC(function () {
-                var isHybrid = Object(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["f" /* i */])(window, 'hybrid');
-                if (!__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('_testing')) {
-                    __webpack_require__.e/* import() */(87/* duplicate */).then(__webpack_require__.bind(null, 544)).then(function (module) { return module.startTapClick(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"]); });
-                }
-                if (__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('statusTap', isHybrid)) {
-                    __webpack_require__.e/* import() */(89/* duplicate */).then(__webpack_require__.bind(null, 545)).then(function (module) { return module.startStatusTap(); });
-                }
-                if (__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('inputShims', needInputShims())) {
-                    __webpack_require__.e/* import() */(90/* duplicate */).then(__webpack_require__.bind(null, 546)).then(function (module) { return module.startInputShims(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"]); });
-                }
-                if (__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('hardwareBackButton', isHybrid)) {
-                    __webpack_require__.e/* import() */(91/* duplicate */).then(__webpack_require__.bind(null, 547)).then(function (module) { return module.startHardwareBackButton(); });
-                }
-                __webpack_require__.e/* import() */(92/* duplicate */).then(__webpack_require__.bind(null, 548)).then(function (module) { return module.startFocusVisible(); });
-            });
-        }
+    var arrowCSS = {
+        top: targetTop + targetHeight,
+        left: targetLeft + targetWidth / 2 - arrowWidth / 2
     };
-    App.prototype.render = function () {
-        var _a;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: (_a = {},
-                _a[mode] = true,
-                _a['ion-page'] = true,
-                _a['force-statusbar-padding'] = __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('_forceStatusbarPadding'),
-                _a) }));
+    var popoverCSS = {
+        top: targetTop + targetHeight + (arrowHeight - 1),
+        left: targetLeft + targetWidth / 2 - contentWidth / 2
     };
-    Object.defineProperty(App.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(App, "style", {
-        get: function () { return "html.plt-mobile ion-app{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}ion-app.force-statusbar-padding{--ion-safe-area-top:20px}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return App;
-}());
-var needInputShims = function () {
-    return Object(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["f" /* i */])(window, 'ios') && Object(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["f" /* i */])(window, 'mobile');
+    // If the popover left is less than the padding it is off screen
+    // to the left so adjust it, else if the width of the popover
+    // exceeds the body width it is off screen to the right so adjust
+    //
+    var checkSafeAreaLeft = false;
+    var checkSafeAreaRight = false;
+    // If the popover left is less than the padding it is off screen
+    // to the left so adjust it, else if the width of the popover
+    // exceeds the body width it is off screen to the right so adjust
+    // 25 is a random/arbitrary number. It seems to work fine for ios11
+    // and iPhoneX. Is it perfect? No. Does it work? Yes.
+    if (popoverCSS.left < POPOVER_IOS_BODY_PADDING + 25) {
+        checkSafeAreaLeft = true;
+        popoverCSS.left = POPOVER_IOS_BODY_PADDING;
+    }
+    else if (contentWidth + POPOVER_IOS_BODY_PADDING + popoverCSS.left + 25 > bodyWidth) {
+        // Ok, so we're on the right side of the screen,
+        // but now we need to make sure we're still a bit further right
+        // cus....notchurally... Again, 25 is random. It works tho
+        checkSafeAreaRight = true;
+        popoverCSS.left = bodyWidth - contentWidth - POPOVER_IOS_BODY_PADDING;
+        originX = 'right';
+    }
+    // make it pop up if there's room above
+    if (targetTop + targetHeight + contentHeight > bodyHeight && targetTop - contentHeight > 0) {
+        arrowCSS.top = targetTop - (arrowHeight + 1);
+        popoverCSS.top = targetTop - contentHeight - (arrowHeight - 1);
+        baseEl.className = baseEl.className + ' popover-bottom';
+        originY = 'bottom';
+        // If there isn't room for it to pop up above the target cut it off
+    }
+    else if (targetTop + targetHeight + contentHeight > bodyHeight) {
+        contentEl.style.bottom = POPOVER_IOS_BODY_PADDING + '%';
+    }
+    arrowEl.style.top = arrowCSS.top + 'px';
+    arrowEl.style.left = arrowCSS.left + 'px';
+    contentEl.style.top = popoverCSS.top + 'px';
+    contentEl.style.left = popoverCSS.left + 'px';
+    if (checkSafeAreaLeft) {
+        contentEl.style.left = "calc(" + popoverCSS.left + "px + var(--ion-safe-area-left, 0px))";
+    }
+    if (checkSafeAreaRight) {
+        contentEl.style.left = "calc(" + popoverCSS.left + "px - var(--ion-safe-area-right, 0px))";
+    }
+    contentEl.style.transformOrigin = originY + ' ' + originX;
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.01, 0.08);
+    wrapperAnimation
+        .addElement(baseEl.querySelector('.popover-wrapper'))
+        .fromTo('opacity', 0.01, 1);
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('ease')
+        .duration(100)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
 };
-var rIC = function (callback) {
-    if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(callback);
-    }
-    else {
-        setTimeout(callback, 32);
-    }
+var POPOVER_IOS_BODY_PADDING = 5;
+/**
+ * iOS Popover Leave Animation
+ */
+var iosLeaveAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.08, 0);
+    wrapperAnimation
+        .addElement(baseEl.querySelector('.popover-wrapper'))
+        .fromTo('opacity', 0.99, 0);
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('ease')
+        .duration(500)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
 };
-var Buttons = /** @class */ (function () {
-    function Buttons(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        /**
-         * If true, buttons will disappear when its
-         * parent toolbar has fully collapsed if the toolbar
-         * is not the first toolbar. If the toolbar is the
-         * first toolbar, the buttons will be hidden and will
-         * only be shown once all toolbars have fully collapsed.
-         *
-         * Only applies in `ios` mode with `collapse` set to
-         * `true` on `ion-header`.
-         *
-         * Typically used for [Collapsible Large Titles](https://ionicframework.com/docs/api/title#collapsible-large-titles)
-         */
-        this.collapse = false;
-    }
-    Buttons.prototype.render = function () {
-        var _a;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: (_a = {},
-                _a[mode] = true,
-                _a['buttons-collapse'] = this.collapse,
-                _a) }));
+/**
+ * Md Popover Enter Animation
+ */
+var mdEnterAnimation = function (baseEl, ev) {
+    var POPOVER_MD_BODY_PADDING = 12;
+    var doc = baseEl.ownerDocument;
+    var isRTL = doc.dir === 'rtl';
+    var originY = 'top';
+    var originX = isRTL ? 'right' : 'left';
+    var contentEl = baseEl.querySelector('.popover-content');
+    var contentDimentions = contentEl.getBoundingClientRect();
+    var contentWidth = contentDimentions.width;
+    var contentHeight = contentDimentions.height;
+    var bodyWidth = doc.defaultView.innerWidth;
+    var bodyHeight = doc.defaultView.innerHeight;
+    // If ev was passed, use that for target element
+    var targetDim = ev && ev.target && ev.target.getBoundingClientRect();
+    // As per MD spec, by default position the popover below the target (trigger) element
+    var targetTop = targetDim != null && 'bottom' in targetDim
+        ? targetDim.bottom
+        : bodyHeight / 2 - contentHeight / 2;
+    var targetLeft = targetDim != null && 'left' in targetDim
+        ? isRTL
+            ? targetDim.left - contentWidth + targetDim.width
+            : targetDim.left
+        : bodyWidth / 2 - contentWidth / 2;
+    var targetHeight = (targetDim && targetDim.height) || 0;
+    var popoverCSS = {
+        top: targetTop,
+        left: targetLeft
     };
-    Object.defineProperty(Buttons, "style", {
-        get: function () { return ".sc-ion-buttons-ios-h{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-webkit-transform:translateZ(0);transform:translateZ(0);z-index:99}.sc-ion-buttons-ios-s  ion-button {--padding-top:0;--padding-bottom:0;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;--padding-start:5px;--padding-end:5px;margin-left:2px;margin-right:2px;height:32px;font-size:17px;font-weight:400}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.sc-ion-buttons-ios-s  ion-button {margin-left:unset;margin-right:unset;-webkit-margin-start:2px;margin-inline-start:2px;-webkit-margin-end:2px;margin-inline-end:2px}}.sc-ion-buttons-ios-s  ion-button:not(.button-round) {--border-radius:4px}.sc-ion-buttons-ios-h.ion-color.sc-ion-buttons-ios-s  .button , .ion-color .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button {--color:initial;--border-color:initial;--background-focused:rgba(var(--ion-color-contrast-rgb),0.1)}.sc-ion-buttons-ios-h.ion-color.sc-ion-buttons-ios-s  .button-solid , .ion-color .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-solid {--background:var(--ion-color-contrast);--background-activated:rgba(var(--ion-color-contrast-rgb),0.8);--background-focused:rgba(var(--ion-color-contrast-rgb),0.6);--color:var(--ion-color-base);--color-focused:var(--ion-color-base)}.sc-ion-buttons-ios-h.ion-color.sc-ion-buttons-ios-s  .button-clear , .ion-color .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-clear {--background-focused:rgba(var(--ion-color-contrast-rgb),0.1);--color-activated:var(--ion-color-contrast);--color-focused:var(--ion-color-contrast)}.sc-ion-buttons-ios-h.ion-color.sc-ion-buttons-ios-s  .button-outline , .ion-color .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-outline {--background-activated:var(--ion-color-contrast);--background-focused:rgba(var(--ion-color-contrast-rgb),0.1);--color-activated:var(--ion-color-base);--color-focused:var(--ion-color-contrast)}.sc-ion-buttons-ios-hion-toolbar:not(.ion-color).sc-ion-buttons-ios-s  .button-clear , ion-toolbar:not(.ion-color) .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-clear {--color:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff));--color-activated:var(--ion-toolbar-color-activated,var(--ion-color-primary,#3880ff));--color-focused:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff))}.sc-ion-buttons-ios-hion-toolbar:not(.ion-color).sc-ion-buttons-ios-s  .button-outline , ion-toolbar:not(.ion-color) .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-outline {--color:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff));--color-activated:var(--ion-toolbar-background,var(--ion-color-primary-contrast,#fff));--color-focused:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff));--border-color:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff));--background-activated:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff))}.sc-ion-buttons-ios-hion-toolbar:not(.ion-color).sc-ion-buttons-ios-s  .button-solid , ion-toolbar:not(.ion-color) .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button-solid {--color:var(--ion-toolbar-background,var(--ion-color-step-50,#fff));--color-activated:var(--ion-toolbar-background,var(--ion-color-step-50,#fff));--color-focused:var(--ion-toolbar-background,var(--ion-color-step-50,#fff));--background:var(--ion-toolbar-color,var(--ion-color-primary,#3880ff));--background-activated:var(--ion-toolbar-color-activated,var(--ion-color-primary-shade,#3171e0));--background-focused:var(--ion-toolbar-color-activated,var(--ion-color-primary-shade,#3171e0))}.sc-ion-buttons-ios-s  ion-icon[slot=start] {margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;margin-right:.3em;font-size:24px;line-height:.67}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.sc-ion-buttons-ios-s  ion-icon[slot=start] {margin-right:unset;-webkit-margin-end:.3em;margin-inline-end:.3em}}.sc-ion-buttons-ios-s  ion-icon[slot=end] {margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;margin-left:.4em;font-size:24px;line-height:.67}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.sc-ion-buttons-ios-s  ion-icon[slot=end] {margin-left:unset;-webkit-margin-start:.4em;margin-inline-start:.4em}}.sc-ion-buttons-ios-s  ion-icon[slot=icon-only] {padding-left:0;padding-right:0;padding-top:0;padding-bottom:0;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;font-size:31px;line-height:.67}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Buttons;
-}());
-var Content = /** @class */ (function () {
+    // If the popover left is less than the padding it is off screen
+    // to the left so adjust it, else if the width of the popover
+    // exceeds the body width it is off screen to the right so adjust
+    if (popoverCSS.left < POPOVER_MD_BODY_PADDING) {
+        popoverCSS.left = POPOVER_MD_BODY_PADDING;
+        // Same origin in this case for both LTR & RTL
+        // Note: in LTR, originX is already 'left'
+        originX = 'left';
+    }
+    else if (contentWidth + POPOVER_MD_BODY_PADDING + popoverCSS.left >
+        bodyWidth) {
+        popoverCSS.left = bodyWidth - contentWidth - POPOVER_MD_BODY_PADDING;
+        // Same origin in this case for both LTR & RTL
+        // Note: in RTL, originX is already 'right'
+        originX = 'right';
+    }
+    // If the popover when popped down stretches past bottom of screen,
+    // make it pop up if there's room above
+    if (targetTop + targetHeight + contentHeight > bodyHeight &&
+        targetTop - contentHeight > 0) {
+        popoverCSS.top = targetTop - contentHeight - targetHeight;
+        baseEl.className = baseEl.className + ' popover-bottom';
+        originY = 'bottom';
+        // If there isn't room for it to pop up above the target cut it off
+    }
+    else if (targetTop + targetHeight + contentHeight > bodyHeight) {
+        contentEl.style.bottom = POPOVER_MD_BODY_PADDING + 'px';
+    }
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var contentAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var viewportAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.01, 0.32);
+    wrapperAnimation
+        .addElement(baseEl.querySelector('.popover-wrapper'))
+        .fromTo('opacity', 0.01, 1);
+    contentAnimation
+        .addElement(contentEl)
+        .beforeStyles({
+        'top': popoverCSS.top + "px",
+        'left': popoverCSS.left + "px",
+        'transform-origin': originY + " " + originX
+    })
+        .fromTo('transform', 'scale(0.001)', 'scale(1)');
+    viewportAnimation
+        .addElement(baseEl.querySelector('.popover-viewport'))
+        .fromTo('opacity', 0.01, 1);
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(0.36,0.66,0.04,1)')
+        .duration(300)
+        .addAnimation([backdropAnimation, wrapperAnimation, contentAnimation, viewportAnimation]);
+};
+/**
+ * Md Popover Leave Animation
+ */
+var mdLeaveAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var backdropAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    backdropAnimation
+        .addElement(baseEl.querySelector('ion-backdrop'))
+        .fromTo('opacity', 0.32, 0);
+    wrapperAnimation
+        .addElement(baseEl.querySelector('.popover-wrapper'))
+        .fromTo('opacity', 0.99, 0);
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('ease')
+        .duration(500)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+};
+var Popover = /** @class */ (function () {
     function class_1(hostRef) {
+        var _this = this;
         Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.isScrolling = false;
-        this.lastScroll = 0;
-        this.queued = false;
-        this.cTop = -1;
-        this.cBottom = -1;
+        this.presented = false;
         this.mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        // Detail is used in a hot loop in the scroll event, by allocating it here
-        // V8 will be able to inline any read/write to it since it's a monomorphic class.
-        // https://mrale.ph/blog/2015/01/11/whats-up-with-monomorphism.html
-        this.detail = {
-            scrollTop: 0,
-            scrollLeft: 0,
-            type: 'scroll',
-            event: undefined,
-            startX: 0,
-            startY: 0,
-            startTimeStamp: 0,
-            currentX: 0,
-            currentY: 0,
-            velocityX: 0,
-            velocityY: 0,
-            deltaX: 0,
-            deltaY: 0,
-            timeStamp: 0,
-            data: undefined,
-            isScrolling: true,
-        };
         /**
-         * If `true`, the content will scroll behind the headers
-         * and footers. This effect can easily be seen by setting the toolbar
-         * to transparent.
+         * If `true`, the keyboard will be automatically dismissed when the overlay is presented.
          */
-        this.fullscreen = false;
+        this.keyboardClose = true;
         /**
-         * If you want to enable the content scrolling in the X axis, set this property to `true`.
+         * If `true`, the popover will be dismissed when the backdrop is clicked.
          */
-        this.scrollX = false;
+        this.backdropDismiss = true;
         /**
-         * If you want to disable the content scrolling in the Y axis, set this property to `false`.
+         * If `true`, a backdrop will be displayed behind the popover.
          */
-        this.scrollY = true;
+        this.showBackdrop = true;
         /**
-         * Because of performance reasons, ionScroll events are disabled by default, in order to enable them
-         * and start listening from (ionScroll), set this property to `true`.
+         * If `true`, the popover will be translucent.
+         * Only applies when the mode is `"ios"` and the device supports
+         * [`backdrop-filter`](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility).
          */
-        this.scrollEvents = false;
-        this.ionScrollStart = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionScrollStart", 7);
-        this.ionScroll = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionScroll", 7);
-        this.ionScrollEnd = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionScrollEnd", 7);
-    }
-    class_1.prototype.disconnectedCallback = function () {
-        this.onScrollEnd();
-    };
-    class_1.prototype.componentDidLoad = function () {
-        this.resize();
-    };
-    class_1.prototype.onClick = function (ev) {
-        if (this.isScrolling) {
-            ev.preventDefault();
+        this.translucent = false;
+        /**
+         * If `true`, the popover will animate.
+         */
+        this.animated = true;
+        this.onDismiss = function (ev) {
             ev.stopPropagation();
-        }
-    };
-    class_1.prototype.shouldForceOverscroll = function () {
-        var _a = this, forceOverscroll = _a.forceOverscroll, mode = _a.mode;
-        return forceOverscroll === undefined
-            ? mode === 'ios' && Object(__WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["f" /* i */])('ios')
-            : forceOverscroll;
-    };
-    class_1.prototype.resize = function () {
-        if (this.fullscreen) {
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(this.readDimensions.bind(this));
-        }
-        else if (this.cTop !== 0 || this.cBottom !== 0) {
-            this.cTop = this.cBottom = 0;
-            this.el.forceUpdate();
-        }
-    };
-    class_1.prototype.readDimensions = function () {
-        var page = getPageElement(this.el);
-        var top = Math.max(this.el.offsetTop, 0);
-        var bottom = Math.max(page.offsetHeight - top - this.el.offsetHeight, 0);
-        var dirty = top !== this.cTop || bottom !== this.cBottom;
-        if (dirty) {
-            this.cTop = top;
-            this.cBottom = bottom;
-            this.el.forceUpdate();
-        }
-    };
-    class_1.prototype.onScroll = function (ev) {
-        var _this = this;
-        var timeStamp = Date.now();
-        var shouldStart = !this.isScrolling;
-        this.lastScroll = timeStamp;
-        if (shouldStart) {
-            this.onScrollStart();
-        }
-        if (!this.queued && this.scrollEvents) {
-            this.queued = true;
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(function (ts) {
-                _this.queued = false;
-                _this.detail.event = ev;
-                updateScrollDetail(_this.detail, _this.scrollEl, ts, shouldStart);
-                _this.ionScroll.emit(_this.detail);
-            });
-        }
-    };
-    /**
-     * Get the element where the actual scrolling takes place.
-     * This element can be used to subscribe to `scroll` events or manually modify
-     * `scrollTop`. However, it's recommended to use the API provided by `ion-content`:
-     *
-     * i.e. Using `ionScroll`, `ionScrollStart`, `ionScrollEnd` for scrolling events
-     * and `scrollToPoint()` to scroll the content into a certain point.
-     */
-    class_1.prototype.getScrollElement = function () {
-        return Promise.resolve(this.scrollEl);
-    };
-    /**
-     * Scroll to the top of the component.
-     *
-     * @param duration The amount of time to take scrolling to the top. Defaults to `0`.
-     */
-    class_1.prototype.scrollToTop = function (duration) {
-        if (duration === void 0) { duration = 0; }
-        return this.scrollToPoint(undefined, 0, duration);
-    };
-    /**
-     * Scroll to the bottom of the component.
-     *
-     * @param duration The amount of time to take scrolling to the bottom. Defaults to `0`.
-     */
-    class_1.prototype.scrollToBottom = function (duration) {
-        if (duration === void 0) { duration = 0; }
-        var y = this.scrollEl.scrollHeight - this.scrollEl.clientHeight;
-        return this.scrollToPoint(undefined, y, duration);
-    };
-    /**
-     * Scroll by a specified X/Y distance in the component.
-     *
-     * @param x The amount to scroll by on the horizontal axis.
-     * @param y The amount to scroll by on the vertical axis.
-     * @param duration The amount of time to take scrolling by that amount.
-     */
-    class_1.prototype.scrollByPoint = function (x, y, duration) {
-        return this.scrollToPoint(x + this.scrollEl.scrollLeft, y + this.scrollEl.scrollTop, duration);
-    };
-    /**
-     * Scroll to a specified X/Y location in the component.
-     *
-     * @param x The point to scroll to on the horizontal axis.
-     * @param y The point to scroll to on the vertical axis.
-     * @param duration The amount of time to take scrolling to that point. Defaults to `0`.
-     */
-    class_1.prototype.scrollToPoint = function (x, y, duration) {
-        if (duration === void 0) { duration = 0; }
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var el, resolve, startTime, promise, fromY, fromX, deltaY, deltaX, step;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                el = this.scrollEl;
-                if (duration < 32) {
-                    if (y != null) {
-                        el.scrollTop = y;
-                    }
-                    if (x != null) {
-                        el.scrollLeft = x;
-                    }
-                    return [2 /*return*/];
-                }
-                startTime = 0;
-                promise = new Promise(function (r) { return resolve = r; });
-                fromY = el.scrollTop;
-                fromX = el.scrollLeft;
-                deltaY = y != null ? y - fromY : 0;
-                deltaX = x != null ? x - fromX : 0;
-                step = function (timeStamp) {
-                    var linearTime = Math.min(1, ((timeStamp - startTime) / duration)) - 1;
-                    var easedT = Math.pow(linearTime, 3) + 1;
-                    if (deltaY !== 0) {
-                        el.scrollTop = Math.floor((easedT * deltaY) + fromY);
-                    }
-                    if (deltaX !== 0) {
-                        el.scrollLeft = Math.floor((easedT * deltaX) + fromX);
-                    }
-                    if (easedT < 1) {
-                        // do not use DomController here
-                        // must use nativeRaf in order to fire in the next frame
-                        // TODO: remove as any
-                        requestAnimationFrame(step);
-                    }
-                    else {
-                        resolve();
-                    }
-                };
-                // chill out for a frame first
-                requestAnimationFrame(function (ts) {
-                    startTime = ts;
-                    step(ts);
+            ev.preventDefault();
+            _this.dismiss();
+        };
+        this.onBackdropTap = function () {
+            _this.dismiss(undefined, __WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["a" /* B */]);
+        };
+        this.onLifecycle = function (modalEvent) {
+            var el = _this.usersElement;
+            var name = LIFECYCLE_MAP[modalEvent.type];
+            if (el && name) {
+                var event = new CustomEvent(name, {
+                    bubbles: false,
+                    cancelable: false,
+                    detail: modalEvent.detail
                 });
-                return [2 /*return*/, promise];
-            });
-        });
-    };
-    class_1.prototype.onScrollStart = function () {
-        var _this = this;
-        this.isScrolling = true;
-        this.ionScrollStart.emit({
-            isScrolling: true
-        });
-        if (this.watchDog) {
-            clearInterval(this.watchDog);
-        }
-        // watchdog
-        this.watchDog = setInterval(function () {
-            if (_this.lastScroll < Date.now() - 120) {
-                _this.onScrollEnd();
+                el.dispatchEvent(event);
             }
-        }, 100);
-    };
-    class_1.prototype.onScrollEnd = function () {
-        clearInterval(this.watchDog);
-        this.watchDog = null;
-        if (this.isScrolling) {
-            this.isScrolling = false;
-            this.ionScrollEnd.emit({
-                isScrolling: false
+        };
+        Object(__WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["e" /* d */])(this.el);
+        this.didPresent = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionPopoverDidPresent", 7);
+        this.willPresent = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionPopoverWillPresent", 7);
+        this.willDismiss = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionPopoverWillDismiss", 7);
+        this.didDismiss = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionPopoverDidDismiss", 7);
+    }
+    /**
+     * Present the popover overlay after it has been created.
+     */
+    class_1.prototype.present = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            var container, data, _a;
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (this.presented) {
+                            return [2 /*return*/];
+                        }
+                        container = this.el.querySelector('.popover-content');
+                        if (!container) {
+                            throw new Error('container is undefined');
+                        }
+                        data = Object.assign(Object.assign({}, this.componentProps), { popover: this.el });
+                        _a = this;
+                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_8__framework_delegate_c2e2e1f4_js__["a"])(this.delegate, container, this.component, ['popover-viewport', this.el['s-sc']], data)];
+                    case 1:
+                        _a.usersElement = _b.sent();
+                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_9__index_6826f2f6_js__["a" /* d */])(this.usersElement)];
+                    case 2:
+                        _b.sent();
+                        return [2 /*return*/, Object(__WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["f" /* e */])(this, 'popoverEnter', iosEnterAnimation, mdEnterAnimation, this.event)];
+                }
             });
-        }
+        });
+    };
+    /**
+     * Dismiss the popover overlay after it has been presented.
+     *
+     * @param data Any data to emit in the dismiss events.
+     * @param role The role of the element that is dismissing the popover. For example, 'cancel' or 'backdrop'.
+     */
+    class_1.prototype.dismiss = function (data, role) {
+        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            var shouldDismiss;
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["g" /* f */])(this, data, role, 'popoverLeave', iosLeaveAnimation, mdLeaveAnimation, this.event)];
+                    case 1:
+                        shouldDismiss = _a.sent();
+                        if (!shouldDismiss) return [3 /*break*/, 3];
+                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_8__framework_delegate_c2e2e1f4_js__["b" /* d */])(this.delegate, this.usersElement)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3: return [2 /*return*/, shouldDismiss];
+                }
+            });
+        });
+    };
+    /**
+     * Returns a promise that resolves when the popover did dismiss.
+     */
+    class_1.prototype.onDidDismiss = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["h" /* g */])(this.el, 'ionPopoverDidDismiss');
+    };
+    /**
+     * Returns a promise that resolves when the popover will dismiss.
+     */
+    class_1.prototype.onWillDismiss = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_6__overlays_10640d86_js__["h" /* g */])(this.el, 'ionPopoverWillDismiss');
     };
     class_1.prototype.render = function () {
         var _a;
-        var _this = this;
-        var _b = this, scrollX = _b.scrollX, scrollY = _b.scrollY;
         var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var forceOverscroll = this.shouldForceOverscroll();
-        var transitionShadow = (mode === 'ios' && __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('experimentalTransitionShadow', true));
-        this.resize();
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: Object.assign(Object.assign({}, Object(__WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__["a" /* c */])(this.color)), (_a = {}, _a[mode] = true, _a['content-sizing'] = Object(__WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__["c" /* h */])('ion-popover', this.el), _a['overscroll'] = forceOverscroll, _a)), style: {
-                '--offset-top': this.cTop + "px",
-                '--offset-bottom': this.cBottom + "px",
-            } }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("main", { class: {
-                'inner-scroll': true,
-                'scroll-x': scrollX,
-                'scroll-y': scrollY,
-                'overscroll': (scrollX || scrollY) && forceOverscroll
-            }, ref: function (el) { return _this.scrollEl = el; }, onScroll: function (ev) { return _this.onScroll(ev); } }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", null)), transitionShadow ? (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "transition-effect" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "transition-cover" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "transition-shadow" }))) : null, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", { name: "fixed" })));
+        var onLifecycle = this.onLifecycle;
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { "aria-modal": "true", "no-router": true, style: {
+                zIndex: "" + (20000 + this.overlayIndex),
+            }, class: Object.assign(Object.assign({}, Object(__WEBPACK_IMPORTED_MODULE_7__theme_18cbe2cc_js__["b" /* g */])(this.cssClass)), (_a = {}, _a[mode] = true, _a['popover-translucent'] = this.translucent, _a)), onIonPopoverDidPresent: onLifecycle, onIonPopoverWillPresent: onLifecycle, onIonPopoverWillDismiss: onLifecycle, onIonPopoverDidDismiss: onLifecycle, onIonDismiss: this.onDismiss, onIonBackdropTap: this.onBackdropTap }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-backdrop", { tappable: this.backdropDismiss, visible: this.showBackdrop }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "popover-wrapper" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "popover-arrow" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "popover-content" }))));
     };
     Object.defineProperty(class_1.prototype, "el", {
         get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
@@ -374,730 +378,18 @@ var Content = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(class_1, "style", {
-        get: function () { return ":host{--background:var(--ion-background-color,#fff);--color:var(--ion-text-color,#000);--padding-top:0px;--padding-bottom:0px;--padding-start:0px;--padding-end:0px;--keyboard-offset:0px;--offset-top:0px;--offset-bottom:0px;--overflow:auto;display:block;position:relative;-ms-flex:1;flex:1;width:100%;height:100%;margin:0!important;padding:0!important;font-family:var(--ion-font-family,inherit);contain:size style}:host(.ion-color) .inner-scroll{background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.outer-content){--background:var(--ion-color-step-50,#f2f2f2)}.inner-scroll{left:0;right:0;top:calc(var(--offset-top) * -1);bottom:calc(var(--offset-bottom) * -1);padding-left:var(--padding-start);padding-right:var(--padding-end);padding-top:calc(var(--padding-top) + var(--offset-top));padding-bottom:calc(var(--padding-bottom) + var(--keyboard-offset) + var(--offset-bottom));position:absolute;background:var(--background);color:var(--color);-webkit-box-sizing:border-box;box-sizing:border-box;overflow:hidden}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.inner-scroll{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--padding-start);padding-inline-start:var(--padding-start);-webkit-padding-end:var(--padding-end);padding-inline-end:var(--padding-end)}}.scroll-x,.scroll-y{-webkit-overflow-scrolling:touch;will-change:scroll-position;-ms-scroll-chaining:none;overscroll-behavior:contain}.scroll-y{-ms-touch-action:pan-y;touch-action:pan-y;overflow-y:var(--overflow)}.scroll-x{-ms-touch-action:pan-x;touch-action:pan-x;overflow-x:var(--overflow)}.scroll-x.scroll-y{-ms-touch-action:auto;touch-action:auto}.overscroll:after,.overscroll:before{position:absolute;width:1px;height:1px;content:\"\"}.overscroll:before{bottom:-1px}.overscroll:after{top:-1px}:host(.content-sizing){contain:none}:host(.content-sizing) .inner-scroll{position:relative}.transition-effect{left:-100%;opacity:0;pointer-events:none}.transition-cover,.transition-effect{position:absolute;width:100%;height:100%}.transition-cover{right:0;background:#000;opacity:.1}.transition-shadow{display:block;position:absolute;right:0;width:10px;height:100%;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTE3MDgzRkQ5QTkyMTFFOUEwNzQ5MkJFREE1NUY2MjQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTE3MDgzRkU5QTkyMTFFOUEwNzQ5MkJFREE1NUY2MjQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxMTcwODNGQjlBOTIxMUU5QTA3NDkyQkVEQTU1RjYyNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxMTcwODNGQzlBOTIxMUU5QTA3NDkyQkVEQTU1RjYyNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PmePEuQAAABNSURBVHjaYvz//z8DIxAwMDAwATGMhmFmPDQuOSZks0AMmoJBaQHjkPfB0Lfg/2gQjVow+HPy/yHvg9GiYjQfjMbBqAWjFgy/4hogwADYqwdzxy5BuwAAAABJRU5ErkJggg==);background-repeat:repeat-y;background-size:10px 16px}"; },
+        get: function () { return ".sc-ion-popover-ios-h{--background:var(--ion-background-color,#fff);--min-width:0;--min-height:0;--max-width:auto;--height:auto;left:0;right:0;top:0;bottom:0;display:-ms-flexbox;display:flex;position:fixed;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;color:var(--ion-text-color,#000);z-index:1001}.overlay-hidden.sc-ion-popover-ios-h{display:none}.popover-wrapper.sc-ion-popover-ios{opacity:0;z-index:10}.popover-content.sc-ion-popover-ios{display:-ms-flexbox;display:flex;position:absolute;-ms-flex-direction:column;flex-direction:column;width:var(--width);min-width:var(--min-width);max-width:var(--max-width);height:var(--height);min-height:var(--min-height);max-height:var(--max-height);background:var(--background);-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);overflow:auto;z-index:10}.popover-viewport.sc-ion-popover-ios{--ion-safe-area-top:0px;--ion-safe-area-right:0px;--ion-safe-area-bottom:0px;--ion-safe-area-left:0px}.sc-ion-popover-ios-h{--width:200px;--max-height:90%;--box-shadow:none}.popover-content.sc-ion-popover-ios{border-radius:10px}.popover-arrow.sc-ion-popover-ios{display:block;position:absolute;width:20px;height:10px;overflow:hidden}.popover-arrow.sc-ion-popover-ios:after{left:3px;top:3px;border-radius:3px;position:absolute;width:14px;height:14px;-webkit-transform:rotate(45deg);transform:rotate(45deg);background:var(--background);content:\"\";z-index:10}[dir=rtl].sc-ion-popover-ios-h .popover-arrow.sc-ion-popover-ios:after, [dir=rtl] .sc-ion-popover-ios-h .popover-arrow.sc-ion-popover-ios:after, [dir=rtl].sc-ion-popover-ios .popover-arrow.sc-ion-popover-ios:after{left:unset;right:unset;right:3px}.popover-bottom.sc-ion-popover-ios-h .popover-arrow.sc-ion-popover-ios{top:auto;bottom:-10px}.popover-bottom.sc-ion-popover-ios-h .popover-arrow.sc-ion-popover-ios:after{top:-6px}\@supports ((-webkit-backdrop-filter:blur(0)) or (backdrop-filter:blur(0))){.popover-translucent.sc-ion-popover-ios-h .popover-arrow.sc-ion-popover-ios:after, .popover-translucent.sc-ion-popover-ios-h .popover-content.sc-ion-popover-ios{background:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}}"; },
         enumerable: true,
         configurable: true
     });
     return class_1;
 }());
-var getParentElement = function (el) {
-    if (el.parentElement) {
-        // normal element with a parent element
-        return el.parentElement;
-    }
-    if (el.parentNode && el.parentNode.host) {
-        // shadow dom's document fragment
-        return el.parentNode.host;
-    }
-    return null;
+var LIFECYCLE_MAP = {
+    'ionPopoverDidPresent': 'ionViewDidEnter',
+    'ionPopoverWillPresent': 'ionViewWillEnter',
+    'ionPopoverWillDismiss': 'ionViewWillLeave',
+    'ionPopoverDidDismiss': 'ionViewDidLeave',
 };
-var getPageElement = function (el) {
-    var tabs = el.closest('ion-tabs');
-    if (tabs) {
-        return tabs;
-    }
-    var page = el.closest('ion-app,ion-page,.ion-page,page-inner');
-    if (page) {
-        return page;
-    }
-    return getParentElement(el);
-};
-// ******** DOM READ ****************
-var updateScrollDetail = function (detail, el, timestamp, shouldStart) {
-    var prevX = detail.currentX;
-    var prevY = detail.currentY;
-    var prevT = detail.timeStamp;
-    var currentX = el.scrollLeft;
-    var currentY = el.scrollTop;
-    var timeDelta = timestamp - prevT;
-    if (shouldStart) {
-        // remember the start positions
-        detail.startTimeStamp = timestamp;
-        detail.startX = currentX;
-        detail.startY = currentY;
-        detail.velocityX = detail.velocityY = 0;
-    }
-    detail.timeStamp = timestamp;
-    detail.currentX = detail.scrollLeft = currentX;
-    detail.currentY = detail.scrollTop = currentY;
-    detail.deltaX = currentX - detail.startX;
-    detail.deltaY = currentY - detail.startY;
-    if (timeDelta > 0 && timeDelta < 100) {
-        var velocityX = (currentX - prevX) / timeDelta;
-        var velocityY = (currentY - prevY) / timeDelta;
-        detail.velocityX = velocityX * 0.7 + detail.velocityX * 0.3;
-        detail.velocityY = velocityY * 0.7 + detail.velocityY * 0.3;
-    }
-};
-var Footer = /** @class */ (function () {
-    function Footer(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        /**
-         * If `true`, the footer will be translucent.
-         * Only applies when the mode is `"ios"` and the device supports
-         * [`backdrop-filter`](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility).
-         *
-         * Note: In order to scroll content behind the footer, the `fullscreen`
-         * attribute needs to be set on the content.
-         */
-        this.translucent = false;
-    }
-    Footer.prototype.render = function () {
-        var _a;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var translucent = this.translucent;
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { role: "contentinfo", class: (_a = {},
-                _a[mode] = true,
-                // Used internally for styling
-                _a["footer-" + mode] = true,
-                _a["footer-translucent"] = translucent,
-                _a["footer-translucent-" + mode] = translucent,
-                _a) }));
-    };
-    Object.defineProperty(Footer, "style", {
-        get: function () { return "ion-footer{display:block;position:relative;-ms-flex-order:1;order:1;width:100%;z-index:10}ion-footer ion-toolbar:last-child{padding-bottom:var(--ion-safe-area-bottom,0)}.footer-ios ion-toolbar:first-child{--border-width:0.55px 0 0}.footer-ios[no-border] ion-toolbar:first-child{--border-width:0}\@supports ((-webkit-backdrop-filter:blur(0)) or (backdrop-filter:blur(0))){.footer-translucent-ios{-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.footer-translucent-ios ion-toolbar{--opacity:.8;--backdrop-filter:saturate(180%) blur(20px)}}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Footer;
-}());
-var TRANSITION = 'all 0.2s ease-in-out';
-var cloneElement = function (tagName) {
-    var getCachedEl = document.querySelector(tagName + ".ion-cloned-element");
-    if (getCachedEl !== null) {
-        return getCachedEl;
-    }
-    var clonedEl = document.createElement(tagName);
-    clonedEl.classList.add('ion-cloned-element');
-    clonedEl.style.setProperty('display', 'none');
-    document.body.appendChild(clonedEl);
-    return clonedEl;
-};
-var createHeaderIndex = function (headerEl) {
-    if (!headerEl) {
-        return;
-    }
-    var toolbars = headerEl.querySelectorAll('ion-toolbar');
-    return {
-        el: headerEl,
-        toolbars: Array.from(toolbars).map(function (toolbar) {
-            var ionTitleEl = toolbar.querySelector('ion-title');
-            return {
-                el: toolbar,
-                background: toolbar.shadowRoot.querySelector('.toolbar-background'),
-                ionTitleEl: ionTitleEl,
-                innerTitleEl: (ionTitleEl) ? ionTitleEl.shadowRoot.querySelector('.toolbar-title') : null,
-                ionButtonsEl: Array.from(toolbar.querySelectorAll('ion-buttons')) || []
-            };
-        }) || [[]]
-    };
-};
-var handleContentScroll = function (scrollEl, mainHeaderIndex, scrollHeaderIndex, remainingHeight) {
-    if (remainingHeight === void 0) { remainingHeight = 0; }
-    Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(function () {
-        var scrollTop = scrollEl.scrollTop;
-        var lastMainToolbar = mainHeaderIndex.toolbars[mainHeaderIndex.toolbars.length - 1];
-        var scale = Object(__WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__["c"])(1, 1 + (-scrollTop / 500), 1.1);
-        var borderOpacity = Object(__WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__["c"])(0, (scrollTop - remainingHeight) / lastMainToolbar.el.clientHeight, 1);
-        var maxOpacity = 1;
-        var scaledOpacity = borderOpacity * maxOpacity;
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
-            scaleLargeTitles(scrollHeaderIndex.toolbars, scale);
-            setToolbarBackgroundOpacity(mainHeaderIndex.toolbars[0], (scaledOpacity === 1) ? undefined : scaledOpacity);
-        });
-    });
-};
-var setToolbarBackgroundOpacity = function (toolbar, opacity) {
-    if (opacity === undefined) {
-        toolbar.background.style.removeProperty('--opacity');
-    }
-    else {
-        toolbar.background.style.setProperty('--opacity', opacity.toString());
-    }
-};
-/**
- * If toolbars are intersecting, hide the scrollable toolbar content
- * and show the primary toolbar content. If the toolbars are not intersecting,
- * hide the primary toolbar content and show the scrollable toolbar content
- */
-var handleToolbarIntersection = function (ev, mainHeaderIndex, scrollHeaderIndex) {
-    Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
-        var event = ev[0];
-        var intersection = event.intersectionRect;
-        var intersectionArea = intersection.width * intersection.height;
-        var rootArea = event.rootBounds.width * event.rootBounds.height;
-        var isPageHidden = intersectionArea === 0 && rootArea === 0;
-        var leftDiff = Math.abs(intersection.left - event.boundingClientRect.left);
-        var rightDiff = Math.abs(intersection.right - event.boundingClientRect.right);
-        var isPageTransitioning = intersectionArea > 0 && (leftDiff >= 5 || rightDiff >= 5);
-        if (isPageHidden || isPageTransitioning) {
-            return;
-        }
-        if (event.isIntersecting) {
-            setHeaderActive(mainHeaderIndex, false);
-            setHeaderActive(scrollHeaderIndex);
-        }
-        else {
-            /**
-             * There is a bug with IntersectionObserver on Safari
-             * where `event.isIntersecting === false` when cancelling
-             * a swipe to go back gesture. Checking the intersection
-             * x, y, width, and height provides a workaround. This bug
-             * does not happen when using Safari + Web Animations,
-             * only Safari + CSS Animations.
-             */
-            var hasValidIntersection = (intersection.x === 0 && intersection.y === 0) || (intersection.width !== 0 && intersection.height !== 0);
-            if (hasValidIntersection) {
-                setHeaderActive(mainHeaderIndex);
-                setHeaderActive(scrollHeaderIndex, false);
-            }
-        }
-    });
-};
-var setHeaderActive = function (headerIndex, active) {
-    if (active === void 0) { active = true; }
-    Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
-        if (active) {
-            headerIndex.el.classList.remove('header-collapse-condense-inactive');
-        }
-        else {
-            headerIndex.el.classList.add('header-collapse-condense-inactive');
-        }
-        setToolbarBackgroundOpacity(headerIndex.toolbars[0], (active) ? undefined : 0);
-    });
-};
-var scaleLargeTitles = function (toolbars, scale, transition) {
-    if (toolbars === void 0) { toolbars = []; }
-    if (scale === void 0) { scale = 1; }
-    if (transition === void 0) { transition = false; }
-    toolbars.forEach(function (toolbar) {
-        var ionTitle = toolbar.ionTitleEl;
-        var titleDiv = toolbar.innerTitleEl;
-        if (!ionTitle || ionTitle.size !== 'large') {
-            return;
-        }
-        titleDiv.style.transformOrigin = 'left center';
-        titleDiv.style.transition = (transition) ? TRANSITION : '';
-        titleDiv.style.transform = "scale3d(" + scale + ", " + scale + ", 1)";
-    });
-};
-var Header = /** @class */ (function () {
-    function class_2(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.collapsibleHeaderInitialized = false;
-        /**
-         * If `true`, the header will be translucent.
-         * Only applies when the mode is `"ios"` and the device supports
-         * [`backdrop-filter`](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility).
-         *
-         * Note: In order to scroll content behind the header, the `fullscreen`
-         * attribute needs to be set on the content.
-         */
-        this.translucent = false;
-    }
-    class_2.prototype.componentDidLoad = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.checkCollapsibleHeader()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    class_2.prototype.componentDidUpdate = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.checkCollapsibleHeader()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    class_2.prototype.componentDidUnload = function () {
-        this.destroyCollapsibleHeader();
-    };
-    class_2.prototype.checkCollapsibleHeader = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var hasCollapse, canCollapse, tabs, page, pageEl, contentEl;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        hasCollapse = this.collapse === 'condense';
-                        canCollapse = (hasCollapse && Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this) === 'ios') ? hasCollapse : false;
-                        if (!(!canCollapse && this.collapsibleHeaderInitialized)) return [3 /*break*/, 1];
-                        this.destroyCollapsibleHeader();
-                        return [3 /*break*/, 3];
-                    case 1:
-                        if (!(canCollapse && !this.collapsibleHeaderInitialized)) return [3 /*break*/, 3];
-                        tabs = this.el.closest('ion-tabs');
-                        page = this.el.closest('ion-app,ion-page,.ion-page,page-inner');
-                        pageEl = (tabs) ? tabs : (page) ? page : null;
-                        contentEl = (pageEl) ? pageEl.querySelector('ion-content') : null;
-                        return [4 /*yield*/, this.setupCollapsibleHeader(contentEl, pageEl)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    class_2.prototype.destroyCollapsibleHeader = function () {
-        if (this.intersectionObserver) {
-            this.intersectionObserver.disconnect();
-            this.intersectionObserver = undefined;
-        }
-        if (this.scrollEl && this.contentScrollCallback) {
-            this.scrollEl.removeEventListener('scroll', this.contentScrollCallback);
-            this.contentScrollCallback = undefined;
-        }
-    };
-    class_2.prototype.setupCollapsibleHeader = function (contentEl, pageEl) {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var _a;
-            var _this = this;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (!contentEl || !pageEl) {
-                            console.error('ion-header requires a content to collapse, make sure there is an ion-content.');
-                            return [2 /*return*/];
-                        }
-                        _a = this;
-                        return [4 /*yield*/, contentEl.getScrollElement()];
-                    case 1:
-                        _a.scrollEl = _b.sent();
-                        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(function () {
-                            var headers = pageEl.querySelectorAll('ion-header');
-                            var mainHeader = Array.from(headers).find(function (header) { return header.collapse !== 'condense'; });
-                            if (!mainHeader || !_this.scrollEl) {
-                                return;
-                            }
-                            var mainHeaderIndex = createHeaderIndex(mainHeader);
-                            var scrollHeaderIndex = createHeaderIndex(_this.el);
-                            if (!mainHeaderIndex || !scrollHeaderIndex) {
-                                return;
-                            }
-                            setHeaderActive(mainHeaderIndex, false);
-                            // TODO: Find a better way to do this
-                            var remainingHeight = 0;
-                            for (var i = 1; i <= scrollHeaderIndex.toolbars.length - 1; i++) {
-                                remainingHeight += scrollHeaderIndex.toolbars[i].el.clientHeight;
-                            }
-                            /**
-                             * Handle interaction between toolbar collapse and
-                             * showing/hiding content in the primary ion-header
-                             */
-                            var toolbarIntersection = function (ev) { handleToolbarIntersection(ev, mainHeaderIndex, scrollHeaderIndex); };
-                            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(function () {
-                                var mainHeaderHeight = mainHeaderIndex.el.clientHeight;
-                                _this.intersectionObserver = new IntersectionObserver(toolbarIntersection, { threshold: 0.25, rootMargin: "-" + mainHeaderHeight + "px 0px 0px 0px" });
-                                _this.intersectionObserver.observe(scrollHeaderIndex.toolbars[0].el);
-                            });
-                            /**
-                             * Handle scaling of large iOS titles and
-                             * showing/hiding border on last toolbar
-                             * in primary header
-                             */
-                            _this.contentScrollCallback = function () { handleContentScroll(_this.scrollEl, mainHeaderIndex, scrollHeaderIndex, remainingHeight); };
-                            _this.scrollEl.addEventListener('scroll', _this.contentScrollCallback);
-                        });
-                        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
-                            cloneElement('ion-title');
-                            cloneElement('ion-back-button');
-                        });
-                        this.collapsibleHeaderInitialized = true;
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    class_2.prototype.render = function () {
-        var _a;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var collapse = this.collapse || 'none';
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { role: "banner", class: (_a = {},
-                _a[mode] = true,
-                // Used internally for styling
-                _a["header-" + mode] = true,
-                _a["header-translucent"] = this.translucent,
-                _a["header-collapse-" + collapse] = true,
-                _a["header-translucent-" + mode] = this.translucent,
-                _a) }));
-    };
-    Object.defineProperty(class_2.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(class_2, "style", {
-        get: function () { return "ion-header{display:block;position:relative;-ms-flex-order:-1;order:-1;width:100%;z-index:10}ion-header ion-toolbar:first-child{padding-top:var(--ion-safe-area-top,0)}.header-ios ion-toolbar:last-child{--border-width:0 0 0.55px}.header-ios[no-border] ion-toolbar:last-child{--border-width:0}\@supports ((-webkit-backdrop-filter:blur(0)) or (backdrop-filter:blur(0))){.header-translucent-ios{-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.header-translucent-ios ion-toolbar{--opacity:.8;--backdrop-filter:saturate(180%) blur(20px)}}.header-collapse-condense{z-index:9}.header-collapse-condense ion-toolbar{position:-webkit-sticky;position:sticky;top:0}.header-collapse-condense ion-toolbar:first-child{padding-top:7px;z-index:1}.header-collapse-condense ion-toolbar{z-index:0}.header-collapse-condense ion-toolbar ion-searchbar{height:48px;padding-top:0;padding-bottom:13px}ion-toolbar.in-toolbar ion-buttons,ion-toolbar.in-toolbar ion-title{-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out}.header-collapse-condense ion-toolbar ion-buttons,.header-collapse-condense ion-toolbar ion-title{-webkit-transition:none;transition:none}.header-collapse-condense-inactive ion-toolbar.in-toolbar ion-buttons.buttons-collapse,.header-collapse-condense-inactive ion-toolbar.in-toolbar ion-title{opacity:0;pointer-events:none}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return class_2;
-}());
-var RouterOutlet = /** @class */ (function () {
-    function class_3(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.animationEnabled = true;
-        /**
-         * The mode determines which platform styles to use.
-         */
-        this.mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        /**
-         * If `true`, the router-outlet should animate the transition of components.
-         */
-        this.animated = true;
-        this.ionNavWillLoad = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionNavWillLoad", 7);
-        this.ionNavWillChange = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionNavWillChange", 3);
-        this.ionNavDidChange = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionNavDidChange", 3);
-    }
-    class_3.prototype.swipeHandlerChanged = function () {
-        if (this.gesture) {
-            this.gesture.setDisabled(this.swipeHandler === undefined);
-        }
-    };
-    class_3.prototype.connectedCallback = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var _a;
-            var _this = this;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = this;
-                        return [4 /*yield*/, __webpack_require__.e/* import() */(86/* duplicate */).then(__webpack_require__.bind(null, 543))];
-                    case 1:
-                        _a.gesture = (_b.sent()).createSwipeBackGesture(this.el, function () { return !!_this.swipeHandler && _this.swipeHandler.canStart() && _this.animationEnabled; }, function () { return _this.swipeHandler && _this.swipeHandler.onStart(); }, function (step) { return _this.ani && _this.ani.progressStep(step); }, function (shouldComplete, step, dur) {
-                            if (_this.ani) {
-                                _this.animationEnabled = false;
-                                _this.ani.onFinish(function () {
-                                    _this.animationEnabled = true;
-                                    if (_this.swipeHandler) {
-                                        _this.swipeHandler.onEnd(shouldComplete);
-                                    }
-                                }, { oneTimeCallback: true });
-                                // Account for rounding errors in JS
-                                var newStepValue = (shouldComplete) ? -0.001 : 0.001;
-                                /**
-                                 * Animation will be reversed here, so need to
-                                 * reverse the easing curve as well
-                                 *
-                                 * Additionally, we need to account for the time relative
-                                 * to the new easing curve, as `stepValue` is going to be given
-                                 * in terms of a linear curve.
-                                 */
-                                if (!shouldComplete) {
-                                    _this.ani.easing('cubic-bezier(1, 0, 0.68, 0.28)');
-                                    newStepValue += Object(__WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["b" /* g */])(new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](0, 0), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](1, 0), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](0.68, 0.28), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](1, 1), step);
-                                }
-                                else {
-                                    newStepValue += Object(__WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["b" /* g */])(new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](0, 0), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](0.32, 0.72), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](0, 1), new __WEBPACK_IMPORTED_MODULE_8__cubic_bezier_fc4a068b_js__["a" /* P */](1, 1), step);
-                                }
-                                _this.ani.progressEnd(shouldComplete ? 1 : 0, newStepValue, dur);
-                            }
-                        });
-                        this.swipeHandlerChanged();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    class_3.prototype.componentWillLoad = function () {
-        this.ionNavWillLoad.emit();
-    };
-    class_3.prototype.disconnectedCallback = function () {
-        if (this.gesture) {
-            this.gesture.destroy();
-            this.gesture = undefined;
-        }
-    };
-    /** @internal */
-    class_3.prototype.commit = function (enteringEl, leavingEl, opts) {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var unlock, changed, e_1;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.lock()];
-                    case 1:
-                        unlock = _a.sent();
-                        changed = false;
-                        _a.label = 2;
-                    case 2:
-                        _a.trys.push([2, 4, , 5]);
-                        return [4 /*yield*/, this.transition(enteringEl, leavingEl, opts)];
-                    case 3:
-                        changed = _a.sent();
-                        return [3 /*break*/, 5];
-                    case 4:
-                        e_1 = _a.sent();
-                        console.error(e_1);
-                        return [3 /*break*/, 5];
-                    case 5:
-                        unlock();
-                        return [2 /*return*/, changed];
-                }
-            });
-        });
-    };
-    /** @internal */
-    class_3.prototype.setRouteId = function (id, params, direction) {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var changed;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.setRoot(id, params, {
-                            duration: direction === 'root' ? 0 : undefined,
-                            direction: direction === 'back' ? 'back' : 'forward',
-                        })];
-                    case 1:
-                        changed = _a.sent();
-                        return [2 /*return*/, {
-                                changed: changed,
-                                element: this.activeEl
-                            }];
-                }
-            });
-        });
-    };
-    /** @internal */
-    class_3.prototype.getRouteId = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var active;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                active = this.activeEl;
-                return [2 /*return*/, active ? {
-                        id: active.tagName,
-                        element: active,
-                    } : undefined];
-            });
-        });
-    };
-    class_3.prototype.setRoot = function (component, params, opts) {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var leavingEl, enteringEl;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (this.activeComponent === component) {
-                            return [2 /*return*/, false];
-                        }
-                        leavingEl = this.activeEl;
-                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_6__framework_delegate_c2e2e1f4_js__["a"])(this.delegate, this.el, component, ['ion-page', 'ion-page-invisible'], params)];
-                    case 1:
-                        enteringEl = _a.sent();
-                        this.activeComponent = component;
-                        this.activeEl = enteringEl;
-                        // commit animation
-                        return [4 /*yield*/, this.commit(enteringEl, leavingEl, opts)];
-                    case 2:
-                        // commit animation
-                        _a.sent();
-                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_6__framework_delegate_c2e2e1f4_js__["b" /* d */])(this.delegate, leavingEl)];
-                    case 3:
-                        _a.sent();
-                        return [2 /*return*/, true];
-                }
-            });
-        });
-    };
-    class_3.prototype.transition = function (enteringEl, leavingEl, opts) {
-        if (opts === void 0) { opts = {}; }
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var _a, el, mode, animated, animationBuilder;
-            var _this = this;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (leavingEl === enteringEl) {
-                            return [2 /*return*/, false];
-                        }
-                        // emit nav will change event
-                        this.ionNavWillChange.emit();
-                        _a = this, el = _a.el, mode = _a.mode;
-                        animated = this.animated && __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].getBoolean('animated', true);
-                        animationBuilder = this.animation || opts.animationBuilder || __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('navAnimation');
-                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_7__index_35276576_js__["d" /* t */])(Object.assign({ mode: mode,
-                                animated: animated,
-                                animationBuilder: animationBuilder,
-                                enteringEl: enteringEl,
-                                leavingEl: leavingEl, baseEl: el, progressCallback: (opts.progressAnimation
-                                    ? function (ani) { return _this.ani = ani; }
-                                    : undefined) }, opts))];
-                    case 1:
-                        _b.sent();
-                        // emit nav changed event
-                        this.ionNavDidChange.emit();
-                        return [2 /*return*/, true];
-                }
-            });
-        });
-    };
-    class_3.prototype.lock = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var p, resolve;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        p = this.waitPromise;
-                        this.waitPromise = new Promise(function (r) { return resolve = r; });
-                        if (!(p !== undefined)) return [3 /*break*/, 2];
-                        return [4 /*yield*/, p];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2 /*return*/, resolve];
-                }
-            });
-        });
-    };
-    class_3.prototype.render = function () {
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", null));
-    };
-    Object.defineProperty(class_3.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(class_3, "watchers", {
-        get: function () {
-            return {
-                "swipeHandler": ["swipeHandlerChanged"]
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(class_3, "style", {
-        get: function () { return ":host{left:0;right:0;top:0;bottom:0;position:absolute;contain:layout size style;overflow:hidden;z-index:0}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return class_3;
-}());
-var ToolbarTitle = /** @class */ (function () {
-    function ToolbarTitle(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.ionStyle = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionStyle", 7);
-    }
-    ToolbarTitle.prototype.sizeChanged = function () {
-        this.emitStyle();
-    };
-    ToolbarTitle.prototype.connectedCallback = function () {
-        this.emitStyle();
-    };
-    ToolbarTitle.prototype.emitStyle = function () {
-        var _a;
-        var size = this.getSize();
-        this.ionStyle.emit((_a = {},
-            _a["title-" + size] = true,
-            _a));
-    };
-    ToolbarTitle.prototype.getSize = function () {
-        return (this.size !== undefined) ? this.size : 'default';
-    };
-    ToolbarTitle.prototype.getMode = function () {
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var toolbar = this.el.closest('ion-toolbar');
-        return (toolbar && toolbar.mode) || mode;
-    };
-    ToolbarTitle.prototype.render = function () {
-        var _a;
-        var mode = this.getMode();
-        var size = this.getSize();
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: Object.assign((_a = {}, _a[mode] = true, _a["title-" + mode] = true, _a["title-" + size] = true, _a), Object(__WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__["a" /* c */])(this.color)) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toolbar-title" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", null))));
-    };
-    Object.defineProperty(ToolbarTitle.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ToolbarTitle, "watchers", {
-        get: function () {
-            return {
-                "size": ["sizeChanged"]
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ToolbarTitle, "style", {
-        get: function () { return ":host{--color:initial;display:-ms-flexbox;display:flex;-ms-flex:1;flex:1;-ms-flex-align:center;align-items:center;-webkit-transform:translateZ(0);transform:translateZ(0);color:var(--color)}:host(.title-ios.title-default),:host(.title-ios.title-large){left:0;top:0;padding-left:90px;padding-right:90px;padding-top:0;padding-bottom:0;position:absolute;width:100%;height:100%;-webkit-transform:translateZ(0);transform:translateZ(0);font-size:17px;font-weight:600;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;pointer-events:none}:host-context([dir=rtl]).title-ios.title-default,:host-context([dir=rtl]).title-ios.title-large,:host-context([dir=rtl]):host(.title-ios.title-default),:host-context([dir=rtl]):host(.title-ios.title-large){left:unset;right:unset;right:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.title-ios.title-default),:host(.title-ios.title-large){padding-left:unset;padding-right:unset;-webkit-padding-start:90px;padding-inline-start:90px;-webkit-padding-end:90px;padding-inline-end:90px}}:host(.title-md){padding-left:20px;padding-right:20px;padding-top:0;padding-bottom:0;font-size:20px;font-weight:500;letter-spacing:.0125em}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.title-md){padding-left:unset;padding-right:unset;-webkit-padding-start:20px;padding-inline-start:20px;-webkit-padding-end:20px;padding-inline-end:20px}}:host(.ion-color){color:var(--ion-color-base)}.toolbar-title{display:block;width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;pointer-events:auto}:host(.title-small) .toolbar-title{white-space:normal}:host(.title-ios.title-small){padding-left:9px;padding-right:9px;padding-top:6px;padding-bottom:16px;width:100%;height:100%;font-size:13px;text-align:center}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.title-ios.title-small){padding-left:unset;padding-right:unset;-webkit-padding-start:9px;padding-inline-start:9px;-webkit-padding-end:9px;padding-inline-end:9px}}:host(.title-md.title-small){width:100%;height:100%;font-size:15px;font-weight:400}:host(.title-ios.title-large){padding-left:16px;padding-right:16px;padding-top:0;padding-bottom:0;bottom:0;-ms-flex-align:end;align-items:flex-end;min-width:100%;padding-bottom:6px;font-size:34px;font-weight:700;text-align:start}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.title-ios.title-large){padding-left:unset;padding-right:unset;-webkit-padding-start:16px;padding-inline-start:16px;-webkit-padding-end:16px;padding-inline-end:16px}}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return ToolbarTitle;
-}());
-var Toolbar = /** @class */ (function () {
-    function Toolbar(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.childrenStyles = new Map();
-    }
-    Toolbar.prototype.componentWillLoad = function () {
-        var buttons = Array.from(this.el.querySelectorAll('ion-buttons'));
-        var firstButtons = buttons.find(function (button) {
-            return button.slot === 'start';
-        });
-        if (firstButtons) {
-            firstButtons.classList.add('buttons-first-slot');
-        }
-        var buttonsReversed = buttons.reverse();
-        var lastButtons = buttonsReversed.find(function (button) { return button.slot === 'end'; }) ||
-            buttonsReversed.find(function (button) { return button.slot === 'primary'; }) ||
-            buttonsReversed.find(function (button) { return button.slot === 'secondary'; });
-        if (lastButtons) {
-            lastButtons.classList.add('buttons-last-slot');
-        }
-    };
-    Toolbar.prototype.childrenStyle = function (ev) {
-        ev.stopPropagation();
-        var tagName = ev.target.tagName;
-        var updatedStyles = ev.detail;
-        var newStyles = {};
-        var childStyles = this.childrenStyles.get(tagName) || {};
-        var hasStyleChange = false;
-        Object.keys(updatedStyles).forEach(function (key) {
-            var childKey = "toolbar-" + key;
-            var newValue = updatedStyles[key];
-            if (newValue !== childStyles[childKey]) {
-                hasStyleChange = true;
-            }
-            if (newValue) {
-                newStyles[childKey] = true;
-            }
-        });
-        if (hasStyleChange) {
-            this.childrenStyles.set(tagName, newStyles);
-            this.el.forceUpdate();
-        }
-    };
-    Toolbar.prototype.render = function () {
-        var _a;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var childStyles = {};
-        this.childrenStyles.forEach(function (value) {
-            Object.assign(childStyles, value);
-        });
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: Object.assign(Object.assign((_a = { 'in-toolbar': Object(__WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__["c" /* h */])('ion-toolbar', this.el) }, _a[mode] = true, _a), childStyles), Object(__WEBPACK_IMPORTED_MODULE_5__theme_18cbe2cc_js__["a" /* c */])(this.color)) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toolbar-background" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toolbar-container" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", { name: "start" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", { name: "secondary" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toolbar-content" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", null)), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", { name: "primary" }), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", { name: "end" }))));
-    };
-    Object.defineProperty(Toolbar.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Toolbar, "style", {
-        get: function () { return ":host{--border-width:0;--border-style:solid;--opacity:1;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;padding-left:var(--ion-safe-area-left);padding-right:var(--ion-safe-area-right);display:block;position:relative;width:100%;color:var(--color);font-family:var(--ion-font-family,inherit);contain:content;z-index:10;-webkit-box-sizing:border-box;box-sizing:border-box}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--ion-safe-area-left);padding-inline-start:var(--ion-safe-area-left);-webkit-padding-end:var(--ion-safe-area-right);padding-inline-end:var(--ion-safe-area-right)}}:host(.ion-color){color:var(--ion-color-contrast)}:host(.ion-color) .toolbar-background{background:var(--ion-color-base)}.toolbar-container{padding-left:var(--padding-start);padding-right:var(--padding-end);padding-top:var(--padding-top);padding-bottom:var(--padding-bottom);display:-ms-flexbox;display:flex;position:relative;-ms-flex-direction:row;flex-direction:row;-ms-flex-align:center;align-items:center;-ms-flex-pack:justify;justify-content:space-between;width:100%;min-height:var(--min-height);contain:content;overflow:hidden;z-index:10;-webkit-box-sizing:border-box;box-sizing:border-box}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.toolbar-container{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--padding-start);padding-inline-start:var(--padding-start);-webkit-padding-end:var(--padding-end);padding-inline-end:var(--padding-end)}}.toolbar-background{top:0;-webkit-transform:translateZ(0);transform:translateZ(0);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);background:var(--background);contain:strict;opacity:var(--opacity);z-index:-1;pointer-events:none}.toolbar-background,::slotted(ion-progress-bar){left:0;right:0;bottom:0;position:absolute}:host{--background:var(--ion-toolbar-background,var(--ion-color-step-50,#fff));--color:var(--ion-toolbar-color,var(--ion-text-color,#000));--border-color:var(--ion-toolbar-border-color,var(--ion-border-color,var(--ion-color-step-150,rgba(0,0,0,0.2))));--padding-top:3px;--padding-bottom:3px;--padding-start:4px;--padding-end:4px;--min-height:44px}.toolbar-content{-ms-flex:1;flex:1;-ms-flex-order:4;order:4;min-width:0}:host(.toolbar-segment){--min-height:auto}:host(.toolbar-searchbar) .toolbar-container{padding-top:0;padding-bottom:0}:host(.toolbar-searchbar) ::slotted(*){-ms-flex-item-align:start;align-self:start}:host(.toolbar-searchbar) ::slotted(ion-chip){margin-top:3px}:host(.toolbar-searchbar) ::slotted(ion-back-button){height:38px}::slotted(ion-buttons){min-height:38px}::slotted([slot=start]){-ms-flex-order:2;order:2}::slotted([slot=secondary]){-ms-flex-order:3;order:3}::slotted([slot=primary]){-ms-flex-order:5;order:5;text-align:end}::slotted([slot=end]){-ms-flex-order:6;order:6;text-align:end}:host(.toolbar-title-large) .toolbar-container{-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-align:start;align-items:flex-start}:host(.toolbar-title-large) .toolbar-content ion-title{-ms-flex:1;flex:1;-ms-flex-order:8;order:8;min-width:100%}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Toolbar;
-}());
 
 
 
@@ -1221,17 +513,18 @@ var detachComponent = function (delegate, element) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return deepReady; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return lifecycle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return setPageHidden; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return transition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getIonPageElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return lifecycle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return setPageHidden; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return transition; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(434);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__ = __webpack_require__(437);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants_3c3e1099_js__ = __webpack_require__(270);
 
 
 
-var iosTransitionAnimation = function () { return __webpack_require__.e/* import() */(94).then(__webpack_require__.bind(null, 540)); };
-var mdTransitionAnimation = function () { return __webpack_require__.e/* import() */(93).then(__webpack_require__.bind(null, 541)); };
+var iosTransitionAnimation = function () { return __webpack_require__.e/* import() */(93).then(__webpack_require__.bind(null, 540)); };
+var mdTransitionAnimation = function () { return __webpack_require__.e/* import() */(92).then(__webpack_require__.bind(null, 541)); };
 var transition = function (opts) {
     return new Promise(function (resolve, reject) {
         Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
@@ -1322,7 +615,7 @@ var animation = function (animationBuilder, opts) { return Object(__WEBPACK_IMPO
                 _a.label = 2;
             case 2:
                 _a.trys.push([2, 5, , 6]);
-                return [4 /*yield*/, __webpack_require__.e/* import() */(2/* duplicate */).then(__webpack_require__.bind(null, 450))];
+                return [4 /*yield*/, __webpack_require__.e/* import() */(0/* duplicate */).then(__webpack_require__.bind(null, 450))];
             case 3:
                 mod = _a.sent();
                 return [4 /*yield*/, mod.create(animationBuilder, opts.baseEl, opts)];
@@ -1501,105 +794,16 @@ var setZIndex = function (enteringEl, leavingEl, direction) {
         leavingEl.style.zIndex = '100';
     }
 };
-
-
-
-/***/ }),
-
-/***/ 539:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Point; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getTimeGivenProgression; });
-/**
- * Based on:
- * https://stackoverflow.com/questions/7348009/y-coordinate-for-a-given-x-cubic-bezier
- * https://math.stackexchange.com/questions/26846/is-there-an-explicit-form-for-cubic-b%C3%A9zier-curves
- * TODO: Reduce rounding error
- */
-var Point = /** @class */ (function () {
-    function Point(x, y) {
-        this.x = x;
-        this.y = y;
+var getIonPageElement = function (element) {
+    if (element.classList.contains('ion-page')) {
+        return element;
     }
-    return Point;
-}());
-/**
- * Given a cubic-bezier curve, get the x value (time) given
- * the y value (progression).
- * Ex: cubic-bezier(0.32, 0.72, 0, 1);
- * P0: (0, 0)
- * P1: (0.32, 0.72)
- * P2: (0, 1)
- * P3: (1, 1)
- */
-var getTimeGivenProgression = function (p0, p1, p2, p3, progression) {
-    var tValues = solveCubicBezier(p0.y, p1.y, p2.y, p3.y, progression);
-    return solveCubicParametricEquation(p0.x, p1.x, p2.x, p3.x, tValues[0]); // TODO: Add better strategy for dealing with multiple solutions
-};
-/**
- * Solve a cubic equation in one dimension (time)
- */
-var solveCubicParametricEquation = function (p0, p1, p2, p3, t) {
-    var partA = (3 * p1) * Math.pow(t - 1, 2);
-    var partB = (-3 * p2 * t) + (3 * p2) + (p3 * t);
-    var partC = p0 * Math.pow(t - 1, 3);
-    return t * (partA + (t * partB)) - partC;
-};
-/**
- * Find the `t` value for a cubic bezier using Cardano's formula
- */
-var solveCubicBezier = function (p0, p1, p2, p3, refPoint) {
-    p0 -= refPoint;
-    p1 -= refPoint;
-    p2 -= refPoint;
-    p3 -= refPoint;
-    var roots = solveCubicEquation(p3 - 3 * p2 + 3 * p1 - p0, 3 * p2 - 6 * p1 + 3 * p0, 3 * p1 - 3 * p0, p0);
-    return roots.filter(function (root) { return root >= 0 && root <= 1; });
-};
-var solveQuadraticEquation = function (a, b, c) {
-    var discriminant = b * b - 4 * a * c;
-    if (discriminant < 0) {
-        return [];
+    var ionPage = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
+    if (ionPage) {
+        return ionPage;
     }
-    else {
-        return [
-            (-b + Math.sqrt(discriminant)) / (2 * a),
-            (-b - Math.sqrt(discriminant)) / (2 * a)
-        ];
-    }
-};
-var solveCubicEquation = function (a, b, c, d) {
-    if (a === 0) {
-        return solveQuadraticEquation(b, c, d);
-    }
-    b /= a;
-    c /= a;
-    d /= a;
-    var p = (3 * c - b * b) / 3;
-    var q = (2 * b * b * b - 9 * b * c + 27 * d) / 27;
-    if (p === 0) {
-        return [Math.pow(-q, 1 / 3)];
-    }
-    else if (q === 0) {
-        return [Math.sqrt(-p), -Math.sqrt(-p)];
-    }
-    var discriminant = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
-    if (discriminant === 0) {
-        return [Math.pow(q / 2, 1 / 2) - b / 3];
-    }
-    else if (discriminant > 0) {
-        return [Math.pow(-(q / 2) + Math.sqrt(discriminant), 1 / 3) - Math.pow((q / 2) + Math.sqrt(discriminant), 1 / 3) - b / 3];
-    }
-    var r = Math.sqrt(Math.pow(-(p / 3), 3));
-    var phi = Math.acos(-(q / (2 * Math.sqrt(Math.pow(-(p / 3), 3)))));
-    var s = 2 * Math.pow(r, 1 / 3);
-    return [
-        s * Math.cos(phi / 3) - b / 3,
-        s * Math.cos((phi + 2 * Math.PI) / 3) - b / 3,
-        s * Math.cos((phi + 4 * Math.PI) / 3) - b / 3
-    ];
+    // idk, return the original element so at least something animates and we don't have a null pointer
+    return element;
 };
 
 

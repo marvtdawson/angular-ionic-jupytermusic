@@ -1,340 +1,226 @@
 webpackJsonp([65],{
 
-/***/ 503:
+/***/ 480:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_refresher", function() { return Refresher; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_refresher_content", function() { return RefresherContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_infinite_scroll", function() { return InfiniteScroll; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_infinite_scroll_content", function() { return InfiniteScrollContent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(434);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__ = __webpack_require__(535);
 
 
 
 
-var Refresher = /** @class */ (function () {
+var InfiniteScroll = /** @class */ (function () {
     function class_1(hostRef) {
+        var _this = this;
         Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.appliedStyles = false;
-        this.didStart = false;
-        this.progress = 0;
+        this.thrPx = 0;
+        this.thrPc = 0;
+        this.didFire = false;
+        this.isBusy = false;
+        this.isLoading = false;
         /**
-         * The current state which the refresher is in. The refresher's states include:
+         * The threshold distance from the bottom
+         * of the content to call the `infinite` output event when scrolled.
+         * The threshold value can be either a percent, or
+         * in pixels. For example, use the value of `10%` for the `infinite`
+         * output event to get called when the user has scrolled 10%
+         * from the bottom of the page. Use the value `100px` when the
+         * scroll is within 100 pixels from the bottom of the page.
+         */
+        this.threshold = '15%';
+        /**
+         * If `true`, the infinite scroll will be hidden and scroll event listeners
+         * will be removed.
          *
-         * - `inactive` - The refresher is not being pulled down or refreshing and is currently hidden.
-         * - `pulling` - The user is actively pulling down the refresher, but has not reached the point yet that if the user lets go, it'll refresh.
-         * - `cancelling` - The user pulled down the refresher and let go, but did not pull down far enough to kick off the `refreshing` state. After letting go, the refresher is in the `cancelling` state while it is closing, and will go back to the `inactive` state once closed.
-         * - `ready` - The user has pulled down the refresher far enough that if they let go, it'll begin the `refreshing` state.
-         * - `refreshing` - The refresher is actively waiting on the async operation to end. Once the refresh handler calls `complete()` it will begin the `completing` state.
-         * - `completing` - The `refreshing` state has finished and the refresher is in the way of closing itself. Once closed, the refresher will go back to the `inactive` state.
-         */
-        this.state = 1 /* Inactive */;
-        /**
-         * The minimum distance the user must pull down until the
-         * refresher will go into the `refreshing` state.
-         */
-        this.pullMin = 60;
-        /**
-         * The maximum distance of the pull until the refresher
-         * will automatically go into the `refreshing` state.
-         * Defaults to the result of `pullMin + 60`.
-         */
-        this.pullMax = this.pullMin + 60;
-        /**
-         * Time it takes to close the refresher.
-         */
-        this.closeDuration = '280ms';
-        /**
-         * Time it takes the refresher to to snap back to the `refreshing` state.
-         */
-        this.snapbackDuration = '280ms';
-        /**
-         * How much to multiply the pull speed by. To slow the pull animation down,
-         * pass a number less than `1`. To speed up the pull, pass a number greater
-         * than `1`. The default value is `1` which is equal to the speed of the cursor.
-         * If a negative value is passed in, the factor will be `1` instead.
-         *
-         * For example: If the value passed is `1.2` and the content is dragged by
-         * `10` pixels, instead of `10` pixels the content will be pulled by `12` pixels
-         * (an increase of 20 percent). If the value passed is `0.8`, the dragged amount
-         * will be `8` pixels, less than the amount the cursor has moved.
-         */
-        this.pullFactor = 1;
-        /**
-         * If `true`, the refresher will be hidden.
+         * Set this to true to disable the infinite scroll from actively
+         * trying to receive new data while scrolling. This is useful
+         * when it is known that there is no more data that can be added, and
+         * the infinite scroll is no longer needed.
          */
         this.disabled = false;
-        this.ionRefresh = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionRefresh", 7);
-        this.ionPull = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionPull", 7);
-        this.ionStart = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionStart", 7);
+        /**
+         * The position of the infinite scroll element.
+         * The value can be either `top` or `bottom`.
+         */
+        this.position = 'bottom';
+        this.onScroll = function () {
+            var scrollEl = _this.scrollEl;
+            if (!scrollEl || !_this.canStart()) {
+                return 1;
+            }
+            var infiniteHeight = _this.el.offsetHeight;
+            if (infiniteHeight === 0) {
+                // if there is no height of this element then do nothing
+                return 2;
+            }
+            var scrollTop = scrollEl.scrollTop;
+            var scrollHeight = scrollEl.scrollHeight;
+            var height = scrollEl.offsetHeight;
+            var threshold = _this.thrPc !== 0 ? (height * _this.thrPc) : _this.thrPx;
+            var distanceFromInfinite = (_this.position === 'bottom')
+                ? scrollHeight - infiniteHeight - scrollTop - threshold - height
+                : scrollTop - infiniteHeight - threshold;
+            if (distanceFromInfinite < 0) {
+                if (!_this.didFire) {
+                    _this.isLoading = true;
+                    _this.didFire = true;
+                    _this.ionInfinite.emit();
+                    return 3;
+                }
+            }
+            else {
+                _this.didFire = false;
+            }
+            return 4;
+        };
+        this.ionInfinite = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionInfinite", 7);
     }
-    class_1.prototype.disabledChanged = function () {
-        if (this.gesture) {
-            this.gesture.setDisabled(this.disabled);
+    class_1.prototype.thresholdChanged = function () {
+        var val = this.threshold;
+        if (val.lastIndexOf('%') > -1) {
+            this.thrPx = 0;
+            this.thrPc = (parseFloat(val) / 100);
         }
+        else {
+            this.thrPx = parseFloat(val);
+            this.thrPc = 0;
+        }
+    };
+    class_1.prototype.disabledChanged = function () {
+        var disabled = this.disabled;
+        if (disabled) {
+            this.isLoading = false;
+            this.isBusy = false;
+        }
+        this.enableScrollEvents(!disabled);
     };
     class_1.prototype.connectedCallback = function () {
         return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var contentEl, _a, _b;
+            var contentEl, _a;
             var _this = this;
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_c) {
-                switch (_c.label) {
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        if (this.el.getAttribute('slot') !== 'fixed') {
-                            console.error('Make sure you use: <ion-refresher slot="fixed">');
-                            return [2 /*return*/];
-                        }
                         contentEl = this.el.closest('ion-content');
                         if (!contentEl) {
-                            console.error('<ion-refresher> must be used inside an <ion-content>');
+                            console.error('<ion-infinite-scroll> must be used inside an <ion-content>');
                             return [2 /*return*/];
                         }
                         _a = this;
                         return [4 /*yield*/, contentEl.getScrollElement()];
                     case 1:
-                        _a.scrollEl = _c.sent();
-                        _b = this;
-                        return [4 /*yield*/, new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, 435))];
-                    case 2:
-                        _b.gesture = (_c.sent()).createGesture({
-                            el: contentEl,
-                            gestureName: 'refresher',
-                            gesturePriority: 10,
-                            direction: 'y',
-                            threshold: 20,
-                            passive: false,
-                            canStart: function () { return _this.canStart(); },
-                            onStart: function () { return _this.onStart(); },
-                            onMove: function (ev) { return _this.onMove(ev); },
-                            onEnd: function () { return _this.onEnd(); },
-                        });
+                        _a.scrollEl = _b.sent();
+                        this.thresholdChanged();
                         this.disabledChanged();
+                        if (this.position === 'top') {
+                            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
+                                if (_this.scrollEl) {
+                                    _this.scrollEl.scrollTop = _this.scrollEl.scrollHeight - _this.scrollEl.clientHeight;
+                                }
+                            });
+                        }
                         return [2 /*return*/];
                 }
             });
         });
     };
     class_1.prototype.disconnectedCallback = function () {
+        this.enableScrollEvents(false);
         this.scrollEl = undefined;
-        if (this.gesture) {
-            this.gesture.destroy();
-            this.gesture = undefined;
-        }
     };
     /**
-     * Call `complete()` when your async operation has completed.
-     * For example, the `refreshing` state is while the app is performing
-     * an asynchronous operation, such as receiving more data from an
-     * AJAX request. Once the data has been received, you then call this
-     * method to signify that the refreshing has completed and to close
-     * the refresher. This method also changes the refresher's state from
-     * `refreshing` to `completing`.
+     * Call `complete()` within the `ionInfinite` output event handler when
+     * your async operation has completed. For example, the `loading`
+     * state is while the app is performing an asynchronous operation,
+     * such as receiving more data from an AJAX request to add more items
+     * to a data list. Once the data has been received and UI updated, you
+     * then call this method to signify that the loading has completed.
+     * This method will change the infinite scroll's state from `loading`
+     * to `enabled`.
      */
     class_1.prototype.complete = function () {
         return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            var scrollEl, prev_1;
+            var _this = this;
             return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                this.close(32 /* Completing */, '120ms');
+                scrollEl = this.scrollEl;
+                if (!this.isLoading || !scrollEl) {
+                    return [2 /*return*/];
+                }
+                this.isLoading = false;
+                if (this.position === 'top') {
+                    /**
+                     * New content is being added at the top, but the scrollTop position stays the same,
+                     * which causes a scroll jump visually. This algorithm makes sure to prevent this.
+                     * (Frame 1)
+                     *    - complete() is called, but the UI hasn't had time to update yet.
+                     *    - Save the current content dimensions.
+                     *    - Wait for the next frame using _dom.read, so the UI will be updated.
+                     * (Frame 2)
+                     *    - Read the new content dimensions.
+                     *    - Calculate the height difference and the new scroll position.
+                     *    - Delay the scroll position change until other possible dom reads are done using _dom.write to be performant.
+                     * (Still frame 2, if I'm correct)
+                     *    - Change the scroll position (= visually maintain the scroll position).
+                     *    - Change the state to re-enable the InfiniteScroll.
+                     *    - This should be after changing the scroll position, or it could
+                     *    cause the InfiniteScroll to be triggered again immediately.
+                     * (Frame 3)
+                     *    Done.
+                     */
+                    this.isBusy = true;
+                    prev_1 = scrollEl.scrollHeight - scrollEl.scrollTop;
+                    // ******** DOM READ ****************
+                    requestAnimationFrame(function () {
+                        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["g" /* f */])(function () {
+                            // UI has updated, save the new content dimensions
+                            var scrollHeight = scrollEl.scrollHeight;
+                            // New content was added on top, so the scroll position should be changed immediately to prevent it from jumping around
+                            var newScrollTop = scrollHeight - prev_1;
+                            // ******** DOM WRITE ****************
+                            requestAnimationFrame(function () {
+                                Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
+                                    scrollEl.scrollTop = newScrollTop;
+                                    _this.isBusy = false;
+                                });
+                            });
+                        });
+                    });
+                }
                 return [2 /*return*/];
             });
         });
-    };
-    /**
-     * Changes the refresher's state from `refreshing` to `cancelling`.
-     */
-    class_1.prototype.cancel = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                this.close(16 /* Cancelling */, '');
-                return [2 /*return*/];
-            });
-        });
-    };
-    /**
-     * A number representing how far down the user has pulled.
-     * The number `0` represents the user hasn't pulled down at all. The
-     * number `1`, and anything greater than `1`, represents that the user
-     * has pulled far enough down that when they let go then the refresh will
-     * happen. If they let go and the number is less than `1`, then the
-     * refresh will not happen, and the content will return to it's original
-     * position.
-     */
-    class_1.prototype.getProgress = function () {
-        return Promise.resolve(this.progress);
     };
     class_1.prototype.canStart = function () {
-        if (!this.scrollEl) {
-            return false;
-        }
-        if (this.state !== 1 /* Inactive */) {
-            return false;
-        }
-        // if the scrollTop is greater than zero then it's
-        // not possible to pull the content down yet
-        if (this.scrollEl.scrollTop > 0) {
-            return false;
-        }
-        return true;
+        return (!this.disabled &&
+            !this.isBusy &&
+            !!this.scrollEl &&
+            !this.isLoading);
     };
-    class_1.prototype.onStart = function () {
-        this.progress = 0;
-        this.state = 1 /* Inactive */;
-    };
-    class_1.prototype.onMove = function (detail) {
-        if (!this.scrollEl) {
-            return;
-        }
-        // this method can get called like a bazillion times per second,
-        // so it's built to be as efficient as possible, and does its
-        // best to do any DOM read/writes only when absolutely necessary
-        // if multi-touch then get out immediately
-        var ev = detail.event;
-        if (ev.touches && ev.touches.length > 1) {
-            return;
-        }
-        // do nothing if it's actively refreshing
-        // or it's in the way of closing
-        // or this was never a startY
-        if ((this.state & 56 /* _BUSY_ */) !== 0) {
-            return;
-        }
-        var pullFactor = (Number.isNaN(this.pullFactor) || this.pullFactor < 0) ? 1 : this.pullFactor;
-        var deltaY = detail.deltaY * pullFactor;
-        // don't bother if they're scrolling up
-        // and have not already started dragging
-        if (deltaY <= 0) {
-            // the current Y is higher than the starting Y
-            // so they scrolled up enough to be ignored
-            this.progress = 0;
-            this.state = 1 /* Inactive */;
-            if (this.appliedStyles) {
-                // reset the styles only if they were applied
-                this.setCss(0, '', false, '');
-                return;
+    class_1.prototype.enableScrollEvents = function (shouldListen) {
+        if (this.scrollEl) {
+            if (shouldListen) {
+                this.scrollEl.addEventListener('scroll', this.onScroll);
             }
-            return;
-        }
-        if (this.state === 1 /* Inactive */) {
-            // this refresh is not already actively pulling down
-            // get the content's scrollTop
-            var scrollHostScrollTop = this.scrollEl.scrollTop;
-            // if the scrollTop is greater than zero then it's
-            // not possible to pull the content down yet
-            if (scrollHostScrollTop > 0) {
-                this.progress = 0;
-                return;
+            else {
+                this.scrollEl.removeEventListener('scroll', this.onScroll);
             }
-            // content scrolled all the way to the top, and dragging down
-            this.state = 2 /* Pulling */;
         }
-        // prevent native scroll events
-        if (ev.cancelable) {
-            ev.preventDefault();
-        }
-        // the refresher is actively pulling at this point
-        // move the scroll element within the content element
-        this.setCss(deltaY, '0ms', true, '');
-        if (deltaY === 0) {
-            // don't continue if there's no delta yet
-            this.progress = 0;
-            return;
-        }
-        var pullMin = this.pullMin;
-        // set pull progress
-        this.progress = deltaY / pullMin;
-        // emit "start" if it hasn't started yet
-        if (!this.didStart) {
-            this.didStart = true;
-            this.ionStart.emit();
-        }
-        // emit "pulling" on every move
-        this.ionPull.emit();
-        // do nothing if the delta is less than the pull threshold
-        if (deltaY < pullMin) {
-            // ensure it stays in the pulling state, cuz its not ready yet
-            this.state = 2 /* Pulling */;
-            return;
-        }
-        if (deltaY > this.pullMax) {
-            // they pulled farther than the max, so kick off the refresh
-            this.beginRefresh();
-            return;
-        }
-        // pulled farther than the pull min!!
-        // it is now in the `ready` state!!
-        // if they let go then it'll refresh, kerpow!!
-        this.state = 4 /* Ready */;
-        return;
-    };
-    class_1.prototype.onEnd = function () {
-        // only run in a zone when absolutely necessary
-        if (this.state === 4 /* Ready */) {
-            // they pulled down far enough, so it's ready to refresh
-            this.beginRefresh();
-        }
-        else if (this.state === 2 /* Pulling */) {
-            // they were pulling down, but didn't pull down far enough
-            // set the content back to it's original location
-            // and close the refresher
-            // set that the refresh is actively cancelling
-            this.cancel();
-        }
-    };
-    class_1.prototype.beginRefresh = function () {
-        // assumes we're already back in a zone
-        // they pulled down far enough, so it's ready to refresh
-        this.state = 8 /* Refreshing */;
-        // place the content in a hangout position while it thinks
-        this.setCss(this.pullMin, this.snapbackDuration, true, '');
-        // emit "refresh" because it was pulled down far enough
-        // and they let go to begin refreshing
-        this.ionRefresh.emit({
-            complete: this.complete.bind(this)
-        });
-    };
-    class_1.prototype.close = function (state, delay) {
-        var _this = this;
-        // create fallback timer incase something goes wrong with transitionEnd event
-        setTimeout(function () {
-            _this.state = 1 /* Inactive */;
-            _this.progress = 0;
-            _this.didStart = false;
-            _this.setCss(0, '0ms', false, '');
-        }, 600);
-        // reset set the styles on the scroll element
-        // set that the refresh is actively cancelling/completing
-        this.state = state;
-        this.setCss(0, this.closeDuration, true, delay);
-        // TODO: stop gesture
-    };
-    class_1.prototype.setCss = function (y, duration, overflowVisible, delay) {
-        var _this = this;
-        this.appliedStyles = (y > 0);
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
-            if (_this.scrollEl) {
-                var style = _this.scrollEl.style;
-                style.transform = ((y > 0) ? "translateY(" + y + "px) translateZ(0px)" : 'translateZ(0px)');
-                style.transitionDuration = duration;
-                style.transitionDelay = delay;
-                style.overflow = (overflowVisible ? 'hidden' : '');
-            }
-        });
     };
     class_1.prototype.render = function () {
         var _a;
         var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { slot: "fixed", class: (_a = {},
+        var disabled = this.disabled;
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: (_a = {},
                 _a[mode] = true,
-                // Used internally for styling
-                _a["refresher-" + mode] = true,
-                _a['refresher-active'] = this.state !== 1 /* Inactive */,
-                _a['refresher-pulling'] = this.state === 2 /* Pulling */,
-                _a['refresher-ready'] = this.state === 4 /* Ready */,
-                _a['refresher-refreshing'] = this.state === 8 /* Refreshing */,
-                _a['refresher-cancelling'] = this.state === 16 /* Cancelling */,
-                _a['refresher-completing'] = this.state === 32 /* Completing */,
+                _a['infinite-scroll-loading'] = this.isLoading,
+                _a['infinite-scroll-enabled'] = !disabled,
                 _a) }));
     };
     Object.defineProperty(class_1.prototype, "el", {
@@ -345,6 +231,7 @@ var Refresher = /** @class */ (function () {
     Object.defineProperty(class_1, "watchers", {
         get: function () {
             return {
+                "threshold": ["thresholdChanged"],
                 "disabled": ["disabledChanged"]
             };
         },
@@ -352,33 +239,37 @@ var Refresher = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(class_1, "style", {
-        get: function () { return "ion-refresher{left:0;top:0;display:none;position:absolute;width:100%;height:60px;z-index:-1}:host-context([dir=rtl]) ion-refresher,[dir=rtl] ion-refresher{left:unset;right:unset;right:0}ion-refresher.refresher-active{display:block}ion-refresher-content{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;-ms-flex-pack:center;justify-content:center;height:100%}.refresher-pulling,.refresher-refreshing{display:none;width:100%}.refresher-pulling-icon,.refresher-refreshing-icon{-webkit-transform-origin:center;transform-origin:center;-webkit-transition:.2s;transition:.2s;font-size:30px;text-align:center}:host-context([dir=rtl]) .refresher-pulling-icon,:host-context([dir=rtl]) .refresher-refreshing-icon,[dir=rtl] .refresher-pulling-icon,[dir=rtl] .refresher-refreshing-icon{-webkit-transform-origin:calc(100% - center);transform-origin:calc(100% - center)}.refresher-pulling-text,.refresher-refreshing-text{font-size:16px;text-align:center}.refresher-pulling ion-refresher-content .refresher-pulling,.refresher-ready ion-refresher-content .refresher-pulling{display:block}.refresher-ready ion-refresher-content .refresher-pulling-icon{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.refresher-cancelling ion-refresher-content .refresher-pulling,.refresher-refreshing ion-refresher-content .refresher-refreshing{display:block}.refresher-cancelling ion-refresher-content .refresher-pulling-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-completing ion-refresher-content .refresher-refreshing{display:block}.refresher-completing ion-refresher-content .refresher-refreshing-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-ios .refresher-pulling-icon,.refresher-ios .refresher-pulling-text,.refresher-ios .refresher-refreshing-icon,.refresher-ios .refresher-refreshing-text{color:var(--ion-text-color,#000)}.refresher-ios .refresher-refreshing .spinner-crescent circle,.refresher-ios .refresher-refreshing .spinner-lines-ios line,.refresher-ios .refresher-refreshing .spinner-lines-small-ios line{stroke:var(--ion-text-color,#000)}.refresher-ios .refresher-refreshing .spinner-bubbles circle,.refresher-ios .refresher-refreshing .spinner-circles circle,.refresher-ios .refresher-refreshing .spinner-dots circle{fill:var(--ion-text-color,#000)}"; },
+        get: function () { return "ion-infinite-scroll{display:none;width:100%}.infinite-scroll-enabled{display:block}"; },
         enumerable: true,
         configurable: true
     });
     return class_1;
 }());
-var RefresherContent = /** @class */ (function () {
-    function RefresherContent(hostRef) {
+var InfiniteScrollContent = /** @class */ (function () {
+    function InfiniteScrollContent(hostRef) {
         Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
     }
-    RefresherContent.prototype.componentWillLoad = function () {
-        if (this.pullingIcon === undefined) {
-            this.pullingIcon = __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('refreshingIcon', 'arrow-down');
-        }
-        if (this.refreshingSpinner === undefined) {
+    InfiniteScrollContent.prototype.componentDidLoad = function () {
+        if (this.loadingSpinner === undefined) {
             var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-            this.refreshingSpinner = __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('refreshingSpinner', __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('spinner', mode === 'ios' ? 'lines' : 'crescent'));
+            this.loadingSpinner = __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('infiniteLoadingSpinner', __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('spinner', mode === 'ios' ? 'lines' : 'crescent'));
         }
     };
-    RefresherContent.prototype.render = function () {
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-pulling" }, this.pullingIcon &&
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-pulling-icon" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-icon", { icon: this.pullingIcon, lazy: false })), this.pullingText &&
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-pulling-text", innerHTML: Object(__WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__["a" /* s */])(this.pullingText) })), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-refreshing" }, this.refreshingSpinner &&
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-refreshing-icon" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-spinner", { name: this.refreshingSpinner })), this.refreshingText &&
-            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-refreshing-text", innerHTML: Object(__WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__["a" /* s */])(this.refreshingText) }))));
+    InfiniteScrollContent.prototype.render = function () {
+        var _a;
+        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: (_a = {},
+                _a[mode] = true,
+                // Used internally for styling
+                _a["infinite-scroll-content-" + mode] = true,
+                _a) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "infinite-loading" }, this.loadingSpinner && (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "infinite-loading-spinner" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-spinner", { name: this.loadingSpinner }))), this.loadingText && (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "infinite-loading-text", innerHTML: Object(__WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__["a" /* s */])(this.loadingText) })))));
     };
-    return RefresherContent;
+    Object.defineProperty(InfiniteScrollContent, "style", {
+        get: function () { return "ion-infinite-scroll-content{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;-ms-flex-pack:center;justify-content:center;min-height:84px;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.infinite-loading{margin-left:0;margin-right:0;margin-top:0;margin-bottom:32px;display:none;width:100%}.infinite-loading-text{margin-left:32px;margin-right:32px;margin-top:4px;margin-bottom:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.infinite-loading-text{margin-left:unset;margin-right:unset;-webkit-margin-start:32px;margin-inline-start:32px;-webkit-margin-end:32px;margin-inline-end:32px}}.infinite-scroll-loading ion-infinite-scroll-content>.infinite-loading{display:block}.infinite-scroll-content-ios .infinite-loading-text{color:var(--ion-color-step-600,#666)}.infinite-scroll-content-ios .infinite-loading-spinner .spinner-crescent circle,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-lines-ios line,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-lines-small-ios line{stroke:var(--ion-color-step-600,#666)}.infinite-scroll-content-ios .infinite-loading-spinner .spinner-bubbles circle,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-circles circle,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-dots circle{fill:var(--ion-color-step-600,#666)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return InfiniteScrollContent;
 }());
 
 

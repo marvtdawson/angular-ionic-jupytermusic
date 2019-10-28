@@ -1,67 +1,52 @@
 webpackJsonp([91],{
 
-/***/ 547:
+/***/ 548:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startHardwareBackButton", function() { return startHardwareBackButton; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-
-var startHardwareBackButton = function () {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startFocusVisible", function() { return startFocusVisible; });
+var ION_FOCUSED = 'ion-focused';
+var ION_FOCUSABLE = 'ion-focusable';
+var FOCUS_KEYS = ['Tab', 'ArrowDown', 'Space', 'Escape', ' ', 'Shift', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp'];
+var startFocusVisible = function () {
+    var currentFocus = [];
+    var keyboardMode = true;
     var doc = document;
-    var busy = false;
-    doc.addEventListener('backbutton', function () {
-        if (busy) {
-            return;
+    var setFocus = function (elements) {
+        currentFocus.forEach(function (el) { return el.classList.remove(ION_FOCUSED); });
+        elements.forEach(function (el) { return el.classList.add(ION_FOCUSED); });
+        currentFocus = elements;
+    };
+    var pointerDown = function () {
+        keyboardMode = false;
+        setFocus([]);
+    };
+    doc.addEventListener('keydown', function (ev) {
+        keyboardMode = FOCUS_KEYS.includes(ev.key);
+        if (!keyboardMode) {
+            setFocus([]);
         }
-        var handlers = [];
-        var ev = new CustomEvent('ionBackButton', {
-            bubbles: false,
-            detail: {
-                register: function (priority, handler) {
-                    handlers.push({ priority: priority, handler: handler });
+    });
+    doc.addEventListener('focusin', function (ev) {
+        if (keyboardMode && ev.composedPath) {
+            var toFocus = ev.composedPath().filter(function (el) {
+                if (el.classList) {
+                    return el.classList.contains(ION_FOCUSABLE);
                 }
-            }
-        });
-        doc.dispatchEvent(ev);
-        if (handlers.length > 0) {
-            var selectedPriority_1 = Number.MIN_SAFE_INTEGER;
-            var selectedHandler_1;
-            handlers.forEach(function (_a) {
-                var priority = _a.priority, handler = _a.handler;
-                if (priority >= selectedPriority_1) {
-                    selectedPriority_1 = priority;
-                    selectedHandler_1 = handler;
-                }
+                return false;
             });
-            busy = true;
-            executeAction(selectedHandler_1).then(function () { return busy = false; });
+            setFocus(toFocus);
         }
     });
+    doc.addEventListener('focusout', function () {
+        if (doc.activeElement === doc.body) {
+            setFocus([]);
+        }
+    });
+    doc.addEventListener('touchstart', pointerDown);
+    doc.addEventListener('mousedown', pointerDown);
 };
-var executeAction = function (handler) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
-    var result, e_1;
-    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 3, , 4]);
-                if (!handler) return [3 /*break*/, 2];
-                result = handler();
-                if (!(result != null)) return [3 /*break*/, 2];
-                return [4 /*yield*/, result];
-            case 1:
-                _a.sent();
-                _a.label = 2;
-            case 2: return [3 /*break*/, 4];
-            case 3:
-                e_1 = _a.sent();
-                console.error(e_1);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
 
 
 

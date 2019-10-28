@@ -1,264 +1,333 @@
 webpackJsonp([13],{
 
-/***/ 499:
+/***/ 526:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_radio", function() { return Radio; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_radio_group", function() { return RadioGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_toast", function() { return Toast; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(434);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(430);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__ = __webpack_require__(432);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__theme_18cbe2cc_js__ = __webpack_require__(534);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__watch_options_2af96011_js__ = __webpack_require__(542);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__theme_18cbe2cc_js__ = __webpack_require__(534);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__index_3476b023_js__ = __webpack_require__(535);
 
 
 
 
 
 
-var Radio = /** @class */ (function () {
-    function Radio(hostRef) {
-        var _this = this;
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.inputId = "ion-rb-" + radioButtonIds++;
-        /**
-         * The name of the control, which is submitted with the form data.
-         */
-        this.name = this.inputId;
-        /**
-         * If `true`, the user cannot interact with the radio.
-         */
-        this.disabled = false;
-        /**
-         * If `true`, the radio is selected.
-         */
-        this.checked = false;
-        this.onFocus = function () {
-            _this.ionFocus.emit();
-        };
-        this.onBlur = function () {
-            _this.ionBlur.emit();
-        };
-        this.onClick = function () {
-            if (_this.checked) {
-                _this.ionDeselect.emit();
-            }
-            else {
-                _this.checked = true;
-            }
-        };
-        this.ionStyle = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionStyle", 7);
-        this.ionSelect = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionSelect", 7);
-        this.ionDeselect = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionDeselect", 7);
-        this.ionFocus = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionFocus", 7);
-        this.ionBlur = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionBlur", 7);
+
+
+/**
+ * iOS Toast Enter Animation
+ */
+var iosEnterAnimation = function (baseEl, position) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var hostEl = baseEl.host || baseEl;
+    var wrapperEl = baseEl.querySelector('.toast-wrapper');
+    var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
+    var top = "calc(10px + var(--ion-safe-area-top, 0px))";
+    wrapperAnimation.addElement(wrapperEl);
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('transform', 'translateY(-100%)', "translateY(" + top + ")");
+            break;
+        case 'middle':
+            var topPosition = Math.floor(hostEl.clientHeight / 2 - wrapperEl.clientHeight / 2);
+            wrapperEl.style.top = topPosition + "px";
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+        default:
+            wrapperAnimation.fromTo('transform', 'translateY(100%)', "translateY(" + bottom + ")");
+            break;
     }
-    Radio.prototype.colorChanged = function () {
-        this.emitStyle();
-    };
-    Radio.prototype.checkedChanged = function (isChecked) {
-        if (isChecked) {
-            this.ionSelect.emit({
-                checked: true,
-                value: this.value
-            });
-        }
-        this.emitStyle();
-    };
-    Radio.prototype.disabledChanged = function () {
-        this.emitStyle();
-    };
-    Radio.prototype.componentWillLoad = function () {
-        if (this.value === undefined) {
-            this.value = this.inputId;
-        }
-        this.emitStyle();
-    };
-    Radio.prototype.emitStyle = function () {
-        this.ionStyle.emit({
-            'radio-checked': this.checked,
-            'interactive-disabled': this.disabled,
-        });
-    };
-    Radio.prototype.render = function () {
-        var _a;
-        var _b = this, inputId = _b.inputId, disabled = _b.disabled, checked = _b.checked, color = _b.color, el = _b.el;
-        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var labelId = inputId + '-lbl';
-        var label = Object(__WEBPACK_IMPORTED_MODULE_3__helpers_46f4a262_js__["f"])(el);
-        if (label) {
-            label.id = labelId;
-        }
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { onClick: this.onClick, role: "radio", "aria-disabled": disabled ? 'true' : null, "aria-checked": "" + checked, "aria-labelledby": labelId, class: Object.assign(Object.assign({}, Object(__WEBPACK_IMPORTED_MODULE_4__theme_18cbe2cc_js__["a" /* c */])(color)), (_a = {}, _a[mode] = true, _a['in-item'] = Object(__WEBPACK_IMPORTED_MODULE_4__theme_18cbe2cc_js__["c" /* h */])('ion-item', el), _a['interactive'] = true, _a['radio-checked'] = checked, _a['radio-disabled'] = disabled, _a)) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "radio-icon" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "radio-inner" })), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("button", { type: "button", onFocus: this.onFocus, onBlur: this.onBlur, disabled: disabled })));
-    };
-    Object.defineProperty(Radio.prototype, "el", {
-        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Radio, "watchers", {
-        get: function () {
-            return {
-                "color": ["colorChanged"],
-                "checked": ["checkedChanged"],
-                "disabled": ["disabledChanged"]
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Radio, "style", {
-        get: function () { return ":host{display:inline-block;position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:2}:host(.radio-disabled){pointer-events:none}.radio-icon{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;contain:layout size style}.radio-icon,button{width:100%;height:100%}button{left:0;top:0;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;position:absolute;border:0;background:transparent;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none}:host-context([dir=rtl]) button,[dir=rtl] button{left:unset;right:unset;right:0}button::-moz-focus-inner{border:0}.radio-icon,.radio-inner{-webkit-box-sizing:border-box;box-sizing:border-box}:host{--color-checked:var(--ion-color-primary,#3880ff);width:15px;height:24px}:host(.ion-color.radio-checked) .radio-inner{border-color:var(--ion-color-base)}.item-radio.item-ios ion-label{margin-left:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.item-radio.item-ios ion-label{margin-left:unset;-webkit-margin-start:0;margin-inline-start:0}}.radio-inner{width:33%;height:50%}:host(.radio-checked) .radio-inner{-webkit-transform:rotate(45deg);transform:rotate(45deg);border-width:2px;border-top-width:0;border-left-width:0;border-style:solid;border-color:var(--color-checked)}:host(.radio-disabled){opacity:.3}:host(.ion-focused) .radio-icon:after{border-radius:50%;left:-9px;top:-8px;display:block;position:absolute;width:36px;height:36px;background:var(--ion-color-primary-tint,#4c8dff);content:\"\";opacity:.2}:host-context([dir=rtl]).ion-focused .radio-icon:after,:host-context([dir=rtl]):host(.ion-focused) .radio-icon:after{left:unset;right:unset;right:-9px}:host(.in-item){margin-left:8px;margin-right:11px;margin-top:8px;margin-bottom:8px;display:block;position:static}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.in-item){margin-left:unset;margin-right:unset;-webkit-margin-start:8px;margin-inline-start:8px;-webkit-margin-end:11px;margin-inline-end:11px}}:host(.in-item[slot=start]){margin-left:3px;margin-right:21px;margin-top:8px;margin-bottom:8px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.in-item[slot=start]){margin-left:unset;margin-right:unset;-webkit-margin-start:3px;margin-inline-start:3px;-webkit-margin-end:21px;margin-inline-end:21px}}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Radio;
-}());
-var radioButtonIds = 0;
-var RadioGroup = /** @class */ (function () {
+    return baseAnimation
+        .addElement(hostEl)
+        .easing('cubic-bezier(.155,1.105,.295,1.12)')
+        .duration(400)
+        .addAnimation(wrapperAnimation);
+};
+/**
+ * iOS Toast Leave Animation
+ */
+var iosLeaveAnimation = function (baseEl, position) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var hostEl = baseEl.host || baseEl;
+    var wrapperEl = baseEl.querySelector('.toast-wrapper');
+    var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
+    var top = "calc(10px + var(--ion-safe-area-top, 0px))";
+    wrapperAnimation.addElement(wrapperEl);
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('transform', "translateY(" + top + ")", 'translateY(-100%)');
+            break;
+        case 'middle':
+            wrapperAnimation.fromTo('opacity', 0.99, 0);
+            break;
+        default:
+            wrapperAnimation.fromTo('transform', "translateY(" + bottom + ")", 'translateY(100%)');
+            break;
+    }
+    return baseAnimation
+        .addElement(hostEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(300)
+        .addAnimation(wrapperAnimation);
+};
+/**
+ * MD Toast Enter Animation
+ */
+var mdEnterAnimation = function (baseEl, position) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var hostEl = baseEl.host || baseEl;
+    var wrapperEl = baseEl.querySelector('.toast-wrapper');
+    var bottom = "calc(8px + var(--ion-safe-area-bottom, 0px))";
+    var top = "calc(8px + var(--ion-safe-area-top, 0px))";
+    wrapperAnimation.addElement(wrapperEl);
+    switch (position) {
+        case 'top':
+            wrapperEl.style.top = top;
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+        case 'middle':
+            var topPosition = Math.floor(hostEl.clientHeight / 2 - wrapperEl.clientHeight / 2);
+            wrapperEl.style.top = topPosition + "px";
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+        default:
+            wrapperEl.style.bottom = bottom;
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+    }
+    return baseAnimation
+        .addElement(hostEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(400)
+        .addAnimation(wrapperAnimation);
+};
+/**
+ * md Toast Leave Animation
+ */
+var mdLeaveAnimation = function (baseEl) {
+    var baseAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var wrapperAnimation = Object(__WEBPACK_IMPORTED_MODULE_4__animation_af478fe9_js__["a" /* c */])();
+    var hostEl = baseEl.host || baseEl;
+    var wrapperEl = baseEl.querySelector('.toast-wrapper');
+    wrapperAnimation
+        .addElement(wrapperEl)
+        .fromTo('opacity', 0.99, 0);
+    return baseAnimation
+        .addElement(hostEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(300)
+        .addAnimation(wrapperAnimation);
+};
+var Toast = /** @class */ (function () {
     function class_1(hostRef) {
-        var _this = this;
         Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-        this.inputId = "ion-rg-" + radioGroupIds++;
-        this.labelId = this.inputId + "-lbl";
+        this.presented = false;
+        this.mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
         /**
-         * If `true`, the radios can be deselected.
+         * How many milliseconds to wait before hiding the toast. By default, it will show
+         * until `dismiss()` is called.
          */
-        this.allowEmptySelection = false;
+        this.duration = 0;
         /**
-         * The name of the control, which is submitted with the form data.
+         * If `true`, the keyboard will be automatically dismissed when the overlay is presented.
          */
-        this.name = this.inputId;
-        this.onSelect = function (ev) {
-            var selectedRadio = ev.target;
-            if (selectedRadio) {
-                _this.value = selectedRadio.value;
-            }
-        };
-        this.onDeselect = function (ev) {
-            var selectedRadio = ev.target;
-            if (selectedRadio) {
-                selectedRadio.checked = false;
-                _this.value = undefined;
-            }
-        };
-        this.ionChange = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionChange", 7);
+        this.keyboardClose = false;
+        /**
+         * The position of the toast on the screen.
+         */
+        this.position = 'bottom';
+        /**
+         * @deprecated Use `buttons` instead. If `true`, the close button will be displayed.
+         */
+        this.showCloseButton = false;
+        /**
+         * If `true`, the toast will be translucent.
+         * Only applies when the mode is `"ios"` and the device supports
+         * [`backdrop-filter`](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter#Browser_compatibility).
+         */
+        this.translucent = false;
+        /**
+         * If `true`, the toast will animate.
+         */
+        this.animated = true;
+        Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["e" /* d */])(this.el);
+        this.didPresent = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionToastDidPresent", 7);
+        this.willPresent = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionToastWillPresent", 7);
+        this.willDismiss = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionToastWillDismiss", 7);
+        this.didDismiss = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionToastDidDismiss", 7);
     }
-    class_1.prototype.valueChanged = function (value) {
-        this.updateRadios();
-        this.ionChange.emit({ value: value });
-    };
-    class_1.prototype.connectedCallback = function () {
+    /**
+     * Present the toast overlay after it has been created.
+     */
+    class_1.prototype.present = function () {
         return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var el, header, label, radio;
             var _this = this;
             return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        el = this.el;
-                        header = el.querySelector('ion-list-header') || el.querySelector('ion-item-divider');
-                        if (header) {
-                            label = header.querySelector('ion-label');
-                            if (label) {
-                                this.labelId = label.id = this.name + '-lbl';
-                            }
-                        }
-                        if (!(this.value === undefined)) return [3 /*break*/, 2];
-                        radio = Object(__WEBPACK_IMPORTED_MODULE_5__watch_options_2af96011_js__["a" /* f */])(el, 'ion-radio');
-                        if (!(radio !== undefined)) return [3 /*break*/, 2];
-                        return [4 /*yield*/, radio.componentOnReady()];
+                    case 0: return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["f" /* e */])(this, 'toastEnter', iosEnterAnimation, mdEnterAnimation, this.position)];
                     case 1:
                         _a.sent();
-                        if (this.value === undefined) {
-                            this.value = radio.value;
+                        if (this.duration > 0) {
+                            this.durationTimeout = setTimeout(function () { return _this.dismiss(undefined, 'timeout'); }, this.duration);
                         }
-                        _a.label = 2;
-                    case 2:
-                        this.mutationO = Object(__WEBPACK_IMPORTED_MODULE_5__watch_options_2af96011_js__["b" /* w */])(el, 'ion-radio', function (newOption) {
-                            if (newOption !== undefined) {
-                                newOption.componentOnReady().then(function () {
-                                    _this.value = newOption.value;
-                                });
-                            }
-                            else {
-                                _this.updateRadios();
-                            }
-                        });
-                        this.updateRadios();
                         return [2 /*return*/];
                 }
             });
         });
     };
-    class_1.prototype.disconnectedCallback = function () {
-        if (this.mutationO) {
-            this.mutationO.disconnect();
-            this.mutationO = undefined;
+    /**
+     * Dismiss the toast overlay after it has been presented.
+     *
+     * @param data Any data to emit in the dismiss events.
+     * @param role The role of the element that is dismissing the toast.
+     * This can be useful in a button handler for determining which button was
+     * clicked to dismiss the toast.
+     * Some examples include: ``"cancel"`, `"destructive"`, "selected"`, and `"backdrop"`.
+     */
+    class_1.prototype.dismiss = function (data, role) {
+        if (this.durationTimeout) {
+            clearTimeout(this.durationTimeout);
         }
+        return Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["g" /* f */])(this, data, role, 'toastLeave', iosLeaveAnimation, mdLeaveAnimation, this.position);
     };
-    class_1.prototype.updateRadios = function () {
+    /**
+     * Returns a promise that resolves when the toast did dismiss.
+     */
+    class_1.prototype.onDidDismiss = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["h" /* g */])(this.el, 'ionToastDidDismiss');
+    };
+    /**
+     * Returns a promise that resolves when the toast will dismiss.
+     */
+    class_1.prototype.onWillDismiss = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["h" /* g */])(this.el, 'ionToastWillDismiss');
+    };
+    class_1.prototype.getButtons = function () {
+        var _this = this;
+        var buttons = this.buttons
+            ? this.buttons.map(function (b) {
+                return (typeof b === 'string')
+                    ? { text: b }
+                    : b;
+            })
+            : [];
+        // tslint:disable-next-line: deprecation
+        if (this.showCloseButton) {
+            buttons.push({
+                // tslint:disable-next-line: deprecation
+                text: this.closeButtonText || 'Close',
+                handler: function () { return _this.dismiss(undefined, 'cancel'); }
+            });
+        }
+        return buttons;
+    };
+    class_1.prototype.buttonClick = function (button) {
         return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            var radios, value, hasChecked, _i, radios_1, radio;
+            var role, shouldDismiss;
             return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getRadios()];
+                    case 0:
+                        role = button.role;
+                        if (Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["j" /* i */])(role)) {
+                            return [2 /*return*/, this.dismiss(undefined, role)];
+                        }
+                        return [4 /*yield*/, this.callButtonHandler(button)];
                     case 1:
-                        radios = _a.sent();
-                        value = this.value;
-                        hasChecked = false;
-                        // Walk the DOM in reverse order, since the last selected one wins!
-                        for (_i = 0, radios_1 = radios; _i < radios_1.length; _i++) {
-                            radio = radios_1[_i];
-                            if (!hasChecked && radio.value === value) {
-                                // correct value for this radio
-                                // but this radio isn't checked yet
-                                // and we haven't found a checked yet
-                                hasChecked = true;
-                                radio.checked = true;
-                            }
-                            else {
-                                // this radio doesn't have the correct value
-                                // or the radio group has been already checked
-                                radio.checked = false;
-                            }
+                        shouldDismiss = _a.sent();
+                        if (shouldDismiss) {
+                            return [2 /*return*/, this.dismiss(undefined, button.role)];
                         }
-                        // Reset value if
-                        if (!hasChecked) {
-                            this.value = undefined;
-                        }
-                        return [2 /*return*/];
+                        return [2 /*return*/, Promise.resolve()];
                 }
             });
         });
     };
-    class_1.prototype.getRadios = function () {
-        return Promise.all(Array
-            .from(this.el.querySelectorAll('ion-radio'))
-            .map(function (r) { return r.componentOnReady(); }));
+    class_1.prototype.callButtonHandler = function (button) {
+        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            var rtn, e_1;
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(button && button.handler)) return [3 /*break*/, 4];
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, Object(__WEBPACK_IMPORTED_MODULE_5__overlays_10640d86_js__["p" /* s */])(button.handler)];
+                    case 2:
+                        rtn = _a.sent();
+                        if (rtn === false) {
+                            // if the return value of the handler is false then do not dismiss
+                            return [2 /*return*/, false];
+                        }
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_1 = _a.sent();
+                        console.error(e_1);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/, true];
+                }
+            });
+        });
+    };
+    class_1.prototype.renderButtons = function (buttons, side) {
+        var _a;
+        var _this = this;
+        if (buttons.length === 0) {
+            return;
+        }
+        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
+        var buttonGroupsClasses = (_a = {
+                'toast-button-group': true
+            },
+            _a["toast-button-group-" + side] = true,
+            _a);
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: buttonGroupsClasses }, buttons.map(function (b) { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("button", { type: "button", class: buttonClass(b), tabIndex: 0, onClick: function () { return _this.buttonClick(b); } }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toast-button-inner" }, b.icon &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-icon", { icon: b.icon, slot: b.text === undefined ? 'icon-only' : undefined, class: "toast-icon" }), b.text), mode === 'md' && Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-ripple-effect", { type: b.icon !== undefined && b.text === undefined ? 'unbounded' : 'bounded' })); })));
     };
     class_1.prototype.render = function () {
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { role: "radiogroup", "aria-labelledby": this.labelId, onIonSelect: this.onSelect, onIonDeselect: this.allowEmptySelection ? this.onDeselect : undefined, class: Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this) }));
+        var _a, _b;
+        var allButtons = this.getButtons();
+        var startButtons = allButtons.filter(function (b) { return b.side === 'start'; });
+        var endButtons = allButtons.filter(function (b) { return b.side !== 'start'; });
+        var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
+        var wrapperClass = (_a = {
+                'toast-wrapper': true
+            },
+            _a["toast-" + this.position] = true,
+            _a);
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { style: {
+                zIndex: "" + (60000 + this.overlayIndex),
+            }, class: Object.assign(Object.assign(Object.assign((_b = {}, _b[mode] = true, _b), Object(__WEBPACK_IMPORTED_MODULE_6__theme_18cbe2cc_js__["a" /* c */])(this.color)), Object(__WEBPACK_IMPORTED_MODULE_6__theme_18cbe2cc_js__["b" /* g */])(this.cssClass)), { 'toast-translucent': this.translucent }) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: wrapperClass }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toast-container" }, this.renderButtons(startButtons, 'start'), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toast-content" }, this.header !== undefined &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toast-header" }, this.header), this.message !== undefined &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "toast-message", innerHTML: Object(__WEBPACK_IMPORTED_MODULE_7__index_3476b023_js__["a" /* s */])(this.message) })), this.renderButtons(endButtons, 'end')))));
     };
     Object.defineProperty(class_1.prototype, "el", {
         get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(class_1, "watchers", {
-        get: function () {
-            return {
-                "value": ["valueChanged"]
-            };
-        },
+    Object.defineProperty(class_1, "style", {
+        get: function () { return ":host{--border-width:0;--border-style:none;--border-color:initial;--box-shadow:none;--min-width:auto;--width:auto;--min-height:auto;--height:auto;--max-height:auto;left:0;top:0;display:block;position:absolute;width:100%;height:100%;color:var(--color);font-family:var(--ion-font-family,inherit);contain:strict;z-index:1001;pointer-events:none}:host-context([dir=rtl]){left:unset;right:unset;right:0}:host(.overlay-hidden){display:none}:host(.ion-color){--button-color:inherit;color:var(--ion-color-contrast)}:host(.ion-color) .toast-wrapper{background:var(--ion-color-base)}.toast-wrapper{border-radius:var(--border-radius);left:var(--start);right:var(--end);width:var(--width);min-width:var(--min-width);max-width:var(--max-width);height:var(--height);min-height:var(--min-height);max-height:var(--max-height);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);background:var(--background);-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow)}:host-context([dir=rtl]) .toast-wrapper,[dir=rtl] .toast-wrapper{left:unset;right:unset;left:var(--end);right:var(--start)}.toast-container{-ms-flex-align:center;align-items:center;pointer-events:auto;contain:content}.toast-container,.toast-content{display:-ms-flexbox;display:flex}.toast-content{-ms-flex:1;flex:1;-ms-flex-direction:column;flex-direction:column;-ms-flex-pack:center;justify-content:center}.toast-message{-ms-flex:1;flex:1;white-space:pre-wrap}.toast-button-group{display:-ms-flexbox;display:flex}.toast-button{outline:none;color:var(--button-color);z-index:0}.toast-icon{font-size:1.4em}.toast-button-inner{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center}\@media (any-hover:hover){.toast-button:hover{cursor:pointer}}:host{--background:var(--ion-color-step-50,#f2f2f2);--border-radius:14px;--button-color:var(--ion-color-primary,#3880ff);--color:var(--ion-color-step-850,#262626);--max-width:700px;--start:10px;--end:10px;font-size:14px}.toast-wrapper{margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;display:block;position:absolute;z-index:10}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.toast-wrapper{margin-left:unset;margin-right:unset;-webkit-margin-start:auto;margin-inline-start:auto;-webkit-margin-end:auto;margin-inline-end:auto}}\@supports ((-webkit-backdrop-filter:blur(0)) or (backdrop-filter:blur(0))){:host(.toast-translucent) .toast-wrapper{background:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}}.toast-wrapper.toast-top{-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0);top:0}.toast-wrapper.toast-middle{opacity:.01}.toast-wrapper.toast-bottom{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);bottom:0}.toast-content{padding-left:15px;padding-right:15px;padding-top:15px;padding-bottom:15px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.toast-content{padding-left:unset;padding-right:unset;-webkit-padding-start:15px;padding-inline-start:15px;-webkit-padding-end:15px;padding-inline-end:15px}}.toast-header{margin-bottom:2px;font-weight:500}.toast-button{padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;height:44px;-webkit-transition:background-color,opacity .1s linear;transition:background-color,opacity .1s linear;border:0;background-color:transparent;font-family:var(--ion-font-family);font-size:17px;font-weight:500;overflow:hidden}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.toast-button{padding-left:unset;padding-right:unset;-webkit-padding-start:15px;padding-inline-start:15px;-webkit-padding-end:15px;padding-inline-end:15px}}.toast-button.activated{opacity:.4}\@media (any-hover:hover){.toast-button:hover{opacity:.6}}"; },
         enumerable: true,
         configurable: true
     });
     return class_1;
 }());
-var radioGroupIds = 0;
+var buttonClass = function (button) {
+    var _a;
+    return Object.assign((_a = { 'toast-button': true, 'toast-button-icon-only': button.icon !== undefined && button.text === undefined }, _a["toast-button-" + button.role] = button.role !== undefined, _a['ion-focusable'] = true, _a['ion-activatable'] = true, _a), Object(__WEBPACK_IMPORTED_MODULE_6__theme_18cbe2cc_js__["b" /* g */])(button.cssClass));
+};
 
 
 
@@ -324,41 +393,121 @@ var openURL = function (url, ev, direction) { return Object(__WEBPACK_IMPORTED_M
 
 /***/ }),
 
-/***/ 542:
+/***/ 535:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return findCheckedOption; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return watchForOptions; });
-var watchForOptions = function (containerEl, tagName, onChange) {
-    var mutation = new MutationObserver(function (mutationList) {
-        onChange(getSelectedOption(mutationList, tagName));
-    });
-    mutation.observe(containerEl, {
-        childList: true,
-        subtree: true
-    });
-    return mutation;
-};
-var getSelectedOption = function (mutationList, tagName) {
-    var newOption;
-    mutationList.forEach(function (mut) {
-        // tslint:disable-next-line: prefer-for-of
-        for (var i = 0; i < mut.addedNodes.length; i++) {
-            newOption = findCheckedOption(mut.addedNodes[i], tagName) || newOption;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return sanitizeDOMString; });
+/**
+ * Does a simple sanitization of all elements
+ * in an untrusted string
+ */
+var sanitizeDOMString = function (untrustedString) {
+    try {
+        if (typeof untrustedString !== 'string' || untrustedString === '') {
+            return untrustedString;
         }
-    });
-    return newOption;
-};
-var findCheckedOption = function (el, tagName) {
-    if (el.nodeType !== 1) {
-        return undefined;
+        /**
+         * Create a document fragment
+         * separate from the main DOM,
+         * create a div to do our work in
+         */
+        var documentFragment_1 = document.createDocumentFragment();
+        var workingDiv = document.createElement('div');
+        documentFragment_1.appendChild(workingDiv);
+        workingDiv.innerHTML = untrustedString;
+        /**
+         * Remove any elements
+         * that are blocked
+         */
+        blockedTags.forEach(function (blockedTag) {
+            var getElementsToRemove = documentFragment_1.querySelectorAll(blockedTag);
+            for (var elementIndex = getElementsToRemove.length - 1; elementIndex >= 0; elementIndex--) {
+                var element = getElementsToRemove[elementIndex];
+                if (element.parentNode) {
+                    element.parentNode.removeChild(element);
+                }
+                else {
+                    documentFragment_1.removeChild(element);
+                }
+                /**
+                 * We still need to sanitize
+                 * the children of this element
+                 * as they are left behind
+                 */
+                var childElements = getElementChildren(element);
+                /* tslint:disable-next-line */
+                for (var childIndex = 0; childIndex < childElements.length; childIndex++) {
+                    sanitizeElement(childElements[childIndex]);
+                }
+            }
+        });
+        /**
+         * Go through remaining elements and remove
+         * non-allowed attribs
+         */
+        // IE does not support .children on document fragments, only .childNodes
+        var dfChildren = getElementChildren(documentFragment_1);
+        /* tslint:disable-next-line */
+        for (var childIndex = 0; childIndex < dfChildren.length; childIndex++) {
+            sanitizeElement(dfChildren[childIndex]);
+        }
+        // Append document fragment to div
+        var fragmentDiv = document.createElement('div');
+        fragmentDiv.appendChild(documentFragment_1);
+        // First child is always the div we did our work in
+        var getInnerDiv = fragmentDiv.querySelector('div');
+        return (getInnerDiv !== null) ? getInnerDiv.innerHTML : fragmentDiv.innerHTML;
     }
-    var options = (el.tagName === tagName.toUpperCase())
-        ? [el]
-        : Array.from(el.querySelectorAll(tagName));
-    return options.find(function (o) { return o.checked === true; });
+    catch (err) {
+        console.error(err);
+        return '';
+    }
 };
+/**
+ * Clean up current element based on allowed attributes
+ * and then recursively dig down into any child elements to
+ * clean those up as well
+ */
+var sanitizeElement = function (element) {
+    // IE uses childNodes, so ignore nodes that are not elements
+    if (element.nodeType && element.nodeType !== 1) {
+        return;
+    }
+    for (var i = element.attributes.length - 1; i >= 0; i--) {
+        var attribute = element.attributes.item(i);
+        var attributeName = attribute.name;
+        // remove non-allowed attribs
+        if (!allowedAttributes.includes(attributeName.toLowerCase())) {
+            element.removeAttribute(attributeName);
+            continue;
+        }
+        // clean up any allowed attribs
+        // that attempt to do any JS funny-business
+        var attributeValue = attribute.value;
+        /* tslint:disable-next-line */
+        if (attributeValue != null && attributeValue.toLowerCase().includes('javascript:')) {
+            element.removeAttribute(attributeName);
+        }
+    }
+    /**
+     * Sanitize any nested children
+     */
+    var childElements = getElementChildren(element);
+    /* tslint:disable-next-line */
+    for (var i = 0; i < childElements.length; i++) {
+        sanitizeElement(childElements[i]);
+    }
+};
+/**
+ * IE doesn't always support .children
+ * so we revert to .childNodes instead
+ */
+var getElementChildren = function (el) {
+    return (el.children != null) ? el.children : el.childNodes;
+};
+var allowedAttributes = ['class', 'id', 'href', 'src', 'name', 'slot'];
+var blockedTags = ['script', 'style', 'iframe', 'meta', 'link', 'object', 'embed'];
 
 
 

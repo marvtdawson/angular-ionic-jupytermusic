@@ -1,376 +1,505 @@
 webpackJsonp([63],{
 
-/***/ 453:
+/***/ 503:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_action_sheet_controller", function() { return ActionSheetController; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_alert_controller", function() { return AlertController; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_anchor", function() { return Anchor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_loading_controller", function() { return LoadingController; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_modal_controller", function() { return ModalController; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_picker_controller", function() { return PickerController; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_popover_controller", function() { return PopoverController; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_toast_controller", function() { return ToastController; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_refresher", function() { return Refresher; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ion_refresher_content", function() { return RefresherContent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(434);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(430);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__ = __webpack_require__(436);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__theme_18cbe2cc_js__ = __webpack_require__(534);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__ = __webpack_require__(535);
 
 
 
 
-
-var ActionSheetController = /** @class */ (function () {
+var Refresher = /** @class */ (function () {
     function class_1(hostRef) {
         Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-    }
-    /**
-     * Create an action sheet overlay with action sheet options.
-     *
-     * @param options The options to use to create the action sheet.
-     */
-    class_1.prototype.create = function (options) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["i" /* h */])('ion-action-sheet', options);
-    };
-    /**
-     * Dismiss the open action sheet overlay.
-     *
-     * @param data Any data to emit in the dismiss events.
-     * @param role The role of the element that is dismissing the action sheet.
-     * This can be useful in a button handler for determining which button was
-     * clicked to dismiss the action sheet.
-     * Some examples include: ``"cancel"`, `"destructive"`, "selected"`, and `"backdrop"`.
-     * @param id The id of the action sheet to dismiss. If an id is not provided, it will dismiss the most recently opened action sheet.
-     */
-    class_1.prototype.dismiss = function (data, role, id) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["k" /* j */])(document, data, role, 'ion-action-sheet', id);
-    };
-    /**
-     * Get the most recently opened action sheet overlay.
-     */
-    class_1.prototype.getTop = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                return [2 /*return*/, Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["l" /* k */])(document, 'ion-action-sheet')];
-            });
-        });
-    };
-    return class_1;
-}());
-var AlertController = /** @class */ (function () {
-    function class_2(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-    }
-    /**
-     * Create an alert overlay with alert options.
-     *
-     * @param options The options to use to create the alert.
-     */
-    class_2.prototype.create = function (options) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["i" /* h */])('ion-alert', options);
-    };
-    /**
-     * Dismiss the open alert overlay.
-     *
-     * @param data Any data to emit in the dismiss events.
-     * @param role The role of the element that is dismissing the alert.
-     * This can be useful in a button handler for determining which button was
-     * clicked to dismiss the alert.
-     * Some examples include: ``"cancel"`, `"destructive"`, "selected"`, and `"backdrop"`.
-     * @param id The id of the alert to dismiss. If an id is not provided, it will dismiss the most recently opened alert.
-     */
-    class_2.prototype.dismiss = function (data, role, id) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["k" /* j */])(document, data, role, 'ion-alert', id);
-    };
-    /**
-     * Get the most recently opened alert overlay.
-     */
-    class_2.prototype.getTop = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                return [2 /*return*/, Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["l" /* k */])(document, 'ion-alert')];
-            });
-        });
-    };
-    return class_2;
-}());
-var Anchor = /** @class */ (function () {
-    function Anchor(hostRef) {
-        var _this = this;
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
+        this.appliedStyles = false;
+        this.didStart = false;
+        this.progress = 0;
         /**
-         * When using a router, it specifies the transition direction when navigating to
-         * another page using `href`.
+         * The current state which the refresher is in. The refresher's states include:
+         *
+         * - `inactive` - The refresher is not being pulled down or refreshing and is currently hidden.
+         * - `pulling` - The user is actively pulling down the refresher, but has not reached the point yet that if the user lets go, it'll refresh.
+         * - `cancelling` - The user pulled down the refresher and let go, but did not pull down far enough to kick off the `refreshing` state. After letting go, the refresher is in the `cancelling` state while it is closing, and will go back to the `inactive` state once closed.
+         * - `ready` - The user has pulled down the refresher far enough that if they let go, it'll begin the `refreshing` state.
+         * - `refreshing` - The refresher is actively waiting on the async operation to end. Once the refresh handler calls `complete()` it will begin the `completing` state.
+         * - `completing` - The `refreshing` state has finished and the refresher is in the way of closing itself. Once closed, the refresher will go back to the `inactive` state.
          */
-        this.routerDirection = 'forward';
-        this.onClick = function (ev) {
-            Object(__WEBPACK_IMPORTED_MODULE_4__theme_18cbe2cc_js__["d" /* o */])(_this.href, ev, _this.routerDirection);
-        };
+        this.state = 1 /* Inactive */;
+        /**
+         * The minimum distance the user must pull down until the
+         * refresher will go into the `refreshing` state.
+         */
+        this.pullMin = 60;
+        /**
+         * The maximum distance of the pull until the refresher
+         * will automatically go into the `refreshing` state.
+         * Defaults to the result of `pullMin + 60`.
+         */
+        this.pullMax = this.pullMin + 60;
+        /**
+         * Time it takes to close the refresher.
+         */
+        this.closeDuration = '280ms';
+        /**
+         * Time it takes the refresher to to snap back to the `refreshing` state.
+         */
+        this.snapbackDuration = '280ms';
+        /**
+         * How much to multiply the pull speed by. To slow the pull animation down,
+         * pass a number less than `1`. To speed up the pull, pass a number greater
+         * than `1`. The default value is `1` which is equal to the speed of the cursor.
+         * If a negative value is passed in, the factor will be `1` instead.
+         *
+         * For example: If the value passed is `1.2` and the content is dragged by
+         * `10` pixels, instead of `10` pixels the content will be pulled by `12` pixels
+         * (an increase of 20 percent). If the value passed is `0.8`, the dragged amount
+         * will be `8` pixels, less than the amount the cursor has moved.
+         */
+        this.pullFactor = 1;
+        /**
+         * If `true`, the refresher will be hidden.
+         */
+        this.disabled = false;
+        this.ionRefresh = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionRefresh", 7);
+        this.ionPull = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionPull", 7);
+        this.ionStart = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["d" /* c */])(this, "ionStart", 7);
     }
-    Anchor.prototype.componentDidLoad = function () {
-        console.warn('[DEPRECATED][ion-anchor] The <ion-anchor> component has been deprecated. Please use an <ion-router-link> if you are using a vanilla JS or Stencil project or an <a> with the Angular router.');
+    class_1.prototype.disabledChanged = function () {
+        if (this.gesture) {
+            this.gesture.setDisabled(this.disabled);
+        }
     };
-    Anchor.prototype.render = function () {
+    class_1.prototype.connectedCallback = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            var contentEl, _a, _b;
+            var _this = this;
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        if (this.el.getAttribute('slot') !== 'fixed') {
+                            console.error('Make sure you use: <ion-refresher slot="fixed">');
+                            return [2 /*return*/];
+                        }
+                        contentEl = this.el.closest('ion-content');
+                        if (!contentEl) {
+                            console.error('<ion-refresher> must be used inside an <ion-content>');
+                            return [2 /*return*/];
+                        }
+                        _a = this;
+                        return [4 /*yield*/, contentEl.getScrollElement()];
+                    case 1:
+                        _a.scrollEl = _c.sent();
+                        _b = this;
+                        return [4 /*yield*/, new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, 268))];
+                    case 2:
+                        _b.gesture = (_c.sent()).createGesture({
+                            el: contentEl,
+                            gestureName: 'refresher',
+                            gesturePriority: 10,
+                            direction: 'y',
+                            threshold: 20,
+                            passive: false,
+                            canStart: function () { return _this.canStart(); },
+                            onStart: function () { return _this.onStart(); },
+                            onMove: function (ev) { return _this.onMove(ev); },
+                            onEnd: function () { return _this.onEnd(); },
+                        });
+                        this.disabledChanged();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    class_1.prototype.disconnectedCallback = function () {
+        this.scrollEl = undefined;
+        if (this.gesture) {
+            this.gesture.destroy();
+            this.gesture = undefined;
+        }
+    };
+    /**
+     * Call `complete()` when your async operation has completed.
+     * For example, the `refreshing` state is while the app is performing
+     * an asynchronous operation, such as receiving more data from an
+     * AJAX request. Once the data has been received, you then call this
+     * method to signify that the refreshing has completed and to close
+     * the refresher. This method also changes the refresher's state from
+     * `refreshing` to `completing`.
+     */
+    class_1.prototype.complete = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+                this.close(32 /* Completing */, '120ms');
+                return [2 /*return*/];
+            });
+        });
+    };
+    /**
+     * Changes the refresher's state from `refreshing` to `cancelling`.
+     */
+    class_1.prototype.cancel = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
+            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
+                this.close(16 /* Cancelling */, '');
+                return [2 /*return*/];
+            });
+        });
+    };
+    /**
+     * A number representing how far down the user has pulled.
+     * The number `0` represents the user hasn't pulled down at all. The
+     * number `1`, and anything greater than `1`, represents that the user
+     * has pulled far enough down that when they let go then the refresh will
+     * happen. If they let go and the number is less than `1`, then the
+     * refresh will not happen, and the content will return to it's original
+     * position.
+     */
+    class_1.prototype.getProgress = function () {
+        return Promise.resolve(this.progress);
+    };
+    class_1.prototype.canStart = function () {
+        if (!this.scrollEl) {
+            return false;
+        }
+        if (this.state !== 1 /* Inactive */) {
+            return false;
+        }
+        // if the scrollTop is greater than zero then it's
+        // not possible to pull the content down yet
+        if (this.scrollEl.scrollTop > 0) {
+            return false;
+        }
+        return true;
+    };
+    class_1.prototype.onStart = function () {
+        this.progress = 0;
+        this.state = 1 /* Inactive */;
+    };
+    class_1.prototype.onMove = function (detail) {
+        if (!this.scrollEl) {
+            return;
+        }
+        // this method can get called like a bazillion times per second,
+        // so it's built to be as efficient as possible, and does its
+        // best to do any DOM read/writes only when absolutely necessary
+        // if multi-touch then get out immediately
+        var ev = detail.event;
+        if (ev.touches && ev.touches.length > 1) {
+            return;
+        }
+        // do nothing if it's actively refreshing
+        // or it's in the way of closing
+        // or this was never a startY
+        if ((this.state & 56 /* _BUSY_ */) !== 0) {
+            return;
+        }
+        var pullFactor = (Number.isNaN(this.pullFactor) || this.pullFactor < 0) ? 1 : this.pullFactor;
+        var deltaY = detail.deltaY * pullFactor;
+        // don't bother if they're scrolling up
+        // and have not already started dragging
+        if (deltaY <= 0) {
+            // the current Y is higher than the starting Y
+            // so they scrolled up enough to be ignored
+            this.progress = 0;
+            this.state = 1 /* Inactive */;
+            if (this.appliedStyles) {
+                // reset the styles only if they were applied
+                this.setCss(0, '', false, '');
+                return;
+            }
+            return;
+        }
+        if (this.state === 1 /* Inactive */) {
+            // this refresh is not already actively pulling down
+            // get the content's scrollTop
+            var scrollHostScrollTop = this.scrollEl.scrollTop;
+            // if the scrollTop is greater than zero then it's
+            // not possible to pull the content down yet
+            if (scrollHostScrollTop > 0) {
+                this.progress = 0;
+                return;
+            }
+            // content scrolled all the way to the top, and dragging down
+            this.state = 2 /* Pulling */;
+        }
+        // prevent native scroll events
+        if (ev.cancelable) {
+            ev.preventDefault();
+        }
+        // the refresher is actively pulling at this point
+        // move the scroll element within the content element
+        this.setCss(deltaY, '0ms', true, '');
+        if (deltaY === 0) {
+            // don't continue if there's no delta yet
+            this.progress = 0;
+            return;
+        }
+        var pullMin = this.pullMin;
+        // set pull progress
+        this.progress = deltaY / pullMin;
+        // emit "start" if it hasn't started yet
+        if (!this.didStart) {
+            this.didStart = true;
+            this.ionStart.emit();
+        }
+        // emit "pulling" on every move
+        this.ionPull.emit();
+        // do nothing if the delta is less than the pull threshold
+        if (deltaY < pullMin) {
+            // ensure it stays in the pulling state, cuz its not ready yet
+            this.state = 2 /* Pulling */;
+            return;
+        }
+        if (deltaY > this.pullMax) {
+            // they pulled farther than the max, so kick off the refresh
+            this.beginRefresh();
+            return;
+        }
+        // pulled farther than the pull min!!
+        // it is now in the `ready` state!!
+        // if they let go then it'll refresh, kerpow!!
+        this.state = 4 /* Ready */;
+        return;
+    };
+    class_1.prototype.onEnd = function () {
+        // only run in a zone when absolutely necessary
+        if (this.state === 4 /* Ready */) {
+            // they pulled down far enough, so it's ready to refresh
+            this.beginRefresh();
+        }
+        else if (this.state === 2 /* Pulling */) {
+            // they were pulling down, but didn't pull down far enough
+            // set the content back to it's original location
+            // and close the refresher
+            // set that the refresh is actively cancelling
+            this.cancel();
+        }
+    };
+    class_1.prototype.beginRefresh = function () {
+        // assumes we're already back in a zone
+        // they pulled down far enough, so it's ready to refresh
+        this.state = 8 /* Refreshing */;
+        // place the content in a hangout position while it thinks
+        this.setCss(this.pullMin, this.snapbackDuration, true, '');
+        // emit "refresh" because it was pulled down far enough
+        // and they let go to begin refreshing
+        this.ionRefresh.emit({
+            complete: this.complete.bind(this)
+        });
+    };
+    class_1.prototype.close = function (state, delay) {
+        var _this = this;
+        // create fallback timer incase something goes wrong with transitionEnd event
+        setTimeout(function () {
+            _this.state = 1 /* Inactive */;
+            _this.progress = 0;
+            _this.didStart = false;
+            _this.setCss(0, '0ms', false, '');
+        }, 600);
+        // reset set the styles on the scroll element
+        // set that the refresh is actively cancelling/completing
+        this.state = state;
+        this.setCss(0, this.closeDuration, true, delay);
+        // TODO: stop gesture
+    };
+    class_1.prototype.setCss = function (y, duration, overflowVisible, delay) {
+        var _this = this;
+        this.appliedStyles = (y > 0);
+        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["m" /* w */])(function () {
+            if (_this.scrollEl) {
+                var style = _this.scrollEl.style;
+                style.transform = ((y > 0) ? "translateY(" + y + "px) translateZ(0px)" : 'translateZ(0px)');
+                style.transitionDuration = duration;
+                style.transitionDelay = delay;
+                style.overflow = (overflowVisible ? 'hidden' : '');
+            }
+        });
+    };
+    class_1.prototype.render = function () {
         var _a;
         var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
-        var attrs = {
-            href: this.href,
-            rel: this.rel
-        };
-        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { onClick: this.onClick, class: Object.assign(Object.assign({}, Object(__WEBPACK_IMPORTED_MODULE_4__theme_18cbe2cc_js__["a" /* c */])(this.color)), (_a = {}, _a[mode] = true, _a['ion-activatable'] = true, _a)) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("a", Object.assign({}, attrs), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("slot", null))));
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { slot: "fixed", class: (_a = {},
+                _a[mode] = true,
+                // Used internally for styling
+                _a["refresher-" + mode] = true,
+                _a['refresher-active'] = this.state !== 1 /* Inactive */,
+                _a['refresher-pulling'] = this.state === 2 /* Pulling */,
+                _a['refresher-ready'] = this.state === 4 /* Ready */,
+                _a['refresher-refreshing'] = this.state === 8 /* Refreshing */,
+                _a['refresher-cancelling'] = this.state === 16 /* Cancelling */,
+                _a['refresher-completing'] = this.state === 32 /* Completing */,
+                _a) }));
     };
-    Object.defineProperty(Anchor, "style", {
-        get: function () { return ":host{--background:transparent;--color:var(--ion-color-primary,#3880ff);background:var(--background);color:var(--color)}:host(.ion-color){color:var(--ion-color-base)}a{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit}"; },
+    Object.defineProperty(class_1.prototype, "el", {
+        get: function () { return Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["f" /* e */])(this); },
         enumerable: true,
         configurable: true
     });
-    return Anchor;
+    Object.defineProperty(class_1, "watchers", {
+        get: function () {
+            return {
+                "disabled": ["disabledChanged"]
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(class_1, "style", {
+        get: function () { return "ion-refresher{left:0;top:0;display:none;position:absolute;width:100%;height:60px;z-index:-1}:host-context([dir=rtl]) ion-refresher,[dir=rtl] ion-refresher{left:unset;right:unset;right:0}ion-refresher.refresher-active{display:block}ion-refresher-content{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;-ms-flex-pack:center;justify-content:center;height:100%}.refresher-pulling,.refresher-refreshing{display:none;width:100%}.refresher-pulling-icon,.refresher-refreshing-icon{-webkit-transform-origin:center;transform-origin:center;-webkit-transition:.2s;transition:.2s;font-size:30px;text-align:center}:host-context([dir=rtl]) .refresher-pulling-icon,:host-context([dir=rtl]) .refresher-refreshing-icon,[dir=rtl] .refresher-pulling-icon,[dir=rtl] .refresher-refreshing-icon{-webkit-transform-origin:calc(100% - center);transform-origin:calc(100% - center)}.refresher-pulling-text,.refresher-refreshing-text{font-size:16px;text-align:center}.refresher-pulling ion-refresher-content .refresher-pulling,.refresher-ready ion-refresher-content .refresher-pulling{display:block}.refresher-ready ion-refresher-content .refresher-pulling-icon{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.refresher-cancelling ion-refresher-content .refresher-pulling,.refresher-refreshing ion-refresher-content .refresher-refreshing{display:block}.refresher-cancelling ion-refresher-content .refresher-pulling-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-completing ion-refresher-content .refresher-refreshing{display:block}.refresher-completing ion-refresher-content .refresher-refreshing-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-ios .refresher-pulling-icon,.refresher-ios .refresher-pulling-text,.refresher-ios .refresher-refreshing-icon,.refresher-ios .refresher-refreshing-text{color:var(--ion-text-color,#000)}.refresher-ios .refresher-refreshing .spinner-crescent circle,.refresher-ios .refresher-refreshing .spinner-lines-ios line,.refresher-ios .refresher-refreshing .spinner-lines-small-ios line{stroke:var(--ion-text-color,#000)}.refresher-ios .refresher-refreshing .spinner-bubbles circle,.refresher-ios .refresher-refreshing .spinner-circles circle,.refresher-ios .refresher-refreshing .spinner-dots circle{fill:var(--ion-text-color,#000)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return class_1;
 }());
-var LoadingController = /** @class */ (function () {
-    function class_3(hostRef) {
+var RefresherContent = /** @class */ (function () {
+    function RefresherContent(hostRef) {
         Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
     }
-    /**
-     * Create a loading overlay with loading options.
-     *
-     * @param options The options to use to create the loading.
-     */
-    class_3.prototype.create = function (options) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["i" /* h */])('ion-loading', options);
+    RefresherContent.prototype.componentWillLoad = function () {
+        if (this.pullingIcon === undefined) {
+            this.pullingIcon = __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('refreshingIcon', 'arrow-down');
+        }
+        if (this.refreshingSpinner === undefined) {
+            var mode = Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this);
+            this.refreshingSpinner = __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('refreshingSpinner', __WEBPACK_IMPORTED_MODULE_2__config_3c7f3790_js__["b"].get('spinner', mode === 'ios' ? 'lines' : 'crescent'));
+        }
     };
-    /**
-     * Dismiss the open loading overlay.
-     *
-     * @param data Any data to emit in the dismiss events.
-     * @param role The role of the element that is dismissing the loading.
-     * This can be useful in a button handler for determining which button was
-     * clicked to dismiss the loading.
-     * Some examples include: ``"cancel"`, `"destructive"`, "selected"`, and `"backdrop"`.
-     * @param id The id of the loading to dismiss. If an id is not provided, it will dismiss the most recently opened loading.
-     */
-    class_3.prototype.dismiss = function (data, role, id) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["k" /* j */])(document, data, role, 'ion-loading', id);
+    RefresherContent.prototype.render = function () {
+        return (Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["a" /* H */], { class: Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["e" /* d */])(this) }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-pulling" }, this.pullingIcon &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-pulling-icon" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-icon", { icon: this.pullingIcon, lazy: false })), this.pullingText &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-pulling-text", innerHTML: Object(__WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__["a" /* s */])(this.pullingText) })), Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-refreshing" }, this.refreshingSpinner &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-refreshing-icon" }, Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("ion-spinner", { name: this.refreshingSpinner })), this.refreshingText &&
+            Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["i" /* h */])("div", { class: "refresher-refreshing-text", innerHTML: Object(__WEBPACK_IMPORTED_MODULE_3__index_3476b023_js__["a" /* s */])(this.refreshingText) }))));
     };
-    /**
-     * Get the most recently opened loading overlay.
-     */
-    class_3.prototype.getTop = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                return [2 /*return*/, Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["l" /* k */])(document, 'ion-loading')];
-            });
-        });
-    };
-    return class_3;
-}());
-var ModalController = /** @class */ (function () {
-    function class_4(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-    }
-    /**
-     * Create a modal overlay with modal options.
-     *
-     * @param options The options to use to create the modal.
-     */
-    class_4.prototype.create = function (options) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["i" /* h */])('ion-modal', options);
-    };
-    /**
-     * Dismiss the open modal overlay.
-     *
-     * @param data Any data to emit in the dismiss events.
-     * @param role The role of the element that is dismissing the modal.
-     * This can be useful in a button handler for determining which button was
-     * clicked to dismiss the modal.
-     * Some examples include: ``"cancel"`, `"destructive"`, "selected"`, and `"backdrop"`.
-     * @param id The id of the modal to dismiss. If an id is not provided, it will dismiss the most recently opened modal.
-     */
-    class_4.prototype.dismiss = function (data, role, id) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["k" /* j */])(document, data, role, 'ion-modal', id);
-    };
-    /**
-     * Get the most recently opened modal overlay.
-     */
-    class_4.prototype.getTop = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                return [2 /*return*/, Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["l" /* k */])(document, 'ion-modal')];
-            });
-        });
-    };
-    return class_4;
-}());
-var PickerController = /** @class */ (function () {
-    function class_5(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-    }
-    /**
-     * Create a picker overlay with picker options.
-     *
-     * @param options The options to use to create the picker.
-     */
-    class_5.prototype.create = function (options) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["i" /* h */])('ion-picker', options);
-    };
-    /**
-     * Dismiss the open picker overlay.
-     *
-     * @param data Any data to emit in the dismiss events.
-     * @param role The role of the element that is dismissing the picker.
-     * This can be useful in a button handler for determining which button was
-     * clicked to dismiss the picker.
-     * Some examples include: ``"cancel"`, `"destructive"`, "selected"`, and `"backdrop"`.
-     * @param id The id of the picker to dismiss. If an id is not provided, it will dismiss the most recently opened picker.
-     */
-    class_5.prototype.dismiss = function (data, role, id) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["k" /* j */])(document, data, role, 'ion-picker', id);
-    };
-    /**
-     * Get the most recently opened picker overlay.
-     */
-    class_5.prototype.getTop = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                return [2 /*return*/, Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["l" /* k */])(document, 'ion-picker')];
-            });
-        });
-    };
-    return class_5;
-}());
-var PopoverController = /** @class */ (function () {
-    function class_6(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-    }
-    /**
-     * Create a popover overlay with popover options.
-     *
-     * @param options The options to use to create the popover.
-     */
-    class_6.prototype.create = function (options) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["i" /* h */])('ion-popover', options);
-    };
-    /**
-     * Dismiss the open popover overlay.
-     *
-     * @param data Any data to emit in the dismiss events.
-     * @param role The role of the element that is dismissing the popover.
-     * This can be useful in a button handler for determining which button was
-     * clicked to dismiss the popover.
-     * Some examples include: ``"cancel"`, `"destructive"`, "selected"`, and `"backdrop"`.
-     * @param id The id of the popover to dismiss. If an id is not provided, it will dismiss the most recently opened popover.
-     */
-    class_6.prototype.dismiss = function (data, role, id) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["k" /* j */])(document, data, role, 'ion-popover', id);
-    };
-    /**
-     * Get the most recently opened popover overlay.
-     */
-    class_6.prototype.getTop = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                return [2 /*return*/, Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["l" /* k */])(document, 'ion-popover')];
-            });
-        });
-    };
-    return class_6;
-}());
-var ToastController = /** @class */ (function () {
-    function class_7(hostRef) {
-        Object(__WEBPACK_IMPORTED_MODULE_1__core_ca0488fc_js__["l" /* r */])(this, hostRef);
-    }
-    /**
-     * Create a toast overlay with toast options.
-     *
-     * @param options The options to use to create the toast.
-     */
-    class_7.prototype.create = function (options) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["i" /* h */])('ion-toast', options);
-    };
-    /**
-     * Dismiss the open toast overlay.
-     *
-     * @param data Any data to emit in the dismiss events.
-     * @param role The role of the element that is dismissing the toast. For example, 'cancel' or 'backdrop'.
-     * @param id The id of the toast to dismiss. If an id is not provided, it will dismiss the most recently opened toast.
-     */
-    class_7.prototype.dismiss = function (data, role, id) {
-        return Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["k" /* j */])(document, data, role, 'ion-toast', id);
-    };
-    /**
-     * Get the most recently opened toast overlay.
-     */
-    class_7.prototype.getTop = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(this, void 0, void 0, function () {
-            return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-                return [2 /*return*/, Object(__WEBPACK_IMPORTED_MODULE_3__overlays_10640d86_js__["l" /* k */])(document, 'ion-toast')];
-            });
-        });
-    };
-    return class_7;
+    return RefresherContent;
 }());
 
 
 
 /***/ }),
 
-/***/ 534:
+/***/ 535:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createColorClasses; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getClassMap; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hostContext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return openURL; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(1);
-
-var hostContext = function (selector, el) {
-    return el.closest(selector) !== null;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return sanitizeDOMString; });
+/**
+ * Does a simple sanitization of all elements
+ * in an untrusted string
+ */
+var sanitizeDOMString = function (untrustedString) {
+    try {
+        if (typeof untrustedString !== 'string' || untrustedString === '') {
+            return untrustedString;
+        }
+        /**
+         * Create a document fragment
+         * separate from the main DOM,
+         * create a div to do our work in
+         */
+        var documentFragment_1 = document.createDocumentFragment();
+        var workingDiv = document.createElement('div');
+        documentFragment_1.appendChild(workingDiv);
+        workingDiv.innerHTML = untrustedString;
+        /**
+         * Remove any elements
+         * that are blocked
+         */
+        blockedTags.forEach(function (blockedTag) {
+            var getElementsToRemove = documentFragment_1.querySelectorAll(blockedTag);
+            for (var elementIndex = getElementsToRemove.length - 1; elementIndex >= 0; elementIndex--) {
+                var element = getElementsToRemove[elementIndex];
+                if (element.parentNode) {
+                    element.parentNode.removeChild(element);
+                }
+                else {
+                    documentFragment_1.removeChild(element);
+                }
+                /**
+                 * We still need to sanitize
+                 * the children of this element
+                 * as they are left behind
+                 */
+                var childElements = getElementChildren(element);
+                /* tslint:disable-next-line */
+                for (var childIndex = 0; childIndex < childElements.length; childIndex++) {
+                    sanitizeElement(childElements[childIndex]);
+                }
+            }
+        });
+        /**
+         * Go through remaining elements and remove
+         * non-allowed attribs
+         */
+        // IE does not support .children on document fragments, only .childNodes
+        var dfChildren = getElementChildren(documentFragment_1);
+        /* tslint:disable-next-line */
+        for (var childIndex = 0; childIndex < dfChildren.length; childIndex++) {
+            sanitizeElement(dfChildren[childIndex]);
+        }
+        // Append document fragment to div
+        var fragmentDiv = document.createElement('div');
+        fragmentDiv.appendChild(documentFragment_1);
+        // First child is always the div we did our work in
+        var getInnerDiv = fragmentDiv.querySelector('div');
+        return (getInnerDiv !== null) ? getInnerDiv.innerHTML : fragmentDiv.innerHTML;
+    }
+    catch (err) {
+        console.error(err);
+        return '';
+    }
 };
 /**
- * Create the mode and color classes for the component based on the classes passed in
+ * Clean up current element based on allowed attributes
+ * and then recursively dig down into any child elements to
+ * clean those up as well
  */
-var createColorClasses = function (color) {
-    var _a;
-    return (typeof color === 'string' && color.length > 0) ? (_a = {
-            'ion-color': true
-        },
-        _a["ion-color-" + color] = true,
-        _a) : undefined;
-};
-var getClassList = function (classes) {
-    if (classes !== undefined) {
-        var array = Array.isArray(classes) ? classes : classes.split(' ');
-        return array
-            .filter(function (c) { return c != null; })
-            .map(function (c) { return c.trim(); })
-            .filter(function (c) { return c !== ''; });
+var sanitizeElement = function (element) {
+    // IE uses childNodes, so ignore nodes that are not elements
+    if (element.nodeType && element.nodeType !== 1) {
+        return;
     }
-    return [];
-};
-var getClassMap = function (classes) {
-    var map = {};
-    getClassList(classes).forEach(function (c) { return map[c] = true; });
-    return map;
-};
-var SCHEME = /^[a-z][a-z0-9+\-.]*:/;
-var openURL = function (url, ev, direction) { return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __awaiter */])(void 0, void 0, void 0, function () {
-    var router;
-    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["e" /* __generator */])(this, function (_a) {
-        if (url != null && url[0] !== '#' && !SCHEME.test(url)) {
-            router = document.querySelector('ion-router');
-            if (router) {
-                if (ev != null) {
-                    ev.preventDefault();
-                }
-                return [2 /*return*/, router.push(url, direction)];
-            }
+    for (var i = element.attributes.length - 1; i >= 0; i--) {
+        var attribute = element.attributes.item(i);
+        var attributeName = attribute.name;
+        // remove non-allowed attribs
+        if (!allowedAttributes.includes(attributeName.toLowerCase())) {
+            element.removeAttribute(attributeName);
+            continue;
         }
-        return [2 /*return*/, false];
-    });
-}); };
+        // clean up any allowed attribs
+        // that attempt to do any JS funny-business
+        var attributeValue = attribute.value;
+        /* tslint:disable-next-line */
+        if (attributeValue != null && attributeValue.toLowerCase().includes('javascript:')) {
+            element.removeAttribute(attributeName);
+        }
+    }
+    /**
+     * Sanitize any nested children
+     */
+    var childElements = getElementChildren(element);
+    /* tslint:disable-next-line */
+    for (var i = 0; i < childElements.length; i++) {
+        sanitizeElement(childElements[i]);
+    }
+};
+/**
+ * IE doesn't always support .children
+ * so we revert to .childNodes instead
+ */
+var getElementChildren = function (el) {
+    return (el.children != null) ? el.children : el.childNodes;
+};
+var allowedAttributes = ['class', 'id', 'href', 'src', 'name', 'slot'];
+var blockedTags = ['script', 'style', 'iframe', 'meta', 'link', 'object', 'embed'];
 
 
 
